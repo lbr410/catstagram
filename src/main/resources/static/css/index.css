@@ -1,0 +1,119 @@
+@charset "UTF-8";
+.login_form {
+	margin-top: 150px;
+	margin-bottom: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 400px;
+	height: 500px;
+	border: 1px solid #d9d9d9;
+	cursor: default;
+}
+
+.title {
+	font-family: billabong;
+	font-size: 64px;
+	text-align: center;
+	margin-top: 49px;
+}
+
+.id_input_div {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.pwd_input_div {
+	margin-top: 11px;
+	text-align: center;
+}
+
+.id_input, .pwd_input {
+	width: 260px;
+	height: 20px;
+	padding: 10px;
+	border: 1px solid #d9d9d9;
+	background: #fbf9f9;
+	border-radius: 3px;
+}
+
+.saveid_div {
+	margin-top: 7px;
+	padding-left: 55px;
+	font-size: 14px;
+	color: #555555p;
+}
+
+.login_btn_div {
+	text-align: center;
+	margin-top: 11px;
+}
+
+.login_btn {
+	border: none;
+	border-radius: 5px;
+	background: #458eff;
+	text-align: center;
+	width: 280px;
+	height: 35px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #ffffff;
+	cursor: pointer;
+}
+
+.or_div {
+	text-align: center;
+	font-size: 14px;
+	margin-top: 35px;
+	color: #555555;
+}
+
+.or_line {
+	color: #d9d9d9;
+}
+
+.fb_div_parent {
+	margin-top: 42px;
+    position: relative;
+    font-size: 14px;
+}
+
+.fb_div_child {
+	position: absolute; 
+    left: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    color: #385185;
+    cursor: pointer;
+}
+
+.fb_img {
+	width: 33px;
+	height: 25px;
+}
+
+.pwd_result_div {
+	margin-top: 70px;
+	text-align: center;
+	font-size: 13px;
+	color: #f63c3c;
+}
+
+.signup_div {
+	margin: 9px auto;
+	border: 1px solid #d9d9d9;
+	width: 400px;
+	line-height: 60px;
+	text-align: center;
+	font-size: 14px;
+	vertical-align: middle;
+	cursor: default;
+}
+
+.signup_btn {
+	color: #458eff;
+	cursor: pointer;
+	font-weight: bold;
+}
