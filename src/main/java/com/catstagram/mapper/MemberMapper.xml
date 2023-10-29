@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.catstagram.mapper.MemberMapper">
+	<select id="idCheck" parameterType="String" resultType="String">
+		select member_id from catstagram_member where member_id = #{id}
+	</select>
+</mapper>

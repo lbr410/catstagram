@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.login_form {
+.signup_form {
 	margin-top: 150px;
 	margin-bottom: 0;
 	margin-left: auto;
@@ -17,17 +17,20 @@
 	margin-top: 49px;
 }
 
-.id_input_div {
+.signup_msg_div {
 	text-align: center;
 	margin-top: 20px;
+	font-size: 14px;
+	color: #555555;
 }
 
-.pwd_input_div {
+.input_div {
 	margin-top: 11px;
 	text-align: center;
 }
 
-.id_input, .pwd_input {
+/* textbox */
+.name_input {
 	width: 260px;
 	height: 20px;
 	padding: 10px;
@@ -36,19 +39,47 @@
 	border-radius: 3px;
 }
 
-.saveid_div {
-	margin-top: 7px;
-	padding-left: 55px;
-	font-size: 14px;
-	color: #555555;
+.id_input, .pwd_input, .pwd_chk_input {
+	width: 260px;
+	height: 20px;
+	padding: 10px;
+	border: 1px solid #d9d9d9;
+	border-radius: 3px;
 }
 
-.login_btn_div {
+/* 아이디 또는 비밀번호 사용 가능시 */
+.available_it {
+	width: 260px;
+	height: 20px;
+	padding: 10px;
+	border: 1px solid #d9d9d9;
+	border-radius: 3px;
+	background: url('/img/check.png');
+	background-repeat: no-repeat;
+	background-size: 20px;
+	background-position: 252px center;
+}
+
+/* 아이디 또는 비밀번호 사용 불가시 */
+.unavailable_it {
+	width: 260px;
+	height: 20px;
+	padding: 10px;
+	border: 1px solid #d9d9d9;
+	background-color: #fbf9f9;
+	border-radius: 3px;
+	background: url('/img/x.png');
+	background-repeat: no-repeat;
+	background-size: 20px;
+	background-position: 252px center;
+}
+
+.signup_btn_div {
 	text-align: center;
 	margin-top: 11px;
 }
 
-.login_btn {
+.signup_btn {
 	border: none;
 	border-radius: 5px;
 	background: #458eff;
@@ -61,47 +92,7 @@
 	cursor: pointer;
 }
 
-.or_div {
-	text-align: center;
-	font-size: 14px;
-	margin-top: 35px;
-	color: #555555;
-}
-
-.or_line {
-	color: #d9d9d9;
-}
-
-.fb_div_parent {
-	margin-top: 42px;
-    position: relative;
-    font-size: 14px;
-}
-
-.fb_div_child {
-	position: absolute; 
-    left: 50%; 
-    top: 50%; 
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    color: #385185;
-    cursor: pointer;
-}
-
-.fb_img {
-	width: 33px;
-	height: 25px;
-}
-
-.pwd_result_div {
-	margin-top: 70px;
-	text-align: center;
-	font-size: 13px;
-	color: #f63c3c;
-}
-
-.signup_div {
+.login_div {
 	margin: 9px auto;
 	border: 1px solid #d9d9d9;
 	width: 400px;
@@ -113,7 +104,7 @@
 	color: #555555;
 }
 
-.signup_btn {
+.login_btn {
 	color: #458eff;
 	cursor: pointer;
 	font-weight: bold;
