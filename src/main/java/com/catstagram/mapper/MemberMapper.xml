@@ -6,4 +6,19 @@
 	<select id="idCheck" parameterType="String" resultType="String">
 		select member_id from catstagram_member where member_id = #{id}
 	</select>
+	
+	<insert id="signup" parameterType="com.catstagram.member.model.MemberDTO">
+		insert into
+			catstagram_member
+		values
+			(catstagram_member_idx.nextval, #{member_id}, #{member_name}, #{member_pwd}, '', '', '', sysdate, 'n')
+	</insert>
+	
+	<select id="login" parameterType="String" resultType="com.catstagram.member.model.MemberDTO">
+		select member_idx, member_pwd, member_quit from catstagram_member where member_id = #{id}
+	</select>
+	
+	<select id="sessionInfo" parameterType="String" resultType="Integer">
+		select member_idx from catstagram_member where member_id = #{id}
+	</select>
 </mapper>

@@ -1,5 +1,16 @@
 package com.catstagram.member.service;
 
+import com.catstagram.member.model.MemberDTO;
+
 public interface MemberService {
+	
+	int LOGIN_OK = 1; // 로그인 성공
+	int LOGIN_FAIL = 2; // 아이디 또는 비밀번호 틀렸을 시
+	int QUIT = 3; // 회원탈퇴인 경우
+	int ERROR = 4;
+	
 	public String idCheck(String id) throws Exception;
+	public int signup(MemberDTO dto) throws Exception;
+	public int login(String id, String pwd) throws Exception;
+	public int sessionInfo(String id) throws Exception;
 }
