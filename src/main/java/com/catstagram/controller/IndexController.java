@@ -33,7 +33,6 @@ public class IndexController {
 							  @RequestParam(value = "saveidChk", required = false) String saveid,
 							  HttpServletResponse resp,
 							  HttpSession session) {
-		System.out.println("saveid = "+saveid);
 		String EncryptPwd = Encryption.sha256(pwd);
 		int result = 0;
 		try {
@@ -60,7 +59,6 @@ public class IndexController {
 			try {
 				sidx = memberService.sessionInfo(id);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			session.setAttribute("sidx", sidx);

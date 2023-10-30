@@ -40,5 +40,6 @@
 	<div class="signup_div">
 		계정이 필요하신가요? <a class="signup_btn" onclick="javascript: location.href='/catstagram/signup'">가입하기</a>
 	</div>
+	<%@ include file="footer.jsp" %>
 </body>
 </html>
