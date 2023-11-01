@@ -6,6 +6,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border-bottom: 1px solid #d9d9d9;
+	padding-bottom: 5px;
 }
 
 .logo_div {
@@ -78,10 +80,16 @@ input::placeholder {
 	width: 25px;
 	height: 25px;
 	margin-right: 15px;
+	cursor: pointer;
 }
 
 .header_profile_img {
 	width: 29px;
 	height: 29px;
 	border-radius: 20px;
+	cursor: pointer;
+}
+
+.menu_font {
+	font-size: 14px;
 }

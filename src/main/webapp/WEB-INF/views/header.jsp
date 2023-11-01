@@ -17,18 +17,26 @@
 				<span class="logo_title">Catstagram</span>
 			</div>
 		</a>
-		<div class="search_div">
+		<form action="" method="post" class="search_div">
 			<input type="text" class="search_input" placeholder="검색">
 			<input type="submit" value="" class="search-btn">
-		</div>
+		</form>
 		<div class="menu_div">
 			<img src="/img/home.png" class="menu_img">
 			<img src="/img/dm.png" class="menu_img">
 			<img src="/img/feed.png" class="menu_img">
 			<img src="/img/heart.png" class="menu_img">
-			<img src="/img/profile2.jpg" class="header_profile_img">
+			<img src="/img/profile2.jpg" class="header_profile_img" data-bs-toggle="dropdown" aria-expanded="false">
+			<div class="dropdown-center">
+				<ul class="dropdown-menu dropdown-menu2">
+					<li><a class="dropdown-item menu_font" href="#">프로필</a></li>
+					<li><hr class="dropdown-divider"></li>
+				    <li><a class="dropdown-item menu_font" href="#">설정</a></li>
+				    <li><hr class="dropdown-divider"></li>
+				    <li><a class="dropdown-item menu_font" href="#">로그아웃</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
-	<br><br><br>
 </body>
 </html>
