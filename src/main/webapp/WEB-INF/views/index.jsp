@@ -27,15 +27,15 @@
 		<div class="login_btn_div">
 			<input type="submit" value="로그인" class="btn btn-primary login_btn">
 		</div>
-		<div class="or_div">
+		<!-- <div class="or_div">
 			<span class="or_line">────────</span>&nbsp; 또는 &nbsp;<span class="or_line">────────</span>
 		</div>
 		<div class="fb_div_parent">
 			<div class="fb_div_child">
 				<img src="/img/facebook.png" class="fb_img">&nbsp;Facebook으로 로그인
 			</div>
-		</div>
-		<div class="pwd_result_div" id="pwd_result"><!-- state --></div>
+		</div> -->
+		<!-- <div class="pwd_result_div" id="pwd_result"></div> -->
 	</form>
 	<div class="signup_div">
 		계정이 필요하신가요? <a class="signup_btn" onclick="javascript: location.href='/catstagram/signup'">가입하기</a>

@@ -43,6 +43,7 @@
 	height: 40px;
 	padding: 10px;
 	border: 1px solid #d9d9d9;
+	background-color: #FBF9F9;
 	border-radius: 3px;
 }
 
@@ -52,7 +53,8 @@
 	height: 40px;
 	padding: 10px;
 	border-radius: 3px;
-	background: url('/img/check.png');
+	background-color: #FBF9F9;
+	background-image: url('/img/check.png');
 	background-repeat: no-repeat;
 	background-size: 20px;
 	background-position: 252px center;
@@ -65,7 +67,8 @@
 	padding: 10px;
 	border: 1px solid #d9d9d9;
 	border-radius: 3px;
-	background: url('/img/x.png');
+	background-color: #FBF9F9;
+	background-image: url('/img/x.png');
 	background-repeat: no-repeat;
 	background-size: 20px;
 	background-position: 252px center;
