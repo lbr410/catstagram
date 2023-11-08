@@ -53,6 +53,7 @@
 	flex: 1;
 	font-size: 12px;
 	border-radius: 5px;
+	color: #555555;
 }
 
 .search-btn {
@@ -73,7 +74,8 @@ input::placeholder {
 }
 
 .menu_div {
-	
+	display: inline-block;
+	width: 230px;
 }
 
 .menu_img {
@@ -86,7 +88,7 @@ input::placeholder {
 .header_profile_img {
 	width: 29px;
 	height: 29px;
-	border-radius: 20px;
+	border-radius: 29px;
 	cursor: pointer;
 }
 
