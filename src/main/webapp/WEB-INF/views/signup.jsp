@@ -121,6 +121,6 @@
 	<div class="login_div">
 		계정이 있으신가요? <a class="login_btn" onclick="javascript: location.href='/catstagram'">로그인</a>
 	</div>
-	<%@ include file="../footer.jsp" %>
+	<%@ include file="footer.jsp" %>
 </body>
 </html>

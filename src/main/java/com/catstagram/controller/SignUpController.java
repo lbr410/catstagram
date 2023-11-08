@@ -21,7 +21,7 @@ public class SignUpController {
 	// 회원가입 페이지로 이동
 	@GetMapping("/catstagram/signup")
 	public String signUp() {
-		return "member/signup";
+		return "signup";
 	}
 	
 	// 아이디 중복 검사

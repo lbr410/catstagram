@@ -1,0 +1,73 @@
+@charset "UTF-8";
+.search_result_div {
+    margin: 0 auto;
+    width: 1100px;
+    /*border: 1px solid #d9d9d9;*/
+    margin-bottom: 60px;
+}
+
+.search_msg_div {
+    margin-top: 40px;
+    text-align: center;
+    color: #555555;
+}
+
+.search_list_div {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    /*text-align: center;*/
+    /*width: 1100px;*/
+    height: 50px;
+    width: 100%; /* 전체 너비를 활용 */
+    max-width: 680px;
+    margin-left: 210px;
+}
+
+.img_and_id_and_name_div {
+    width: 600px;
+    float: left;
+}
+
+.search_profile_img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+
+.id_and_name_div {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+    padding-top: 1px;
+}
+
+.search_list_id {
+    text-decoration: none;
+    color: #555555;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.search_list_name {
+    text-decoration: none;
+    color: #555555;
+    font-size: 12px;
+}
+
+.search_list_follow_btn_div {
+    width: 80px;
+    float: right;
+}
+
+.search_list_follow_btn {
+    /*margin-left: auto;*/
+    border: none;
+	border-radius: 5px;
+	background: #458eff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 80px;
+    line-height: 15px;
+}
