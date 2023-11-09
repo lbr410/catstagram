@@ -1,0 +1,76 @@
+@charset "UTF-8";
+.profile_img_div {
+    width: 400px;
+    text-align: center;
+}
+
+.profile_img_update_div {
+    padding-top: 40px;
+}
+
+.profile_update_img{
+    width: 300px;
+    height: 300px;
+    border-radius: 300px;
+}
+
+.profile_img_upload_btn_div {
+    margin-top: 20px;
+}
+
+.profile_img_upload_btn {
+    margin-left: auto;
+    border: none;
+	border-radius: 5px;
+	background: #458eff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 120px;
+    line-height: 15px;
+}
+
+.profile_img_del_btn {
+    margin-left: auto;
+    border: none;
+	border-radius: 5px;
+	background: #d9d9d9;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 70px;
+    line-height: 15px;
+    color: #555555;
+}
+
+.profile_img_btn_div {
+    width: 400px;
+    margin-top: 78px;
+    text-align: right;
+    padding-right: 6px;
+}
+
+.profile_img_cancel_btn {
+    margin-left: auto;
+    border: none;
+	border-radius: 5px;
+	background: #d9d9d9;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 80px;
+    line-height: 15px;
+    color: #555555;
+}
+
+.profile_img_update_btn {
+    margin-left: auto;
+    border: none;
+	border-radius: 5px;
+	background: #458eff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 80px;
+    line-height: 15px;
+}

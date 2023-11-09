@@ -18,7 +18,7 @@
         <div>
             <a href="#"><img src="/img/profile2.jpg" class="feed_profile_img"></a>
             <a href="#" class="feed_profile_id">&nbsp;ramiee__l</a>
-            <s class="feed_time">&nbsp;2시간</a>
+            <a class="feed_time">&nbsp;2시간</a>
         </div>
         <div class="feed_img_div">
             <img src="/img/feed_sample.jpg" class="feed_feed_img">
@@ -58,8 +58,8 @@
     <div>
         <div>
             <a href="#"><img src="/img/profile2.jpg" class="feed_profile_img"></a>
-            <a href="#" class="feed_profile_id">ramiee__l</a>
-            <s class="feed_time">&nbsp;2시간</a>
+            <a href="#" class="feed_profile_id">&nbsp;ramiee__l</a>
+            <a class="feed_time">&nbsp;2시간</a>
         </div>
         <div class="feed_img_div">
             <img src="/img/feed_sample.jpg" class="feed_feed_img">
@@ -76,12 +76,12 @@
             <span class="feed_content_content">사랑스러운 우리 뭉이 😘 뭘 그렇게 보니? 귀여운 것❤</span>
         </div>
         <div class="feed_detail_btn_div">
-            <a href="#" class="feed_detail_btn">피드 상세 보기</a>
+            <a id="feedDetailBtn" class="feed_detail_btn">피드 상세 보기</a>
         </div>
         <div class="feed_comment_div">
             <span class="feed_comment">
                 <a href="#" class="feed_comment_id">ss_hhwan</a>
-                <span class="feed_comment_comment">뭉이가 너무 사랑스럽네요 💕</span>
+                <div class="feed_comment_comment">뭉이가 너무 사랑스럽네요 💕</div>
             </span>
             <span class="feed_comment_icon">
                 <img src="/img/heart.png" class="feed_comment_icon_heart_img">
@@ -94,6 +94,7 @@
         </div>
         <hr>
     </div>
+    
 </div>
 
 <!-- Right Menu -->
@@ -154,7 +155,6 @@
 
 </div>
 </div>
-
 
 <!-- feed detail -->
 <div id="feedDetail" class="feed_detail_div">
@@ -263,13 +263,12 @@
         </div>
     </div>
 </div>
-
+<img src="/img/upArrow.png" id="scrollToTopBtn" class="scroll_to_top_btn" onclick="scrollToTop()">
 <%@ include file="footer.jsp" %>
 </body>
 <script>
+    // 피드 상세 보기
     document.getElementById('feedDetailBtn').addEventListener('click', function() {
-        //document.getElementById('feedDetail').style.display = 'block';
-
         var modal = document.getElementById("feedDetail");
         modal.style.display = "flex";
         var modalContent = document.querySelector("feed_detail_content_div");
@@ -279,14 +278,22 @@
         modalContent.style.marginTop = topMargin + "px";
     });
 
+    // X버튼 누르면 피드 상세 보기 닫기
     document.getElementById('closeFeedDetail').addEventListener('click', function() {
         document.getElementById('feedDetail').style.display = 'none';
     });
 
+    // 피드 상세 보기 영역이 아닌 부분 클릭해도 피드 상세 보기 닫기
     document.addEventListener('click', function(event) {
         if(event.target === document.getElementById('feedDetail')) {
             document.getElementById('feedDetail').style.display = 'none';
         }
     });
+
+    // 버튼을 클릭하면 맨 위로 스크롤
+    function scrollToTop() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+    }
 </script>
 </html>

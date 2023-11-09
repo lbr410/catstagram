@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/header.css">
 </head>
-<body>
+<body class="header_body">
 	<div class="header_div">
 		<a href="/catstagram/main">
 			<div class="logo_div">
@@ -22,14 +22,14 @@
 		<div class="menu_div">
 			<img src="/img/home.png" class="menu_img">
 			<img src="/img/dm.png" class="menu_img">
-			<img src="/img/feed.png" class="menu_img">
+			<img src="/img/feed.png" class="menu_img" onclick="javascript: location.href='/catstagram/feedWrite'">
 			<img src="/img/heart.png" class="menu_img">
 			<img src="/img/profile2.jpg" class="header_profile_img" data-bs-toggle="dropdown" aria-expanded="false">
 			<div class="dropdown-center">
 				<ul class="dropdown-menu dropdown-menu2">
-					<li><a class="dropdown-item menu_font" href="#">프로필</a></li>
+					<li><a class="dropdown-item menu_font" href="#">My Catstagram</a></li>
 					<li><hr class="dropdown-divider"></li>
-				    <li><a class="dropdown-item menu_font" href="#">설정</a></li>
+				    <li><a class="dropdown-item menu_font" href="#">회원 정보 수정</a></li>
 				    <li><hr class="dropdown-divider"></li>
 				    <li><a class="dropdown-item menu_font" href="logout">로그아웃</a></li>
 				</ul>

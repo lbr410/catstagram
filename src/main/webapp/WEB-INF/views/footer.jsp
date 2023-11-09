@@ -8,9 +8,11 @@
 <link rel="stylesheet" type="text/css" href="/css/footer.css">
 </head>
 <body>
+<div>
 	<div class="footer_div">
-	© 2023 Catstagram from devBB<br><br>
-	Designed by devBB
+		© 2023 Catstagram from devBB<br><br>
+		Designed by devBB
 	</div>
+</div>
 </body>
 </html>

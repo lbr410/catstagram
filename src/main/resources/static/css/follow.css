@@ -1,0 +1,110 @@
+@charset "UTF-8";
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* 뷰포트 높이의 100% */
+    display: flex;
+    flex-direction: column;
+}
+
+.follow_nav_div {
+    text-align: center;
+    width: 1100px;
+    margin: 150px auto 0 auto;
+}
+
+.nav-item {
+    width: 400px;
+}
+
+.nav-link.active, .nav-link:visited {
+    color: #555555 !important;
+}
+
+.nav-underline, .nav-item, .nav {
+    margin-right: 0 !important;
+    display: inline-block;
+}
+
+.nav_bottom_border {
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.follow_div {
+    margin: 0 auto;
+    width: 1100px;
+    margin-bottom: 80px;
+    cursor: default;
+    flex: 1;
+}
+
+.follow_list_div {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    /*text-align: center;*/
+    /*width: 1100px;*/
+    height: 50px;
+    width: 100%; /* 전체 너비를 활용 */
+    max-width: 680px;
+    margin-left: 210px;
+}
+
+.img_and_id_and_name_div {
+    width: 600px;
+    float: left;
+}
+
+.follow_profile_img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+
+.id_and_name_div {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+    padding-top: 1px;
+}
+
+.follow_list_id {
+    text-decoration: none;
+    color: #555555;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.follow_list_name {
+    text-decoration: none;
+    color: #555555;
+    font-size: 12px;
+}
+
+.follow_list_btn_div {
+    width: 80px;
+    float: right;
+}
+
+.follow_list_del_btn {
+    margin-left: auto;
+    border: none;
+	border-radius: 5px;
+	background: #d9d9d9;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 80px;
+    line-height: 15px;
+    color: #555555;
+}
+
+.scroll_to_top_btn {
+    position: fixed;
+    bottom: 40px;
+    right: 50px;
+    width: 50px;
+    height: 50px;
+    opacity: 0.6;
+    cursor: pointer;
+}
