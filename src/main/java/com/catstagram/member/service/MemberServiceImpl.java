@@ -1,5 +1,7 @@
 package com.catstagram.member.service;
 
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,15 +46,18 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
-//	@Override
-//	public int sessionInfo(String id) throws Exception {
-//		int result = mapper.sessionInfo(id);
-//		return result;
-//	}
-	
 	@Override
 	public MemberDTO sessionInfo(String id) throws Exception {
 		MemberDTO dto = mapper.sessionInfo(id);
+		return dto;
+	}
+	
+	@Override
+	public List<MemberDTO> searchList(String search_id, String member_id) throws Exception {
+		Map map = new HashMap();
+		map.put("search_id", search_id);
+		map.put("member_id", member_id);
+		List<MemberDTO> dto = mapper.searchList(map);
 		return dto;
 	}
 }

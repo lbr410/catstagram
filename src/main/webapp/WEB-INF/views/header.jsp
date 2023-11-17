@@ -15,8 +15,8 @@
 				<span class="logo_title">Catstagram</span>
 			</div>
 		</a>
-		<form action="" method="post" class="search_div">
-			<input type="text" class="search_input" placeholder="검색">
+		<form action="/catstagram/search" method="post" class="search_div">
+			<input type="text" class="search_input" name="search_id" placeholder="검색">
 			<input type="submit" value="" class="search-btn">
 		</form>
 		<div class="menu_div">

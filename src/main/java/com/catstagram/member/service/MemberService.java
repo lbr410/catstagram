@@ -1,5 +1,7 @@
 package com.catstagram.member.service;
 
+import java.util.List;
+
 import com.catstagram.member.model.MemberDTO;
 
 public interface MemberService {
@@ -12,6 +14,6 @@ public interface MemberService {
 	public String idCheck(String id) throws Exception;
 	public int signup(MemberDTO dto) throws Exception;
 	public int login(String id, String pwd) throws Exception;
-//	public int sessionInfo(String id) throws Exception;
 	public MemberDTO sessionInfo(String id) throws Exception;
+	public List<MemberDTO> searchList(String search_id, String member_id) throws Exception;
 }

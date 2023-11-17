@@ -51,7 +51,7 @@
     <div class="menu_title">피드 작성</div>
 </div>
 
-<form class="feed_write_div">
+<form class="feed_write_div" action="/catstagram/feedWrite" method="post" enctype="multipart/form-data">
     <div class="feed_write_img_div">
         <img src="/img/preview.png" class="feed_write_img" id="feedImgPreview">
     </div>

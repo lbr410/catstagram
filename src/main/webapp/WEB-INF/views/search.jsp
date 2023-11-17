@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,233 +14,37 @@
 <%@ include file="header.jsp" %>
 <div class="search_result_div">
     <div class="search_msg_div">
-        <h4>'ramiee__l' 검색 결과</h4>
+        <h4>'${member_id}' 검색 결과</h4>
     </div>
-    <!-- list 1 -->
+    
+    <c:forEach var="dto" items="${list}">
     <div class="search_list_div">
         <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
+            <c:if test="${empty dto.member_img}">
+            	<a href="#"><img src="/img/default_photo2.png" class="search_profile_img"></a>&nbsp;
+            </c:if>
+            <c:if test="${!empty dto.member_img}">
+            	<a href="#"><img src="/upload/member/${dto.member_img}" class="search_profile_img"></a>&nbsp;
+            </c:if>
             <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
+                <a href="#" class="search_list_id">${dto.member_id}</a><br>
+                <a class="search_list_name">${dto.member_name}</a>  
             </div>
         </div>
         <div class="search_list_follow_btn_div">
             <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
         </div>
     </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
-    <!-- list 1 -->
-    <div class="search_list_div">
-        <div class="img_and_id_and_name_div">
-            <a href="#"><img src="/img/profile2.jpg" class="search_profile_img"></a>&nbsp;
-            <div class="id_and_name_div">
-                <a href="#" class="search_list_id">ramiee__l</a><br>
-                <a class="search_list_name">이보람</a>  
-            </div>
-        </div>
-        <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
-        </div>
-    </div>
-
+	</c:forEach>
 </div>
+<img src="/img/upArrow.png" id="scrollToTopBtn" class="scroll_to_top_btn" onclick="scrollToTop()">
 <%@ include file="footer.jsp" %>
 </body>
+<script>
+    // 버튼을 클릭하면 맨 위로 스크롤
+    function scrollToTop() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+    }
+</script>
 </html>
