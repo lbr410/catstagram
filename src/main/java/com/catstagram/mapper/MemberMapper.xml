@@ -18,7 +18,7 @@
 		select member_idx, member_pwd, member_quit from catstagram_member where member_id = #{id}
 	</select>
 	
-	<select id="sessionInfo" parameterType="String" resultType="Integer">
-		select member_idx from catstagram_member where member_id = #{id}
+	<select id="sessionInfo" parameterType="String" resultType="com.catstagram.member.model.MemberDTO">
+		select member_idx, member_id from catstagram_member where member_id = #{id}
 	</select>
 </mapper>

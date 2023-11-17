@@ -44,9 +44,15 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
+//	@Override
+//	public int sessionInfo(String id) throws Exception {
+//		int result = mapper.sessionInfo(id);
+//		return result;
+//	}
+	
 	@Override
-	public int sessionInfo(String id) throws Exception {
-		int result = mapper.sessionInfo(id);
-		return result;
+	public MemberDTO sessionInfo(String id) throws Exception {
+		MemberDTO dto = mapper.sessionInfo(id);
+		return dto;
 	}
 }

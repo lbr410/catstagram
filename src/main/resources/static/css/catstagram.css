@@ -1,0 +1,127 @@
+@charset "UTF-8";
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* 뷰포트 높이의 100% */
+    display: flex;
+    flex-direction: column;
+}
+
+.catstagram_div {
+    margin: 100px auto;
+    width: 1000px;
+    margin-bottom: 60px;
+    cursor: default;
+    flex: 1;
+}
+
+.catstagram_profile_div{
+    width: 1000px;
+    height: 250px;
+    text-align: center;
+    margin-top: 50px;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.catstagram_profile_img {
+    width: 180px;
+    height: 180px;
+    border-radius: 180px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.catstagram_profile_info_div {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    width: 500px;
+    padding-left: 50px;
+}
+
+.catstagram_profile_id_div {
+    display: flex;
+    align-items: center;
+}
+
+.catstagram_profile_id_span {
+    color: #555555;
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+.catstagram_profile_update_btn_span {
+    margin-right: 20px;
+}
+
+.catstagram_profile_update_btn {
+    border: none;
+	border-radius: 5px;
+	background: #d9d9d9;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100px;
+    line-height: 15px;
+    color: #555555;
+}
+
+.catstagram_profile_setting_img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.catstagram_statistics_div {
+    margin-top: 10px;
+}
+
+.cnt_span {
+    font-weight: bold;
+    margin-left: 10px;
+    margin-right: 40px;
+}
+
+.catstagram_profile_name_div {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #555555;
+}
+
+.catstagram_profile_intro_div {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #555555;
+    height: 72px;
+    overflow-y: scroll;
+}
+
+.catstagram_profile_intro_div::-webkit-scrollbar {
+    display: none;
+}
+
+.catstagram_feed_div {
+    width: 1000px;
+    padding-top: 30px;
+    padding-left: 89px;
+}
+
+.catstagram_feed_img_div {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 6px;
+}
+
+.catstagram_feed_img {
+    width: 270px;
+    height: 270px;
+    margin-right: 6px;
+    cursor: pointer;
+    position: relative;
+    transition: opacity 0.3s ease;
+    border: 1px solid #d9d9d9;
+}
+
+.catstagram_feed_img:hover {
+    opacity: 0.6; /* 마우스 오버 시 투명도 조절 */
+}

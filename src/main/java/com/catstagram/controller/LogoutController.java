@@ -13,6 +13,7 @@ public class LogoutController {
 	public String logout(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		session.removeAttribute("sidx");
+		session.removeAttribute("sid");
 		
 		return "redirect:/catstagram";
 	}

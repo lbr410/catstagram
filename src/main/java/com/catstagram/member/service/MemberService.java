@@ -12,5 +12,6 @@ public interface MemberService {
 	public String idCheck(String id) throws Exception;
 	public int signup(MemberDTO dto) throws Exception;
 	public int login(String id, String pwd) throws Exception;
-	public int sessionInfo(String id) throws Exception;
+//	public int sessionInfo(String id) throws Exception;
+	public MemberDTO sessionInfo(String id) throws Exception;
 }

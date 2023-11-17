@@ -1,0 +1,156 @@
+@charset "UTF-8";
+.menu_title_div {
+    margin: 229px auto;
+    width: 800px;
+    margin-bottom: 23px;
+    cursor: default;
+}
+
+.menu_title {
+    margin-top: 100px;
+    font-size: 30px;
+}
+
+.info_form {
+    margin: 0 auto;
+    width: 800px;
+    height: 300px;
+    margin-bottom: 254px;
+    cursor: default;
+    padding-top: 50px;
+}
+
+.info_form2 {
+    margin: 0 auto;
+    width: 800px;
+    height: 300px;
+    margin-bottom: 254px;
+    cursor: default;
+}
+
+.info_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.menu_span {
+    font-weight: bold;
+    color: #555555;
+    margin-right: 20px;
+    display: inline-block;
+    width: 110px;
+    text-align: right;
+}
+
+.input_textbox_deco {
+    width: 280px;
+	height: 40px;
+	padding: 10px;
+	border: 1px solid #d9d9d9;
+	background: #fbf9f9;
+	border-radius: 3px;
+    font-size: 12px;
+}
+
+.input_textbox_deco::placeholder {
+	font-size: 12px;
+}
+
+.info_btn {
+    width: 800px;
+    text-align: center;
+    padding-top: 20px;
+    padding-left: 243px;
+}
+
+.info_btn2{
+    width: 800px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.info_cancel_btn {
+    border: none;
+	border-radius: 5px;
+	background: #d9d9d9;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 80px;
+    line-height: 15px;
+    color: #555555;
+}
+
+.info_ok_btn {
+    margin-left: 2px;
+    border: none;
+	border-radius: 5px;
+	background: #458eff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 80px;
+    line-height: 15px;
+}
+
+/* 아이디 또는 비밀번호 사용 가능시 */
+.available_it {
+	width: 280px;
+	height: 40px;
+	padding: 10px;
+	border-radius: 3px;
+	background-color: #FBF9F9;
+	background-image: url('/img/check.png');
+	background-repeat: no-repeat;
+	background-size: 20px;
+	background-position: 252px center;
+    font-size: 12px;
+}
+
+/* 아이디 또는 비밀번호 사용 불가시 */
+.unavailable_it {
+	width: 280px;
+	height: 40px;
+	padding: 10px;
+	border: 1px solid #d9d9d9;
+	border-radius: 3px;
+	background-color: #FBF9F9;
+	background-image: url('/img/x.png');
+	background-repeat: no-repeat;
+	background-size: 20px;
+	background-position: 252px center;
+    font-size: 12px;
+}
+
+/* 비밀번호 수정 & 회원 탈퇴*/
+.other_menu_div {
+    margin-top: 50px;
+    text-align: center;
+    padding-left: 185px;
+}
+
+.pwd_update_menu_btn {
+    margin-right: 20px;
+    color: #458eff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.quit_menu_btn {
+    color: #dcdcdc;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.chk_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-check-label {
+    color: #555555;
+}

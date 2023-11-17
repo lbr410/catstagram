@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catstagram.encryption.Encryption;
+import com.catstagram.member.model.MemberDTO;
 import com.catstagram.member.service.MemberService;
 
 @Controller
@@ -55,13 +56,20 @@ public class IndexController {
 			}
 			
 			// 세션 생성
-			int sidx = 0;
+			//int sidx = 0;
+			MemberDTO dto = new MemberDTO();
 			try {
-				sidx = memberService.sessionInfo(id);
+				//sidx = memberService.sessionInfo(id);
+				dto = memberService.sessionInfo(id);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			session.setAttribute("sidx", sidx);
+//			session.setAttribute("sidx", sidx);
+			session.setAttribute("sidx", dto.getMember_idx());
+			session.setAttribute("sid", dto.getMember_id());
+			
+			System.out.println(dto.getMember_idx());
+			System.out.println(dto.getMember_id());
 			
 			mav.setViewName("redirect:/catstagram/main");
 		} else if(result == memberService.LOGIN_FAIL || result == memberService.ERROR) {
