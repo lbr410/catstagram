@@ -9,12 +9,13 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="/css/search.css">
+<script type="text/javascript" src="/js/xmlHttpRequest.js"></script>
 </head>
 <body>
 <%@ include file="header.jsp" %>
 <div class="search_result_div">
     <div class="search_msg_div">
-        <h4>'${member_id}' 검색 결과</h4>
+        <h4>'${search_id}' 검색 결과</h4>
     </div>
     
     <c:forEach var="dto" items="${list}">

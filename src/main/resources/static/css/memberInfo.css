@@ -96,6 +96,26 @@
     line-height: 15px;
 }
 
+.update_quit_div {
+    margin-top: 50px;
+    width: 800px;
+    text-align: right;
+    padding-right: 195px;
+}
+
+.pwd_update_btn {
+    color: #458eff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.quit_btn {
+    color: #dcdcdc;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
 /* 아이디 또는 비밀번호 사용 가능시 */
 .available_it {
 	width: 280px;

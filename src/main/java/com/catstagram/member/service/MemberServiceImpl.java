@@ -14,18 +14,21 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	public MemberMapper mapper;
 
+	// 아이디 중복 검사
 	@Override
 	public String idCheck(String id) throws Exception {
 		String result = mapper.idCheck(id);
 		return result;
 	}
 	
+	// 회원가입
 	@Override
 	public int signup(MemberDTO dto) throws Exception {
 		int result = mapper.signup(dto);
 		return result;
 	}
 	
+	// 로그인
 	@Override
 	public int login(String id, String pwd) throws Exception {
 		MemberDTO dto = mapper.login(id);
@@ -46,12 +49,14 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
+	// 세션 정보
 	@Override
 	public MemberDTO sessionInfo(String id) throws Exception {
 		MemberDTO dto = mapper.sessionInfo(id);
 		return dto;
 	}
 	
+	// 회원 검색시 리스트 조회
 	@Override
 	public List<MemberDTO> searchList(String search_id, String member_id) throws Exception {
 		Map map = new HashMap();
@@ -59,5 +64,26 @@ public class MemberServiceImpl implements MemberService {
 		map.put("member_id", member_id);
 		List<MemberDTO> dto = mapper.searchList(map);
 		return dto;
+	}
+	
+	// 이미 저장된 프로필 불러오기
+	@Override
+	public String profileInfo(int member_idx) throws Exception {
+		String result = mapper.profileInfo(member_idx);
+		return result;
+	}
+	
+	// 프로필 수정
+	@Override
+	public int profileUpdate(MemberDTO dto) throws Exception {
+		int result = mapper.profileUpdate(dto);
+		return result;
+	}
+	
+	// 프로필 이미지 변경
+	@Override
+	public int profileImgUpdate(MemberDTO dto) throws Exception {
+		int result = mapper.profileImgUpdate(dto);
+		return result;
 	}
 }

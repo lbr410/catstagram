@@ -8,18 +8,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="/css/feedUpdate.css">
-<script>
-    // 피드 내용 글자수 확인
-    function textCheck() {
-        if(document.getElementById('feedWriteContent').value.length < 10) {
-            document.getElementById('textLength').innerHTML = '00'+document.getElementById('feedWriteContent').value.length;
-        } else if(document.getElementById('feedWriteContent').value.length >= 10 && document.getElementById('feedWriteContent').value.length < 100) {
-            document.getElementById('textLength').innerHTML = '0'+document.getElementById('feedWriteContent').value.length;
-        } else {
-            document.getElementById('textLength').innerHTML = document.getElementById('feedWriteContent').value.length;
-        }
-    }
-</script>
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -42,4 +30,16 @@
 </form>
 <%@ include file="footer.jsp" %>
 </body>
+<script>
+    // 피드 내용 글자수 확인
+    function textCheck() {
+        if(document.getElementById('feedWriteContent').value.length < 10) {
+            document.getElementById('textLength').innerHTML = '00'+document.getElementById('feedWriteContent').value.length;
+        } else if(document.getElementById('feedWriteContent').value.length >= 10 && document.getElementById('feedWriteContent').value.length < 100) {
+            document.getElementById('textLength').innerHTML = '0'+document.getElementById('feedWriteContent').value.length;
+        } else {
+            document.getElementById('textLength').innerHTML = document.getElementById('feedWriteContent').value.length;
+        }
+    }
+</script>
 </html>

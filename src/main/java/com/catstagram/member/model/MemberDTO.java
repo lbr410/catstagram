@@ -18,7 +18,7 @@ public class MemberDTO {
 	private String member_name;
 	private String member_pwd;
 	private String member_email;
-	private String member_prod;
+	private String member_intro;
 	private String member_img;
 	private Date member_joindate;
 	private String member_quit;

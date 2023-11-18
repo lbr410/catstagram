@@ -22,11 +22,13 @@ public class IndexController {
 	@Autowired
 	private MemberService memberService;
 	
+	// 로그인 화면으로 이동
 	@GetMapping("/catstagram")
 	public String index() {
 		return "index";
 	}
 	
+	// 로그인
 	@ResponseBody
 	@PostMapping("/catstagram/login")
 	public ModelAndView login(@RequestParam("member_id") String id, 
@@ -44,7 +46,7 @@ public class IndexController {
 		
 		ModelAndView mav = new ModelAndView();
 		if(result == memberService.LOGIN_OK) {
-			// 쿠키 생성
+			// 아이디 저장하기 쿠키 생성
 			if(saveid == null) {
 				Cookie ck = new Cookie("saveid", id);
 				ck.setMaxAge(0);
@@ -56,20 +58,19 @@ public class IndexController {
 			}
 			
 			// 세션 생성
-			//int sidx = 0;
 			MemberDTO dto = new MemberDTO();
 			try {
-				//sidx = memberService.sessionInfo(id);
 				dto = memberService.sessionInfo(id);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-//			session.setAttribute("sidx", sidx);
 			session.setAttribute("sidx", dto.getMember_idx());
 			session.setAttribute("sid", dto.getMember_id());
+			session.setAttribute("simg", dto.getMember_img());
 			
 			System.out.println(dto.getMember_idx());
 			System.out.println(dto.getMember_id());
+			System.out.println(dto.getMember_img());
 			
 			mav.setViewName("redirect:/catstagram/main");
 		} else if(result == memberService.LOGIN_FAIL || result == memberService.ERROR) {
@@ -83,4 +84,6 @@ public class IndexController {
 		}
 		return mav;
 	}
+	
+	// 로그인 시 header에 이미지 보이게 하기
 }

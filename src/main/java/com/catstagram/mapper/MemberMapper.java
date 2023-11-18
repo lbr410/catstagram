@@ -10,4 +10,7 @@ public interface MemberMapper {
 	public MemberDTO login(String id);
 	public MemberDTO sessionInfo(String id);
 	public List<MemberDTO> searchList(Map map);
+	public String profileInfo(int member_idx);
+	public int profileUpdate(MemberDTO dto);
+	public int profileImgUpdate(MemberDTO dto);
 }

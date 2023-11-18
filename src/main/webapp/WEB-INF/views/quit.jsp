@@ -8,24 +8,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="/css/memberInfo.css">
-<script>
-    window.onload = function() {
-		document.getElementById("quitAgreement").innerHTML = 
-			'<object type="text/html" data="/etc/quit.html" style="width:840px; margin: 10px auto auto 40px; border: 1px solid #ededed; padding: 10px; height: 400px;"></object>';
-	}
-
-    // 탈퇴 동의 체크 후 회원탈퇴
-    function check() {
-        const chk = document.getElementById('chk').checked;
-		
-		if(chk === true) {
-			/*location.href = "signUp.do";*/
-            window.alert('체크 되어있음!');
-		} else {
-			window.alert('필수 항목에 체크바랍니다.');
-		}
-	}
-</script>
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -51,4 +33,22 @@
 </form>
 <%@ include file="footer.jsp" %>
 </body>
+<script>
+    window.onload = function() {
+		document.getElementById("quitAgreement").innerHTML = 
+			'<object type="text/html" data="/etc/quit.html" style="width:840px; margin: 10px auto auto 40px; border: 1px solid #ededed; padding: 10px; height: 400px;"></object>';
+	}
+
+    // 탈퇴 동의 체크 후 회원탈퇴
+    function check() {
+        const chk = document.getElementById('chk').checked;
+		
+		if(chk === true) {
+			/*location.href = "signUp.do";*/
+            window.alert('체크 되어있음!');
+		} else {
+			window.alert('필수 항목에 체크바랍니다.');
+		}
+	}
+</script>
 </html>

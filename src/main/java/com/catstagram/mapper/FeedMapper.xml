@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.catstagram.mapper.FeedMapper">
+	<!-- 피드 등록 -->
 	<insert id="feedWrite" parameterType="com.catstagram.feed.model.FeedDTO">
 		insert into
 			catstagram_feed

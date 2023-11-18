@@ -3,10 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.catstagram.mapper.MemberMapper">
+	<!-- 아이디 중복 검사 -->
 	<select id="idCheck" parameterType="String" resultType="String">
 		select member_id from catstagram_member where member_id = #{id}
 	</select>
 	
+	<!-- 회원가입 -->
 	<insert id="signup" parameterType="com.catstagram.member.model.MemberDTO">
 		insert into
 			catstagram_member
@@ -14,15 +16,33 @@
 			(catstagram_member_idx.nextval, #{member_id}, #{member_name}, #{member_pwd}, '', '', '', sysdate, 'n')
 	</insert>
 	
+	<!--  로그인 -->
 	<select id="login" parameterType="String" resultType="com.catstagram.member.model.MemberDTO">
 		select member_idx, member_pwd, member_quit from catstagram_member where member_id = #{id}
 	</select>
 	
+	<!-- 세션 정보 -->
 	<select id="sessionInfo" parameterType="String" resultType="com.catstagram.member.model.MemberDTO">
-		select member_idx, member_id from catstagram_member where member_id = #{id}
+		select member_idx, member_id, member_img from catstagram_member where member_id = #{id}
 	</select>
 	
+	<!-- 회원 검색시 리스트 조회 -->
 	<select id="searchList" parameterType="Map" resultType="com.catstagram.member.model.MemberDTO">
 		select member_id, member_name, member_img from catstagram_member where member_id like '%'||#{search_id}||'%' and member_id <![CDATA[<>]]> #{member_id}
 	</select>
+	
+	<!-- 이미 저장된 프로필 불러오기 -->
+	<select id="profileInfo" parameterType="Integer" resultType="String">
+		select member_intro from catstagram_member where member_idx = #{member_idx}
+	</select>
+	
+	<!-- 프로필 수정 -->
+	<update id="profileUpdate" parameterType="com.catstagram.member.model.MemberDTO">
+		update catstagram_member set member_intro = #{member_intro} where member_idx = #{member_idx}
+	</update>
+	
+	<!-- 프로필 이미지 변경 -->
+	<update id="profileImgUpdate" parameterType="com.catstagram.member.model.MemberDTO">
+		update catstagram_member set member_img = #{member_img} where member_idx = #{member_idx}
+	</update>
 </mapper>

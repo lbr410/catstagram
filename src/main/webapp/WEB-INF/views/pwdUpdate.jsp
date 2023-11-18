@@ -9,6 +9,28 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="/css/memberInfo.css">
 <script type="text/javascript" src="/js/xmlHttpRequest.js"></script>
+</head>
+<body>
+<%@ include file="header.jsp" %>
+<div class="menu_title_div">
+    <div class="menu_title">비밀번호 수정</div>
+</div>
+<form class="info_form" method="post" onsubmit="return validation()">
+    <div class="info_div">
+        <span class="menu_span">비밀번호</span>
+        <input type="text" name="member_pwd" id="userpwd" placeholder="비밀번호(8~12자 영문;숫자/특수문자 조합)" class="form-control form-control-sm input_textbox_deco" maxlength="12" oninput="pwdChk()" required> 
+    </div>
+    <div class="info_div">
+        <span class="menu_span">비밀번호 확인</span>
+        <input type="text" id="userpwdchk" placeholder="비밀번호 확인" class="form-control form-control-sm input_textbox_deco" maxlength="12" oninput="pwdChk()" required> 
+    </div>
+    <div class="info_btn">
+        <input type="button" value="취소" class="btn btn-secondary info_cancel_btn">
+        <input type="submit" value="수정" class="btn btn-primary info_ok_btn">
+    </div>
+</form>
+<%@ include file="footer.jsp" %>
+</body>
 <script>
     // 비밀번호 유효성
     function pwdChk() {
@@ -61,26 +83,4 @@
 		return true;
 	}
 </script>
-</head>
-<body>
-<%@ include file="header.jsp" %>
-<div class="menu_title_div">
-    <div class="menu_title">비밀번호 수정</div>
-</div>
-<form class="info_form" method="post" onsubmit="return validation()">
-    <div class="info_div">
-        <span class="menu_span">비밀번호</span>
-        <input type="text" name="member_pwd" id="userpwd" placeholder="비밀번호(8~12자 영문;숫자/특수문자 조합)" class="form-control form-control-sm input_textbox_deco" maxlength="12" oninput="pwdChk()" required> 
-    </div>
-    <div class="info_div">
-        <span class="menu_span">비밀번호 확인</span>
-        <input type="text" id="userpwdchk" placeholder="비밀번호 확인" class="form-control form-control-sm input_textbox_deco" maxlength="12" oninput="pwdChk()" required> 
-    </div>
-    <div class="info_btn">
-        <input type="button" value="취소" class="btn btn-secondary info_cancel_btn">
-        <input type="submit" value="수정" class="btn btn-primary info_ok_btn">
-    </div>
-</form>
-<%@ include file="footer.jsp" %>
-</body>
 </html>

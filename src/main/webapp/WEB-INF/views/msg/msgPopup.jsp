@@ -39,7 +39,8 @@
 		const okButton = document.querySelector('#myModal .modal-footer button');
 		okButton.onclick = function() {
 			modal.hide();
-			location.href = '${goUrl}';
+			window.self.close();
+			window.opener.location.reload();
 		}
 		
 		// Enter Key를 눌렀을 때도 click 이벤트 실행	

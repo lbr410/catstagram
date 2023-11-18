@@ -14,6 +14,7 @@ public class LogoutController {
 		HttpSession session = req.getSession();
 		session.removeAttribute("sidx");
 		session.removeAttribute("sid");
+		session.removeAttribute("simg");
 		
 		return "redirect:/catstagram";
 	}

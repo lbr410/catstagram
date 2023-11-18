@@ -8,42 +8,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="/css/feedWrite.css">
-<script>
-    // 이미지 업로드시 확장자 확인
-    function extensionCheck(rp) {
-        const filename = rp.value;
-        const len = filename.length;
-        const filetype = filename.substring(len-4, len);
-
-        if(filetype!='.jpg' && filetype!='.png' && filetype!='jpeg') {
-            window.alert('이미지 파일만 등록 가능합니다.');
-            rp.value = '';
-        }
-    }
-
-    // 업로드한 이미지 미리보기
-    function setFeedImg(event) {
-        const reader = new FileReader();
-
-        reader.onload = function(event) {
-            const img = document.getElementById('feedImgPreview');
-            img.setAttribute("src", event.target.result);
-            
-        }
-        reader.readAsDataURL(event.target.files[0]);
-    }
-
-    // 피드 내용 글자수 확인
-    function textCheck() {
-        if(document.getElementById('feedWriteContent').value.length < 10) {
-            document.getElementById('textLength').innerHTML = '00'+document.getElementById('feedWriteContent').value.length;
-        } else if(document.getElementById('feedWriteContent').value.length >= 10 && document.getElementById('feedWriteContent').value.length < 100) {
-            document.getElementById('textLength').innerHTML = '0'+document.getElementById('feedWriteContent').value.length;
-        } else {
-            document.getElementById('textLength').innerHTML = document.getElementById('feedWriteContent').value.length;
-        }
-    }
-</script>
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -69,4 +33,49 @@
 </form>
 <%@ include file="footer.jsp" %>
 </body>
+<script>
+    // 이미지 업로드시 확장자 확인
+    function extensionCheck(rp) {
+        const filename = rp.value;
+        const len = filename.length;
+        const filetype = filename.substring(len-4, len);
+
+        if(filetype!='.jpg' && filetype!='.png' && filetype!='jpeg') {
+            window.alert('이미지 파일만 등록 가능합니다.');
+            rp.value = '';
+        }
+    }
+
+    // 업로드한 이미지 미리보기 & 피드 이미지 크기 제한
+    function setFeedImg(event) {
+    	const feedImgUpload = document.getElementById('feedImgUpload');
+    	if(feedImgUpload.files.length > 0) {
+    		const fileSizeInBytes = feedImgUpload.files[0].size;
+    		const maxSizeInBytes = 1024 * 1024 * 5; // 5MB
+    		
+    		if(fileSizeInBytes <= maxSizeInBytes) {
+	        	const reader = new FileReader();
+	        	reader.onload = function(event) {
+	            	const img = document.getElementById('feedImgPreview');
+	            	img.setAttribute("src", event.target.result);
+	        	}
+	        	reader.readAsDataURL(event.target.files[0]);
+    		} else {
+    			window.alert('이미지의 사이즈가 10MB를 초과할 수 없습니다.');
+    			feedImgUpload.value = '';
+    		}
+    	}
+    }
+
+    // 피드 내용 글자수 확인
+    function textCheck() {
+        if(document.getElementById('feedWriteContent').value.length < 10) {
+            document.getElementById('textLength').innerHTML = '00'+document.getElementById('feedWriteContent').value.length;
+        } else if(document.getElementById('feedWriteContent').value.length >= 10 && document.getElementById('feedWriteContent').value.length < 100) {
+            document.getElementById('textLength').innerHTML = '0'+document.getElementById('feedWriteContent').value.length;
+        } else {
+            document.getElementById('textLength').innerHTML = document.getElementById('feedWriteContent').value.length;
+        }
+    }
+</script>
 </html>
