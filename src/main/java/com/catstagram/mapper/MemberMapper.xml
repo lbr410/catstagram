@@ -28,7 +28,7 @@
 	
 	<!-- 회원 검색시 리스트 조회 -->
 	<select id="searchList" parameterType="Map" resultType="com.catstagram.member.model.MemberDTO">
-		select member_id, member_name, member_img from catstagram_member where member_id like '%'||#{search_id}||'%' and member_id <![CDATA[<>]]> #{member_id}
+		select member_idx, member_id, member_name, member_img from catstagram_member where member_id like '%'||#{search_id}||'%' and member_id <![CDATA[<>]]> #{member_id}
 	</select>
 	
 	<!-- 이미 저장된 프로필 불러오기 -->

@@ -29,7 +29,7 @@ public class IndexController {
 	}
 	
 	// 로그인
-	@ResponseBody
+	// ResponseBody 지움
 	@PostMapping("/catstagram/login")
 	public ModelAndView login(@RequestParam("member_id") String id, 
 							  @RequestParam("member_pwd") String pwd,
@@ -84,6 +84,4 @@ public class IndexController {
 		}
 		return mav;
 	}
-	
-	// 로그인 시 header에 이미지 보이게 하기
 }

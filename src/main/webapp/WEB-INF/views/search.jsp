@@ -33,7 +33,8 @@
             </div>
         </div>
         <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" class="btn btn-primary search_list_follow_btn">
+            <input type="button" value="팔로우" id="follow${dto.member_idx}" onclick="addFollowing(${dto.member_idx})" class="btn btn-primary search_list_follow_btn">
+            
         </div>
     </div>
 	</c:forEach>
@@ -46,6 +47,41 @@
     function scrollToTop() {
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+    }
+    
+    // 팔로잉(친구추가) - XMLHttpRequest 모듈화 사용 X
+    function addFollowing(member_idx) {	
+    	const XHR = new XMLHttpRequest();
+    	XHR.onreadystatechange = function() {
+    		if(XHR.readyState == 4 && XHR.status == 200) {
+    			const result = JSON.parse(XHR.responseText);
+    			const followBtn = document.getElementById('follow'+result.member_idx);
+    			let followingBtn = document.getElementById('following'+result.member_idx);
+    			const parentDiv = followBtn.parentNode;
+    			
+    			if(parentDiv) {
+    				parentDiv.removeChild(followBtn); // 팔로우 버튼 없앰
+    				
+    				if(!followingBtn) {
+    					followingBtn = document.createElement("input");
+    					followingBtn.type = "button";
+    					followingBtn.value = "팔로잉";
+    					followingBtn.id = "following"+result.member_idx;
+    					followingBtn.className = "btn btn-secondary follow_list_del_btn";
+    					followingBtn.onclick = () => {
+    						// 함수 추가할 예정
+    					}
+    					
+    					if(parentDiv) {
+    						parentDiv.appendChild(followingBtn);
+    					}
+    				}
+    			}
+    		}
+    	}
+    	XHR.open('POST', 'following', true);
+    	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    	XHR.send('to='+member_idx);
     }
 </script>
 </html>
