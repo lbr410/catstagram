@@ -58,10 +58,11 @@ public class MemberServiceImpl implements MemberService {
 	
 	// 회원 검색시 리스트 조회
 	@Override
-	public List<MemberDTO> searchList(String search_id, String member_id) throws Exception {
+	public List<MemberDTO> searchList(String search_id, String sid, int sidx) throws Exception {
 		Map map = new HashMap();
 		map.put("search_id", search_id);
-		map.put("member_id", member_id);
+		map.put("sid", sid);
+		map.put("sidx", sidx);
 		List<MemberDTO> dto = mapper.searchList(map);
 		return dto;
 	}

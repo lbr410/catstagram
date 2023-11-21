@@ -24,33 +24,46 @@ public class FollowController {
 	// 팔로잉(친구추가)
 	@ResponseBody
 	@PostMapping("/catstagram/following")
-	public Map<String, Integer> following(@RequestParam("to") int to,
-							HttpSession session) {
+	public int following(@RequestParam("to") int to, HttpSession session) {
 		FollowDTO dto = new FollowDTO();
 		int sidx = (Integer)session.getAttribute("sidx");
 		dto.setMember_from(sidx);
 		dto.setMember_to(to);
 		
-		int result = 0;
 		try {
-			result = followService.following(dto);
+			followService.following(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("member_idx", to);
-		map.put("result", result);
-		return map;
+		return to;
 	}
 	
-	// 팔로워 목록(나를 친구 추가한 사람)
+	// 팔로잉 취소(친구삭제)
+	@ResponseBody
+	@PostMapping("/catstagram/cancelFollowing")
+	public int cancelFollowing(@RequestParam("to") int to, HttpSession session) {
+		FollowDTO dto = new FollowDTO();
+		int sidx = (Integer)session.getAttribute("sidx");
+		dto.setMember_from(sidx);
+		dto.setMember_to(to);
+		
+		try {
+			followService.cancelFollowing(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return to;
+	}
+	
+	// 팔로워 목록 페이지로 이동(나를 친구 추가한 사람)
 	@GetMapping("/catstagram/follower")
 	public String followerForm() {
 		return "follower";
 	}
 	
-	// 팔로잉 목록(내가 친구 추가한 사람)
+	// 팔로잉 목록 페이지로 이동(내가 친구 추가한 사람)
 	@GetMapping("/catstagram/following")
 	public String followingForm() {
 		return "following";

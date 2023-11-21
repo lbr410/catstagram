@@ -17,4 +17,10 @@ public class FollowServiceImpl implements FollowService {
 		int result = mapper.following(dto);
 		return result;
 	}
+	
+	@Override
+	public int cancelFollowing(FollowDTO dto) throws Exception {
+		int result = mapper.cancelFollowing(dto);
+		return result;
+	}
 }

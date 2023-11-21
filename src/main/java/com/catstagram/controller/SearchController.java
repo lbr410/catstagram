@@ -22,10 +22,11 @@ public class SearchController {
 	// 회원 아이디 검색
 	@PostMapping("/catstagram/search")
 	public ModelAndView search(@RequestParam("search_id") String search_id, HttpSession session) {
-		String member_id = (String) session.getAttribute("sid");
+		String sid = (String)session.getAttribute("sid");
+		int sidx = (Integer)session.getAttribute("sidx");
 		List<MemberDTO> list = null;
 		try {
-			list = memberService.searchList(search_id, member_id);
+			list = memberService.searchList(search_id, sid, sidx);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

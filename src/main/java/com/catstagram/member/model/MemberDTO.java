@@ -22,4 +22,5 @@ public class MemberDTO {
 	private String member_img;
 	private Date member_joindate;
 	private String member_quit;
+	private int is_follow;
 }

@@ -33,8 +33,12 @@
             </div>
         </div>
         <div class="search_list_follow_btn_div">
-            <input type="button" value="팔로우" id="follow${dto.member_idx}" onclick="addFollowing(${dto.member_idx})" class="btn btn-primary search_list_follow_btn">
-            
+        	<c:if test="${dto.is_follow eq 0}">
+        		<input type="button" value="팔로우" id="follow${dto.member_idx}" onclick="addFollowing(${dto.member_idx})" class="btn btn-primary search_list_follow_btn">
+        	</c:if>
+        	<c:if test="${dto.is_follow ne 0}">
+            	<input type="button" value="팔로잉" id="following${dto.member_idx}" onclick="cancelFollowing(${dto.member_idx})" class="btn btn-secondary follow_list_del_btn">
+            </c:if>
         </div>
     </div>
 	</c:forEach>
@@ -55,8 +59,8 @@
     	XHR.onreadystatechange = function() {
     		if(XHR.readyState == 4 && XHR.status == 200) {
     			const result = JSON.parse(XHR.responseText);
-    			const followBtn = document.getElementById('follow'+result.member_idx);
-    			let followingBtn = document.getElementById('following'+result.member_idx);
+    			const followBtn = document.getElementById('follow'+result);
+    			let followingBtn = document.getElementById('following'+result);
     			const parentDiv = followBtn.parentNode;
     			
     			if(parentDiv) {
@@ -66,10 +70,10 @@
     					followingBtn = document.createElement("input");
     					followingBtn.type = "button";
     					followingBtn.value = "팔로잉";
-    					followingBtn.id = "following"+result.member_idx;
+    					followingBtn.id = "following"+result;
     					followingBtn.className = "btn btn-secondary follow_list_del_btn";
     					followingBtn.onclick = () => {
-    						// 함수 추가할 예정
+    						cancelFollowing(result);
     					}
     					
     					if(parentDiv) {
@@ -82,6 +86,42 @@
     	XHR.open('POST', 'following', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('to='+member_idx);
+    }
+    
+    // 팔로잉 취소(친구삭제)
+    function cancelFollowing(member_idx) {
+    	const param = 'to='+member_idx;
+    	sendRequest('cancelFollowing', param, cancelFollowingCallBack, 'POST');
+    }
+    
+    function cancelFollowingCallBack() {
+    	if(XHR.readyState == 4) {
+    		if(XHR.status == 200) {
+    			const result = JSON.parse(XHR.responseText);
+    			const followingBtn = document.getElementById('following'+result);
+    			let followBtn = document.getElementById('follow'+result);
+    			const parentDiv = followingBtn.parentNode;
+    			
+    			if(parentDiv) {
+    				parentDiv.removeChild(followingBtn); // 팔로잉(취소) 버튼 없앰
+    				
+    				if(!followBtn) {
+    					followBtn = document.createElement("input");
+    					followBtn.type = "button";
+    					followBtn.value = "팔로우";
+    					followBtn.id = "follow"+result;
+    					followBtn.className = "btn btn-primary search_list_follow_btn";
+    					followBtn.onclick = () => {
+    						addFollowing(result);
+    					}
+    					
+    					if(parentDiv) {
+    						parentDiv.appendChild(followBtn);
+    					}
+    				}
+    			}
+    		}
+    	}
     }
 </script>
 </html>

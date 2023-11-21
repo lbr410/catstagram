@@ -15,7 +15,7 @@ public interface MemberService {
 	public int signup(MemberDTO dto) throws Exception;
 	public int login(String id, String pwd) throws Exception;
 	public MemberDTO sessionInfo(String id) throws Exception;
-	public List<MemberDTO> searchList(String search_id, String member_id) throws Exception;
+	public List<MemberDTO> searchList(String search_id, String sid, int sidx) throws Exception;
 	public String profileInfo(int member_idx) throws Exception;
 	public int profileUpdate(MemberDTO dto) throws Exception;
 	public int profileImgUpdate(MemberDTO dto) throws Exception;
