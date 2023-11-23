@@ -19,4 +19,6 @@ public interface MemberService {
 	public String profileInfo(int member_idx) throws Exception;
 	public int profileUpdate(MemberDTO dto) throws Exception;
 	public int profileImgUpdate(MemberDTO dto) throws Exception;
+	public List<MemberDTO> followerList(int sidx);
+	public List<MemberDTO> followingList(int sidx);
 }

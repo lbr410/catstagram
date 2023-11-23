@@ -87,4 +87,18 @@ public class MemberServiceImpl implements MemberService {
 		int result = mapper.profileImgUpdate(dto);
 		return result;
 	}
+	
+	// 팔로워 목록(나를 친구 추가한 사람)
+	@Override
+	public List<MemberDTO> followerList(int sidx) {
+		List<MemberDTO> dto = mapper.followerList(sidx);
+		return dto;
+	}
+	
+	// 팔로잉 목록(내가 친구 추가한 사람)
+	@Override
+	public List<MemberDTO> followingList(int sidx) {
+		List<MemberDTO> dto = mapper.followingList(sidx);
+		return dto;
+	}
 }

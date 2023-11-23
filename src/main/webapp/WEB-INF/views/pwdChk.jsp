@@ -20,7 +20,7 @@
         <input type="text" name="member_pwd" placeholder="비밀번호 입력" class="form-control form-control-sm input_textbox_deco" maxlength="12" required> 
     </div>
     <div class="info_btn">
-        <input type="button" value="취소" class="btn btn-secondary info_cancel_btn">
+        <input type="button" value="취소" class="btn btn-secondary info_cancel_btn" onclick="javascript: location.href='/catstagram/infoUpdate'">
         <input type="submit" value="확인" class="btn btn-primary info_ok_btn">
     </div>
 </form>

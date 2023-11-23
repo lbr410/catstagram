@@ -19,13 +19,8 @@
 			member_from = #{member_from} and member_to = #{member_to}
 	</delete>
 	
-	<!-- 팔로워 목록(나를 친구 추가한 사람) -->
-	<select id="followerList" parameterType="Integer" resultType="com.catstagram.follow.model.FollowDTO">
-		select
-			m.member_idx, m.member_id, m.member_name, m.member_img
-		from
-			catstagram_follow f, catstagram_member m
-		where
-			f.member_from = m.member_idx and f.member_to = #{sidx}
-	</select>
+	<!-- 나를 팔로워한(친구 추가한) 사람을 팔로워 목록에서 삭제 -->
+	<delete id="delFollower" parameterType="Map">
+		delete from catstagram_follow where member_from = #{member_from} and member_to = #{member_to}
+	</delete>
 </mapper>

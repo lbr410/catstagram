@@ -50,4 +50,24 @@
 	<update id="profileImgUpdate" parameterType="com.catstagram.member.model.MemberDTO">
 		update catstagram_member set member_img = #{member_img} where member_idx = #{member_idx}
 	</update>
+	
+	<!-- 팔로워 목록(나를 친구 추가한 사람) -->
+	<select id="followerList" parameterType="Integer" resultType="com.catstagram.member.model.MemberDTO">
+		select
+			m.member_idx, m.member_id, m.member_name, m.member_img
+		from
+			catstagram_follow f, catstagram_member m
+		where
+			f.member_from = m.member_idx and f.member_to = #{sidx}
+	</select>
+	
+	<!-- 팔로잉 목록(내가 친구 추가한 사람) -->
+	<select id="followingList" parameterType="Integer" resultType="com.catstagram.member.model.MemberDTO">
+		select
+			m.member_idx, m.member_id, m.member_name, m.member_img
+		from
+			catstagram_follow f, catstagram_member m
+		where
+			f.member_to = m.member_idx and f.member_from = #{sidx}
+	</select>
 </mapper>

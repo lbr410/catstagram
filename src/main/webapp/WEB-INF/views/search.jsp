@@ -54,6 +54,7 @@
     }
     
     // 팔로잉(친구추가) - XMLHttpRequest 모듈화 사용 X
+    // 서버에서 요청받을 것은 없지만 서버가 잘 처리를 하였는지 명확하게 파악하기 위함으로 CallBack을 이용
     function addFollowing(member_idx) {	
     	const XHR = new XMLHttpRequest();
     	XHR.onreadystatechange = function() {

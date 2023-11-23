@@ -13,4 +13,6 @@ public interface MemberMapper {
 	public String profileInfo(int member_idx);
 	public int profileUpdate(MemberDTO dto);
 	public int profileImgUpdate(MemberDTO dto);
+	public List<MemberDTO> followerList(int sidx);
+	public List<MemberDTO> followingList(int sidx);
 }

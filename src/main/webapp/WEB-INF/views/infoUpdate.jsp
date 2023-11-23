@@ -25,12 +25,12 @@
         <input type="text" id="userid" name="member_id" placeholder="아이디(영문 또는 숫자 또는 .,_,. 기호)" class="form-control form-control-sm input_textbox_deco" maxlength="30" oninput="idChk(this)" required> 
     </div>
     <div class="info_btn">
-        <input type="button" value="취소" class="btn btn-secondary info_cancel_btn">
+        <input type="button" value="취소" class="btn btn-secondary info_cancel_btn" onclick="javascript: location.href='/catstagram/main'">
         <input type="submit" value="수정" class="btn btn-primary info_ok_btn">
     </div>
     <div class="update_quit_div">
 		<span class="pwd_update_btn" onclick="javascript: location.href='/catstagram/pwdChk'">비밀번호 수정하기</span>
-		<span class="quit_btn">회원탈퇴</span>
+		<span class="quit_btn" onclick="javascript: location.href='/catstagram/pwdChk'">회원탈퇴</span>
 	</div>
 </form>
 <%@ include file="footer.jsp" %>

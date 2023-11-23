@@ -16,12 +16,12 @@
 				<span class="logo_title">Catstagram</span>
 			</div>
 		</a>
-		<form action="/catstagram/search" method="post" class="search_div">
-			<input type="text" class="search_input" name="search_id" placeholder="검색" required>
+		<form action="/catstagram/search" method="get" class="search_div">
+			<input type="text" class="search_input" name="id" placeholder="검색" required>
 			<input type="submit" value="" class="search-btn">
 		</form>
 		<div class="menu_div">
-			<img src="/img/home.png" class="menu_img">
+			<img src="/img/home.png" class="menu_img" onclick="javascript: location.href='/catstagram/main'">
 			<img src="/img/dm.png" class="menu_img">
 			<img src="/img/feed.png" class="menu_img" onclick="javascript: location.href='/catstagram/feedWrite'">
 			<img src="/img/heart.png" class="menu_img">

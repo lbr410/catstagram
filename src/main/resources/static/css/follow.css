@@ -84,6 +84,17 @@ body {
     float: right;
 }
 
+.follow_list_follow_btn {
+    border: none;
+	border-radius: 5px;
+	background: #458eff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 80px;
+    line-height: 15px;
+}
+
 .follow_list_del_btn {
     margin-left: auto;
     border: none;
