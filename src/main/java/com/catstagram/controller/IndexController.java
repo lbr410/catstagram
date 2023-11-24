@@ -66,10 +66,12 @@ public class IndexController {
 			}
 			session.setAttribute("sidx", dto.getMember_idx());
 			session.setAttribute("sid", dto.getMember_id());
+			session.setAttribute("sname", dto.getMember_name());
 			session.setAttribute("simg", dto.getMember_img());
 			
 			System.out.println(dto.getMember_idx());
 			System.out.println(dto.getMember_id());
+			System.out.println(dto.getMember_name());
 			System.out.println(dto.getMember_img());
 			
 			mav.setViewName("redirect:/catstagram/main");
@@ -78,7 +80,7 @@ public class IndexController {
 			mav.addObject("goUrl", "/catstagram");
 			mav.setViewName("msg/msg");
 		} else if(result == memberService.QUIT) {
-			mav.addObject("msg", "탈퇴한 계정입니다.");
+			mav.addObject("msg", "로그인이 불가능한 계정입니다.");
 			mav.addObject("goUrl", "/catstagram");
 			mav.setViewName("msg/msg");
 		}

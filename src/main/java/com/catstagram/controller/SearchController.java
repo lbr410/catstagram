@@ -26,27 +26,24 @@ public class SearchController {
 		Integer sidx = (Integer)session.getAttribute("sidx");
 		ModelAndView mav = new ModelAndView();
 		
-		if(!search_id.equals("") && sidx != null && sid != null) {
+		if(!search_id.equals("") && search_id != null && sidx != null && sid != null) {
 			List<MemberDTO> list = null;
 			try {
 				list = memberService.searchList(search_id, sid, sidx);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 			mav.addObject("list", list);
 			mav.addObject("search_id", search_id);
 			mav.setViewName("search");
 		} else if(search_id.equals("") || search_id == null) {
 			if(sidx != null) { // 로그인한 상태
-				mav.addObject("msg", "잘못된 접근입니다.");
 				mav.addObject("goUrl", "/catstagram/main");
-				mav.setViewName("msg/msg");	
 			} else { // 로그인하지 않은 상태
-				mav.addObject("msg", "잘못된 접근입니다.");
 				mav.addObject("goUrl", "/catstagram"); 
-				mav.setViewName("msg/msg");			
 			}
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.setViewName("msg/msg");	
 		} else if(sidx == null || sid == null) {
 			mav.addObject("msg", "로그인 후 이용 가능합니다.");
 			mav.addObject("goUrl", "/catstagram"); 

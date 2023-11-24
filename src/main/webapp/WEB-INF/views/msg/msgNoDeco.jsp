@@ -3,5 +3,6 @@
 <!DOCTYPE html>
 <script>
 	window.alert('${msg}');
-	location.href = '${goUrl}';
+	//location.href = '${goUrl}';
+	window.history.back();
 </script>

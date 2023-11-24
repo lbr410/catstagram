@@ -15,6 +15,13 @@
 	font-size: 64px;
 	text-align: center;
 	margin-top: 49px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.title_msg {
+	text-decoration: none;
+	color: black;
 }
 
 .id_input_div {

@@ -100,10 +100,15 @@
 <!-- Right Menu -->
 <div class="suggestion_div">
     <div>
-        <a href="#"><img src="/img/profile2.jpg" class="feed_profile_img"></a>
+        <c:if test="${empty sessionScope.simg}">
+			<img src="/img/default_photo2.png" class="feed_profile_img">
+		</c:if>
+		<c:if test="${!empty sessionScope.simg}">
+			<img src="/upload/member/${sessionScope.simg}" class="feed_profile_img">
+		</c:if>
         <div class="id_and_name_div">
-            <a href="#" class="id_and_name_id">ramiee__l</a><br>
-            <a href="#" class="id_and_name_name">이보람</a>
+            <a href="#" class="id_and_name_id">${sessionScope.sid}</a><br>
+            <a href="#" class="id_and_name_name">${sessionScope.sname}</a>
         </div>
     </div>
 

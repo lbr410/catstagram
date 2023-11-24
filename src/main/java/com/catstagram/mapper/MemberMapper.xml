@@ -23,7 +23,7 @@
 	
 	<!-- 세션 정보 -->
 	<select id="sessionInfo" parameterType="String" resultType="com.catstagram.member.model.MemberDTO">
-		select member_idx, member_id, member_img from catstagram_member where member_id = #{id}
+		select member_idx, member_id, member_name, member_img from catstagram_member where member_id = #{id}
 	</select>
 	
 	<!-- 회원 검색시 리스트 조회 -->
@@ -49,6 +49,28 @@
 	<!-- 프로필 이미지 변경 -->
 	<update id="profileImgUpdate" parameterType="com.catstagram.member.model.MemberDTO">
 		update catstagram_member set member_img = #{member_img} where member_idx = #{member_idx}
+	</update>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="infoUpdate" parameterType="com.catstagram.member.model.MemberDTO">
+		update catstagram_member
+		set member_id = #{member_id}, member_name = #{member_name}
+		where member_idx = #{member_idx}
+	</update>
+	
+	<!-- 비밀번호 확인(회원 정보 수정에서) -->
+	<select id="pwdChk" parameterType="Integer" resultType="String">
+		select member_pwd from catstagram_member where member_idx = #{sidx}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="pwdUpdateOk" parameterType="com.catstagram.member.model.MemberDTO">
+		update catstagram_member set member_pwd = #{member_pwd} where member_idx = #{member_idx}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<update id="quit" parameterType="Integer">
+		update catstagram_member set member_quit = 'y' where member_idx = #{sidx}
 	</update>
 	
 	<!-- 팔로워 목록(나를 친구 추가한 사람) -->

@@ -88,6 +88,34 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
+	// 회원 정보 수정
+	@Override
+	public int infoUpdate(MemberDTO dto) throws Exception {
+		int result = mapper.infoUpdate(dto);
+		return result;
+	}
+	
+	// 비밀번호 확인(회원 정보 수정에서)
+	@Override
+	public String pwdChk(int sidx) throws Exception {
+		String result = mapper.pwdChk(sidx);
+		return result;
+	}
+	
+	// 비밀번호 변경
+	@Override
+	public int pwdUpdateOk(MemberDTO dto) throws Exception {
+		int result = mapper.pwdUpdateOk(dto);
+		return result;
+	}
+	
+	// 회원탈퇴
+	@Override
+	public int quit(int sidx) throws Exception {
+		int result = mapper.quit(sidx);
+		return result;
+	}
+	
 	// 팔로워 목록(나를 친구 추가한 사람)
 	@Override
 	public List<MemberDTO> followerList(int sidx) {

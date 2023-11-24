@@ -14,7 +14,7 @@
 <div class="menu_title_div">
     <div class="menu_title">회원 탈퇴</div>
 </div>
-<form class="info_form2">
+<form class="info_form2" action="quitOk" method="post" onsubmit="return check()">
     <div class="info_div">
         <div id="quitAgreement">
 			<!-- import -->
@@ -22,13 +22,13 @@
     </div>
     <div class="chk_div">
     <div class="form-check">
-        <label class="form-check-label" for="chk">유의 및 안내 사항을 모두 확인하였습니다.</label>&nbsp;
+        <label class="form-check-label" for="chk">(필수)유의 및 안내 사항을 모두 확인하였습니다.</label>&nbsp;
         <input type="checkbox" id="chk" class="form-check-input">
     </div>
     </div>
     <div class="info_btn2">
-        <input type="button" value="탈퇴" class="btn btn-secondary info_cancel_btn" onclick="check()">
-        <input type="button" value="취소" class="btn btn-primary info_ok_btn" onclick="javascript: location.href='/catstagram/main'">
+        <input type="submit" value="탈퇴" class="btn btn-secondary info_cancel_btn">
+        <input type="button" value="취소" onclick="javascript: location.href='/catstagram/infoUpdate'" class="btn btn-primary info_ok_btn" onclick="javascript: location.href='/catstagram/main'">
     </div>
 </form>
 <%@ include file="footer.jsp" %>
@@ -42,12 +42,11 @@
     // 탈퇴 동의 체크 후 회원탈퇴
     function check() {
         const chk = document.getElementById('chk').checked;
-		
-		if(chk === true) {
-			/*location.href = "signUp.do";*/
-            window.alert('체크 되어있음!');
-		} else {
+		if(chk == true) {
+            return true;
+		} else if(chk == false) {
 			window.alert('필수 항목에 체크바랍니다.');
+			return false;
 		}
 	}
 </script>

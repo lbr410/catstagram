@@ -13,7 +13,7 @@
 </head>
 <body>
 	<form class="login_form" action="/catstagram/login" method="post">
-		<div class="title">Catstagram</div>
+		<div class="title"><a href="/catstagram" class="title_msg">Catstagram</a></div>
 		<div class="id_input_div">
 			<input type="text" name="member_id" id="userid" placeholder="아이디" class="form-control mx-auto form-control-sm id_input" maxlength="30" value="${cookie.saveid.value}" required>
 			</div>
