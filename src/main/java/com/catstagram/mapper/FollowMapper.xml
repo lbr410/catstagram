@@ -23,4 +23,94 @@
 	<delete id="delFollower" parameterType="Map">
 		delete from catstagram_follow where member_from = #{member_from} and member_to = #{member_to}
 	</delete>
+	
+	<!-- 전체 팔로우 추천(전체 친구 추천) -->
+	<select id="suggestedFollowers" parameterType="Integer" resultType="com.catstagram.follow.model.FollowDTO">
+		select 
+	        m.member_idx as following_idx_of_my_following,
+	        m.member_id as following_id_of_my_following,
+	        m.member_name as following_name_of_my_following,
+	        m.member_img as following_img_of_my_following,
+	        count(*) - 1 as num_of_followers,
+	        listagg(m2.member_id, ',') within group (order by m2.member_id) as my_following_list
+	    from
+	        catstagram_member m
+	    join
+	        catstagram_follow f on f.member_to = m.member_idx
+	    join
+	        catstagram_member m2 on m2.member_idx = f.member_from
+	    where
+	        m.member_id in
+	        (select
+	            distinct m2.member_id as my_following_following_id
+	        from
+	            catstagram_member m,
+	            catstagram_follow f,
+	            catstagram_member m2,
+	            catstagram_follow f2
+	        where
+	            f.member_to = m.member_idx 
+	        and f.member_from = #{sidx}
+	        and f2.member_from = m.member_idx
+	        and m2.member_idx = f2.member_to
+	        and f2.member_to <![CDATA[<>]]> #{sidx}
+	        and f2.member_to
+	        not in
+	            (select m.member_idx from catstagram_member m, catstagram_follow f
+	            where f.member_to = m.member_idx
+	            and f.member_from = #{sidx}))
+	    group by
+	        m.member_idx,
+	        m.member_id,
+	        m.member_name,
+	        m.member_img
+	    order by
+	        dbms_random.value
+	</select>
+	
+	<!-- 랜덤으로 3명 팔로우 추천(메인에서 랜덤으로 3명 친구 추천) -->
+	<select id="suggestedFollowersInMain" parameterType="Integer" resultType="com.catstagram.follow.model.FollowDTO">
+		select * from (
+		    select 
+		        m.member_idx as following_idx_of_my_following,
+		        m.member_id as following_id_of_my_following,
+		        m.member_name as following_name_of_my_following,
+		        m.member_img as following_img_of_my_following,
+		        count(*) - 1 as num_of_followers,
+		        listagg(m2.member_id, ',') within group (order by m2.member_id) as my_following_list
+		    from
+		        catstagram_member m
+		    join
+		        catstagram_follow f on f.member_to = m.member_idx
+		    join
+		        catstagram_member m2 on m2.member_idx = f.member_from
+		    where
+		        m.member_id in
+		        (select
+		            distinct m2.member_id as my_following_following_id
+		        from
+		            catstagram_member m,
+		            catstagram_follow f,
+		            catstagram_member m2,
+		            catstagram_follow f2
+		        where
+		            f.member_to = m.member_idx 
+		        and f.member_from = #{sidx}
+		        and f2.member_from = m.member_idx
+		        and m2.member_idx = f2.member_to
+		        and f2.member_to <![CDATA[<>]]> #{sidx}
+		        and f2.member_to
+		        not in
+		            (select m.member_idx from catstagram_member m, catstagram_follow f
+		            where f.member_to = m.member_idx
+		            and f.member_from = #{sidx}))
+		    group by
+		        m.member_idx,
+		        m.member_id,
+		        m.member_name,
+		        m.member_img
+		    order by
+		        dbms_random.value)
+		where rownum <![CDATA[<=]]> 3
+	</select>
 </mapper>
