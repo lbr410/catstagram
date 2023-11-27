@@ -372,20 +372,30 @@
 
         // 드롭다운을 활성화할 인덱스 배열
         function showDropdown(index) {
-        	 console.log('Showing dropdown for index:', index);
+			console.log('Showing dropdown for index:', index);
             var dropdown = document.getElementById('dropdown-center22'+index);
-            if (dropdown) {
+            var suggestedFollowListElement = document.getElementById('suggestedFollowListId'+index);
+            if (suggestedFollowListElement) {
+                suggestedFollowListElement.classList.add('show');
+            }
+            if(dropdown) {
                 dropdown.classList.add('show');
             }
+            
         }
 
         // 드롭다운을 비활성화할 인덱스 배열
         function hideDropdown(index) {
         	console.log('Hiding dropdown for index:', index);
             var dropdown = document.getElementById('dropdown-center22'+index);
-            if (dropdown) {
+            var suggestedFollowListElement = document.getElementById('suggestedFollowListId'+index);
+            if (suggestedFollowListElement) {
+                suggestedFollowListElement.classList.remove('show');
+            }
+            if(dropdown) {
                 dropdown.classList.remove('show');
             }
+            
         }
 
         // 각 드롭다운에 이벤트 리스너 추가
@@ -394,6 +404,7 @@
             console.log('Adding event listener to element:', element);
             element.addEventListener('mouseover', function (event) {
                 console.log('Mouseover event:', event);
+  
                 var index = event.target.dataset.index;
                 activeDropdownIndexes.push(index);
                 showDropdown(index);
