@@ -94,15 +94,20 @@ input::placeholder {
 }
 
 .menu_div {
-	display: inline-block;
-	width: 230px;
+	/*display: inline-block;
+	width: 230px;*/
+	display: flex;
+    align-items: center;
+    width: 230px;
+    padding-left: 15px;
 }
 
 .menu_img {
 	width: 25px;
 	height: 25px;
-	margin-right: 15px;
+	margin-right: 20px;
 	cursor: pointer;
+	flex-shrink: 0;
 }
 
 .header_profile_img {

@@ -149,9 +149,7 @@
 				</c:forEach>
 			</ul>
 		</div>
-		
     </c:forEach>
-    
 </div>
 </div>
 
