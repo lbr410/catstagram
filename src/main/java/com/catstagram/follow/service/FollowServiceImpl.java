@@ -39,4 +39,18 @@ public class FollowServiceImpl implements FollowService {
 		int result = mapper.delFollower(map);
 		return result;
 	}
+	
+	// 팔로우 추천(친구 추천, 최대 100명)
+	@Override
+	public List<FollowDTO> suggestedFollows(int sidx) throws Exception {
+		List<FollowDTO> list = mapper.suggestedFollows(sidx);
+		return list;
+	}
+	
+	// 랜덤으로 3명 팔로우 추천(메인에서 랜덤으로 3명 친구 추천)
+	@Override
+	public List<FollowDTO> suggestedFollowersInMain(int sidx) throws Exception {
+		List<FollowDTO> list = mapper.suggestedFollowersInMain(sidx);
+		return list;
+	}
 }

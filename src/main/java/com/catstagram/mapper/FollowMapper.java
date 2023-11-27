@@ -8,6 +8,6 @@ public interface FollowMapper {
 	public int following(FollowDTO dto);
 	public int cancelFollowing(FollowDTO dto);
 	public int delFollower(Map map);
-	public FollowDTO suggestedFollowers(int sidx);
-	public FollowDTO suggestedFollowersInMain(int sidx);
+	public List<FollowDTO> suggestedFollows(int sidx);
+	public List<FollowDTO> suggestedFollowersInMain(int sidx);
 }

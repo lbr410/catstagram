@@ -97,4 +97,27 @@ public class FollowController {
 		
 		return mav;	
 	}
+	
+	// 팔로우 추천 페이지
+	@GetMapping("/catstagram/suggestedFollows")
+	public ModelAndView suggestedFollows(HttpSession session) {
+		int sidx = (Integer)session.getAttribute("sidx");
+		List<FollowDTO> suggestedFollows = null;
+		String[] followingList = null;
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			suggestedFollows = followService.suggestedFollows(sidx);
+			for(int i=0; i<suggestedFollows.size(); i++) {
+				followingList = suggestedFollows.get(i).getMy_following_list().split(",");
+				suggestedFollows.get(i).setMy_following_list_one(followingList[0]);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		mav.addObject("suggestedFollows", suggestedFollows);
+		mav.setViewName("suggestedFollows");
+		return mav;
+	}
 }

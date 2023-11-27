@@ -221,6 +221,13 @@ body {
     font-size: 14px;
 }
 
+.more_suggested_follow {
+	margin-left: 305px;
+	color: #7e7e7e;
+	cursor: pointer;
+	text-decoration: none;
+}
+
 .suggestion_list_div {
     margin-top: 15px;
     display: flex;
@@ -247,6 +254,19 @@ body {
     font-weight: bold;
     width: 80px;
     line-height: 15px;
+}
+
+.suggestion_list_follow_del_btn {
+	margin-left: auto;
+    border: none;
+	border-radius: 5px;
+	background: #d9d9d9;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 80px;
+    line-height: 15px;
+    color: #555555;
 }
 
 /* feed detail */
