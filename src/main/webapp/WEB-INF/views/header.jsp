@@ -17,7 +17,7 @@
 			</div>
 		</a>
 		<form action="/catstagram/search" method="get" class="search_div">
-			<input type="text" class="search_input" name="id" placeholder="검색" required>
+			<input type="text" class="search_input" name="id" placeholder="검색" maxlength="30" required>
 			<input type="submit" value="" class="search-btn">
 		</form>
 		<div class="menu_div">

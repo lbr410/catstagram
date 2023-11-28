@@ -58,7 +58,7 @@ body {
 .search_list_name {
     text-decoration: none;
     color: #555555;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .search_list_follow_btn_div {
@@ -98,4 +98,8 @@ body {
     width: 80px;
     line-height: 15px;
     color: #555555;
+}
+
+.suggestedFollowList {
+	cursor: pointer;
 }

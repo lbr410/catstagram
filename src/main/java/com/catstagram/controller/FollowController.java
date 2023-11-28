@@ -110,7 +110,7 @@ public class FollowController {
 			suggestedFollows = followService.suggestedFollows(sidx);
 			for(int i=0; i<suggestedFollows.size(); i++) {
 				followingList = suggestedFollows.get(i).getMy_following_list().split(",");
-				suggestedFollows.get(i).setMy_following_list_one(followingList[0]);
+				suggestedFollows.get(i).setMy_following_list_arr(followingList);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

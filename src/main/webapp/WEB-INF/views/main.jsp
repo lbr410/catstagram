@@ -122,34 +122,48 @@
 	    <div class="suggestion_list_div">
 	        <div class="img_and_id_and_name_div">
 	        	<c:if test="${empty suggestedFollowers.following_img_of_my_following}">
-					<img src="/img/default_photo2.png" class="feed_profile_img" data-bs-toggle="dropdown" aria-expanded="false">
+					<img src="/img/default_photo2.png" class="feed_profile_img2">
 				</c:if>
 				<c:if test="${!empty suggestedFollowers.following_img_of_my_following}">
-					<img src="/upload/member/${suggestedFollowers.following_img_of_my_following}" class="feed_profile_img" data-bs-toggle="dropdown" aria-expanded="false">
+					<img src="/upload/member/${suggestedFollowers.following_img_of_my_following}" class="feed_profile_img2">
 				</c:if>
 	            <div class="id_and_name_div">
-	                <a href="#" class="suggestion_list_id">${suggestedFollowers.following_id_of_my_following}</a><br>
-	                <c:if test="${suggestedFollowers.num_of_followers eq 0}">
-	                	<a class="suggestion_follow_who">${suggestedFollowers.my_following_list_arr[0]}님이 팔로우합니다.</a>
-	                </c:if>
-	                <c:if test="${suggestedFollowers.num_of_followers ne 0}">
-	                	<a class="suggestion_follow_who">${suggestedFollowers.my_following_list_arr[0]}님 외 <span id="suggestedFollowListId${loop.index}" data-index="${loop.index}" class="suggestedFollowList">${suggestedFollowers.num_of_followers}명</span>이 팔로우합니다.</a>
-	                </c:if> 
+	            	<div class="id_and_name_div2">
+		                <a href="#" class="suggestion_list_id">${suggestedFollowers.following_id_of_my_following}</a><br>
+		                <c:if test="${suggestedFollowers.num_of_followers eq 0}">
+		                	<a class="suggestion_follow_who">${suggestedFollowers.my_following_list_arr[0]}님이 팔로우합니다.</a>
+		                </c:if>
+		                <c:if test="${suggestedFollowers.num_of_followers ne 0}">
+		                	<span class="suggestion_follow_who">${suggestedFollowers.my_following_list_arr[0]}님 외 
+		                	<span id="suggestedFollowListId${loop.index}" data-index="${loop.index}"
+		                		class="suggestedFollowList" data-bs-toggle="dropdown" aria-expanded="false">
+		                		${suggestedFollowers.num_of_followers}명</span>이 팔로우합니다.
+		                	
+								<div class="dropdown">
+									<ul class="dropdown-menu" id="follow_list_ul${loop.index}">
+										<c:forEach var="suggestedFollowList" items="${suggestedFollowers.my_following_list_arr}">
+											<li><a class="dropdown-item menu_font" href="#">${suggestedFollowList}</a></li>
+										</c:forEach>
+									</ul>
+			                	</div>
+							</span>
+		                </c:if>
+		                
+					    
+		                
+	                </div>
+	                
+	                
 	            </div>
+	            
 	        </div>
 	        <div class="suggestion_list_follow_btn_div">
 	            <input type="button" value="팔로우" id="follow${suggestedFollowers.following_idx_of_my_following}" onclick="addFollowing(${suggestedFollowers.following_idx_of_my_following})" class="btn btn-primary suggestion_list_follow_btn">
 	        </div>
 	    </div>
-
-	    <div class="dropdown-center dropdown-center22" id="dropdown-center22${loop.index}">
-			<ul class="dropdown-menu dropdown-menu2">
-				<c:forEach var="suggestedFollowList" items="${suggestedFollowers.my_following_list_arr}">
-					<li><a class="dropdown-item menu_font" href="#">${suggestedFollowList}</a></li>
-				</c:forEach>
-			</ul>
-		</div>
+	    
     </c:forEach>
+    
 </div>
 </div>
 
@@ -364,61 +378,5 @@
     		}
     	}
     }
-    
-    document.addEventListener('DOMContentLoaded', function () {
-        var activeDropdownIndexes = [];
-
-        // 드롭다운을 활성화할 인덱스 배열
-        function showDropdown(index) {
-			console.log('Showing dropdown for index:', index);
-            var dropdown = document.getElementById('dropdown-center22'+index);
-            var suggestedFollowListElement = document.getElementById('suggestedFollowListId'+index);
-            if (suggestedFollowListElement) {
-                suggestedFollowListElement.classList.add('show');
-            }
-            if(dropdown) {
-                dropdown.classList.add('show');
-            }
-            
-        }
-
-        // 드롭다운을 비활성화할 인덱스 배열
-        function hideDropdown(index) {
-        	console.log('Hiding dropdown for index:', index);
-            var dropdown = document.getElementById('dropdown-center22'+index);
-            var suggestedFollowListElement = document.getElementById('suggestedFollowListId'+index);
-            if (suggestedFollowListElement) {
-                suggestedFollowListElement.classList.remove('show');
-            }
-            if(dropdown) {
-                dropdown.classList.remove('show');
-            }
-            
-        }
-
-        // 각 드롭다운에 이벤트 리스너 추가
-        var suggestedFollowListElements = document.getElementsByClassName('suggestedFollowList');
-        Array.from(suggestedFollowListElements).forEach(function (element) {
-            console.log('Adding event listener to element:', element);
-            element.addEventListener('mouseover', function (event) {
-                console.log('Mouseover event:', event);
-  
-                var index = event.target.dataset.index;
-                activeDropdownIndexes.push(index);
-                showDropdown(index);
-            });
-
-            element.addEventListener('mouseout', function (event) {
-                console.log('Mouseout event:', event);
-                var index = event.target.dataset.index;
-                var indexToRemove = activeDropdownIndexes.indexOf(index);
-                if (indexToRemove !== -1) {
-                    activeDropdownIndexes.splice(indexToRemove, 1);
-                }
-
-                hideDropdown(index);
-            });
-        });
-    });
 </script>
 </html>

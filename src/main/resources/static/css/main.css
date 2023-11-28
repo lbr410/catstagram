@@ -28,6 +28,13 @@ body {
     border-radius: 50px;
 }
 
+.feed_profile_img2 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin-right: 7px;
+}
+
 .feed_profile_id {
     text-decoration: none;
     color: #555555;
@@ -198,6 +205,18 @@ body {
     padding-top: 1px;
 }
 
+.id_and_name_div2 {
+	width: 312px;
+    /*white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;*/
+}
+
+.suggestion_follow_who:hover {
+	overflow: visible;
+}
+
 .id_and_name_id, .suggestion_list_id {
     text-decoration: none;
     color: #555555;
@@ -205,8 +224,14 @@ body {
     font-size: 14px;
 }
 
-.id_and_name_name, .suggestion_follow_who {
+.id_and_name_name {
     text-decoration: none;
+    color: #555555;
+    font-size: 13px;
+}
+
+.suggestion_follow_who {
+	text-decoration: none;
     color: #555555;
     font-size: 13px;
 }
@@ -230,13 +255,20 @@ body {
 
 .suggestion_list_div {
     margin-top: 15px;
+    /*display: flex;
+    align-items: center;*/
     display: flex;
-    align-items: center;
+    justify-content: space-between; /* 수평으로 정렬 */
+    align-items: center; /* 세로 중앙 정렬 (선택적으로 사용) */
+    margin-bottom: 10px;
+    height: 60px;
 }
 
 .img_and_id_and_name_div {
-    width: 390px;
-    float: left;
+    /*width: 390px;
+    float: left;*/
+    display: flex;
+    align-items: center;
 }
 
 .suggestion_list_follow_btn_div {
@@ -473,4 +505,8 @@ body {
     height: 50px;
     opacity: 0.6;
     cursor: pointer;
+}
+
+.suggestedFollowList {
+	cursor: pointer;
 }

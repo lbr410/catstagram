@@ -31,7 +31,6 @@ public class MainController {
 			suggestedFollowersInMain = followService.suggestedFollowersInMain(sidx);
 			for(int i=0; i<suggestedFollowersInMain.size(); i++) {
 				followingList = suggestedFollowersInMain.get(i).getMy_following_list().split(",");
-				suggestedFollowersInMain.get(i).setMy_following_list_one(followingList[0]);
 				suggestedFollowersInMain.get(i).setMy_following_list_arr(followingList);
 			}
 		} catch (Exception e) {

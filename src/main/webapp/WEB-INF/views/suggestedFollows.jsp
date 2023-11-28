@@ -18,7 +18,7 @@
         <h4>💙 Suggestions for you 💙</h4>
     </div>
     
-    <c:forEach var="suggestedFollows" items="${suggestedFollows}">
+    <c:forEach var="suggestedFollows" items="${suggestedFollows}" varStatus="loop">
 	    <div class="search_list_div">
 	        <div class="img_and_id_and_name_div">
 	            <c:if test="${empty suggestedFollows.following_img_of_my_following}">
@@ -30,10 +30,22 @@
 	            <div class="id_and_name_div">
 	                <a href="#" class="search_list_id">${suggestedFollows.following_id_of_my_following}</a><br>
 	                <c:if test="${suggestedFollows.num_of_followers eq 0}">
-	                	<a class="search_list_name">${suggestedFollows.my_following_list_one}님이 팔로우합니다.</a>
+	                	<a class="search_list_name">${suggestedFollows.my_following_list_arr[0]}님이 팔로우합니다.</a>
 	                </c:if>
 	                <c:if test="${suggestedFollows.num_of_followers ne 0}">
-	                	<a class="search_list_name">${suggestedFollows.my_following_list_one}님 외 ${suggestedFollows.num_of_followers}명이 팔로우합니다.</a>
+	                	<span class="search_list_name">${suggestedFollows.my_following_list_arr[0]}님 외
+	                	<span id="suggestedFollowListId${loop.index}" data-index="${loop.index}"
+		                	class="suggestedFollowList" data-bs-toggle="dropdown" aria-expanded="false"> 
+	                		${suggestedFollows.num_of_followers}명</span>이 팔로우합니다.
+	                		
+	                		<div class="dropdown">
+								<ul class="dropdown-menu" id="follow_list_ul${loop.index}">
+									<c:forEach var="suggestedFollowList" items="${suggestedFollows.my_following_list_arr}">
+										<li><a class="dropdown-item menu_font" href="#">${suggestedFollowList}</a></li>
+									</c:forEach>
+								</ul>
+		                	</div>
+		                </span>
 	                </c:if>
 	            </div>
 	        </div>
