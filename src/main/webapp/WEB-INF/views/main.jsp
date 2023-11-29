@@ -280,13 +280,13 @@
 <script>
     // 피드 상세 보기
     document.getElementById('feedDetailBtn').addEventListener('click', function() {
-        var modal = document.getElementById("feedDetail");
-        modal.style.display = "flex";
-        var modalContent = document.querySelector("feed_detail_content_div");
-        var windowHeight = window.innerHeight;
-        var modalHeight = modalContent.clientHeight;
-        var topMargin = (windowHeight - modalHeight) / 2;
-        modalContent.style.marginTop = topMargin + "px";
+        let modal = document.getElementById('feedDetail');
+        modal.style.display = 'flex';
+        let modalContent = document.querySelector('feed_detail_content_div');
+        let windowHeight = window.innerHeight;
+        let modalHeight = modalContent.clientHeight;
+        let topMargin = (windowHeight - modalHeight) / 2;
+        modalContent.style.marginTop = topMargin + 'px';
     });
 
     // X버튼 누르면 피드 상세 보기 닫기
