@@ -3,6 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.catstagram.mapper.FeedMapper">
+	<!-- 메인 화면의 팔로잉(내 친구)들의 피드 -->
+	<select id="mainFollowingFeed" parameterType="Integer" resultType="com.catstagram.etc.model.MainFollowingFeedDTO">
+		select
+			f.follow_idx, m.member_idx, m.member_id, m.member_img, 
+			fe.feed_idx, fe.feed_img, fe.feed_content, fe.feed_like_count, fe.feed_date,
+			trunc((sysdate-fe.feed_date) * 24 * 60) as feed_date_minute 
+		from
+			catstagram_follow f, catstagram_member m, catstagram_feed fe
+		where
+			f.member_to = m.member_idx
+		and
+			f.member_from = #{sidx}
+		and
+			f.member_to = fe.member_idx
+		and
+			fe.feed_date >= sysdate - 7
+		order by
+			fe.feed_date desc
+	</select>
+
 	<!-- 피드 등록 -->
 	<insert id="feedWrite" parameterType="com.catstagram.feed.model.FeedDTO">
 		insert into
