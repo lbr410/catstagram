@@ -16,6 +16,56 @@
 <div class="all_div">
 <div class="feed_div">
     <!-- first -->
+    <c:forEach var="mainFollowingFeed" items="${mainFollowingFeed}">
+	    <div>
+	        <div>
+	            <c:if test="${empty mainFollowingFeed.member_img}">
+					<img src="/img/default_photo2.png" class="feed_profile_img">
+				</c:if>
+				<c:if test="${!empty mainFollowingFeed.member_img}">
+					<img src="/upload/member/${mainFollowingFeed.member_img}" class="feed_profile_img">
+				</c:if>
+	            
+	            <a href="#" class="feed_profile_id">&nbsp;${mainFollowingFeed.member_id}</a>
+	            <a class="feed_time">&nbsp;${mainFollowingFeed.feed_date_time}</a>
+	        </div>
+	        <div class="feed_img_div">
+	            <img src="/upload/feed/${mainFollowingFeed.feed_img}" class="feed_feed_img">
+	        </div>
+	        <div class="feed_icon_div">
+	            <a href="#"><img src="/img/heart.png" class="feed_icon_heart_img"></a>
+	            <a href="#"><img src="/img/reple.png" class="feed_icon_reple_img"></a>
+	        </div>
+	        <div class="like_div">
+	            <span class="like_span">좋아요 ${mainFollowingFeed.feed_like_count}개</span>
+	        </div>
+	        <div class="feed_content_div">
+	            <a href="#" class="feed_content_id">${mainFollowingFeed.member_id}</a>
+	            <span class="feed_content_content">${mainFollowingFeed.feed_content}</span>
+	        </div>
+	        <div class="feed_detail_btn_div">
+	            <a id="feedDetailBtn" class="feed_detail_btn">피드 상세 보기</a>
+	        </div>
+	        <div class="feed_comment_div">
+	            <span class="feed_comment">
+	                <a href="#" class="feed_comment_id">ss_hhwan</a>
+	                <div class="feed_comment_comment">뭉이가 너무 사랑스럽네요 💕ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+	            </span>
+	            <span class="feed_comment_icon">
+	                <img src="/img/heart.png" class="feed_comment_icon_heart_img">
+	                <img src="/img/trash.png" class="feed_comment_icon_trash_img">
+	            </span>
+	        </div>
+	        <div class="feed_comment_insert_div">
+	            <input type="text" name="comment_content" placeholder="댓글 달기..." maxlength="1000" class="feed_comment_insert_input">
+	            <img src="/img/dm.png" class="feed_comment_insert_icon_img">
+	        </div>
+	        <hr>
+	    </div>
+    </c:forEach>
+    
+   
+    <!-- 테스트로 남겨둔 것. 나중에 지우기! -->
     <div>
         <div>
             <a href="#"><img src="/img/profile2.jpg" class="feed_profile_img"></a>

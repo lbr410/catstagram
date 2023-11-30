@@ -24,4 +24,5 @@ public class MainFollowingFeedDTO {
 	private int feed_like_count;
 	private Date feed_date;
 	private int feed_date_minute;
+	private String feed_date_time;
 }
