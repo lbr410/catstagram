@@ -62,6 +62,117 @@
 	        </div>
 	        <hr>
 	    </div>
+	    
+	    
+		<!-- feed detail -->
+		<div id="feedDetail" class="feed_detail_div">
+		    <span id="closeFeedDetail" class="feed_detail_close_btn">&times;</span>
+		    <div class="feed_detail_content_div">
+		        <div class="feed_detail_img_div">
+		            <img src="/img/feed_sample.jpg" class="feed_detail_img">
+		        </div>
+		
+		        <div class="feed_detail_content_content_div">
+		            <div class="feed_detail_info_div">
+		                <div class="feed_detail_info_span">
+		                    <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_img"></a>
+		                    <a href="#" class="feed_profile_id">&nbsp;ramiee__l</a>
+		                </div>
+		                <div class="feed_detail_more_view_btn_div">
+		                    <img src="/img/3dots.png" class="feed_detail_more_view_btn" data-bs-toggle="dropdown" aria-expanded="false">
+		                    <div class="dropdown-center">
+		                        <ul class="dropdown-menu dropdown-menu2">
+		                            <li><a class="dropdown-item menu_font" href="#">수정</a></li>
+		                            <li><hr class="dropdown-divider"></li>
+		                            <li><a class="dropdown-item menu_font" href="#">삭제</a></li>
+		                        </ul>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="feed_detail_content_content">
+		                <p class="feed_detail_content_content_p">
+		                    사랑스러운 우리 뭉이 😍<br><br>오래오래 행복하자!<br><br><br>❤❤❤❤❤❤
+		                </p>
+		            </div>
+		            <div class="feed_detail_content_time_div">2시간</div>
+		            <div class="feed_detail_content_comment_div">
+		                <!-- 첫 번째 댓글 -->
+		                <div class="feed_detail_comment_div">
+		                    <span class="feed_detail_comment">
+		                        <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_comment_img"></a> 
+		                        <span class="feed_detail_comment_comment">
+		                            <a href="#" class="feed_detail_comment_id">ss_hhwan</a>
+		                            뭉이가 너무 사랑스럽네요 💕ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br><br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>
+		                        </span>
+		                    </span>
+		                    <span class="feed_detail_comment_icon">
+		                        <img src="/img/heart.png" class="feed_comment_icon_heart_img">
+		                        <img src="/img/trash.png" class="feed_comment_icon_trash_img">
+		                    </span>
+		                </div>
+		                <div class="feed_detail_comment_time_like_div">
+		                    1시간&nbsp;&nbsp;좋아요 1개
+		                </div>
+		
+		                <!-- 두 번째 댓글 -->
+		                <div class="feed_detail_comment_div">
+		                    <span class="feed_detail_comment">
+		                        <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_comment_img"></a> 
+		                        <span class="feed_detail_comment_comment">
+		                            <a href="#" class="feed_detail_comment_id">ss_hhwan</a>
+		                            뭉이가 너무 사랑스럽네요 💕
+		                        </span>
+		                    </span>
+		                    <span class="feed_detail_comment_icon">
+		                        <img src="/img/heart.png" class="feed_comment_icon_heart_img">
+		                        <img src="/img/trash.png" class="feed_comment_icon_trash_img">
+		                    </span>
+		                </div>
+		                <div class="feed_detail_comment_time_like_div">
+		                    1시간&nbsp;&nbsp;
+		                </div>
+		
+		                <!-- 세 번째 댓글 -->
+		                <div class="feed_detail_comment_div">
+		                    <span class="feed_detail_comment">
+		                        <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_comment_img"></a> 
+		                        <span class="feed_detail_comment_comment">
+		                            <a href="#" class="feed_detail_comment_id">ss_hhwan</a>
+		                            뭉이가 너무 사랑스럽네요 💕
+		                        </span>
+		                    </span>
+		                    <span class="feed_detail_comment_icon">
+		                        <img src="/img/heart.png" class="feed_comment_icon_heart_img">
+		                        <img src="/img/trash.png" class="feed_comment_icon_trash_img">
+		                    </span>
+		                </div>
+		                <div class="feed_detail_comment_time_like_div">
+		                    1시간&nbsp;&nbsp;좋아요 1개
+		                </div>
+		            </div>
+		
+		            <div class="feed_detail_comment_write_div">
+		                <div class="feed_detail_icon_div">
+		                    <a href="#"><img src="/img/heart.png" class="feed_icon_heart_img"></a>
+		                    <a href="#"><img src="/img/reple.png" class="feed_icon_reple_img"></a>
+		                </div>
+		                <div class="feed_detail_like_div">
+		                    <div class="feed_detail_like">
+		                        좋아요 1004개
+		                    </div>
+		                </div>
+		                <div class="feed_detail_comment_write_write_div">
+		                    <div class="feed_detail_comment_input">
+		                        <input type="text" name="comment_content" placeholder="댓글 달기..." maxlength="1000" class="feed_detail_comment_insert_input">
+		                        <img src="/img/dm.png" class="feed_comment_insert_icon_img">
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	    
+	    
     </c:forEach>
     
    
@@ -109,113 +220,7 @@
 </div>
 
 
-<!-- feed detail -->
-<div id="feedDetail" class="feed_detail_div">
-    <span id="closeFeedDetail" class="feed_detail_close_btn">&times;</span>
-    <div class="feed_detail_content_div">
-        <div class="feed_detail_img_div">
-            <img src="/img/feed_sample.jpg" class="feed_detail_img">
-        </div>
 
-        <div class="feed_detail_content_content_div">
-            <div class="feed_detail_info_div">
-                <div class="feed_detail_info_span">
-                    <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_img"></a>
-                    <a href="#" class="feed_profile_id">&nbsp;ramiee__l</a>
-                </div>
-                <div class="feed_detail_more_view_btn_div">
-                    <img src="/img/3dots.png" class="feed_detail_more_view_btn" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div class="dropdown-center">
-                        <ul class="dropdown-menu dropdown-menu2">
-                            <li><a class="dropdown-item menu_font" href="#">수정</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item menu_font" href="#">삭제</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="feed_detail_content_content">
-                <p class="feed_detail_content_content_p">
-                    사랑스러운 우리 뭉이 😍<br><br>오래오래 행복하자!<br><br><br>❤❤❤❤❤❤
-                </p>
-            </div>
-            <div class="feed_detail_content_time_div">2시간</div>
-            <div class="feed_detail_content_comment_div">
-                <!-- 첫 번째 댓글 -->
-                <div class="feed_detail_comment_div">
-                    <span class="feed_detail_comment">
-                        <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_comment_img"></a> 
-                        <span class="feed_detail_comment_comment">
-                            <a href="#" class="feed_detail_comment_id">ss_hhwan</a>
-                            뭉이가 너무 사랑스럽네요 💕ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br><br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>
-                        </span>
-                    </span>
-                    <span class="feed_detail_comment_icon">
-                        <img src="/img/heart.png" class="feed_comment_icon_heart_img">
-                        <img src="/img/trash.png" class="feed_comment_icon_trash_img">
-                    </span>
-                </div>
-                <div class="feed_detail_comment_time_like_div">
-                    1시간&nbsp;&nbsp;좋아요 1개
-                </div>
-
-                <!-- 두 번째 댓글 -->
-                <div class="feed_detail_comment_div">
-                    <span class="feed_detail_comment">
-                        <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_comment_img"></a> 
-                        <span class="feed_detail_comment_comment">
-                            <a href="#" class="feed_detail_comment_id">ss_hhwan</a>
-                            뭉이가 너무 사랑스럽네요 💕
-                        </span>
-                    </span>
-                    <span class="feed_detail_comment_icon">
-                        <img src="/img/heart.png" class="feed_comment_icon_heart_img">
-                        <img src="/img/trash.png" class="feed_comment_icon_trash_img">
-                    </span>
-                </div>
-                <div class="feed_detail_comment_time_like_div">
-                    1시간&nbsp;&nbsp;
-                </div>
-
-                <!-- 세 번째 댓글 -->
-                <div class="feed_detail_comment_div">
-                    <span class="feed_detail_comment">
-                        <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_comment_img"></a> 
-                        <span class="feed_detail_comment_comment">
-                            <a href="#" class="feed_detail_comment_id">ss_hhwan</a>
-                            뭉이가 너무 사랑스럽네요 💕
-                        </span>
-                    </span>
-                    <span class="feed_detail_comment_icon">
-                        <img src="/img/heart.png" class="feed_comment_icon_heart_img">
-                        <img src="/img/trash.png" class="feed_comment_icon_trash_img">
-                    </span>
-                </div>
-                <div class="feed_detail_comment_time_like_div">
-                    1시간&nbsp;&nbsp;좋아요 1개
-                </div>
-            </div>
-
-            <div class="feed_detail_comment_write_div">
-                <div class="feed_detail_icon_div">
-                    <a href="#"><img src="/img/heart.png" class="feed_icon_heart_img"></a>
-                    <a href="#"><img src="/img/reple.png" class="feed_icon_reple_img"></a>
-                </div>
-                <div class="feed_detail_like_div">
-                    <div class="feed_detail_like">
-                        좋아요 1004개
-                    </div>
-                </div>
-                <div class="feed_detail_comment_write_write_div">
-                    <div class="feed_detail_comment_input">
-                        <input type="text" name="comment_content" placeholder="댓글 달기..." maxlength="1000" class="feed_detail_comment_insert_input">
-                        <img src="/img/dm.png" class="feed_comment_insert_icon_img">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <!-- Menu of Right -->
