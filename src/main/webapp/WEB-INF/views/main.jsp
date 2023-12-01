@@ -63,7 +63,6 @@
 	        <hr>
 	    </div>
 	    
-	    
 		<!-- feed detail -->
 		<div id="feedDetail" class="feed_detail_div">
 		    <span id="closeFeedDetail" class="feed_detail_close_btn">&times;</span>
