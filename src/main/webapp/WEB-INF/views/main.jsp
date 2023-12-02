@@ -16,7 +16,7 @@
 <div class="all_div">
 <div class="feed_div">
     <!-- first -->
-    <c:forEach var="mainFollowingFeed" items="${mainFollowingFeed}">
+    <c:forEach var="mainFollowingFeed" items="${mainFollowingFeed}" varStatus="loop">
 	    <div>
 	        <div>
 	            <c:if test="${empty mainFollowingFeed.member_img}">
@@ -25,7 +25,6 @@
 				<c:if test="${!empty mainFollowingFeed.member_img}">
 					<img src="/upload/member/${mainFollowingFeed.member_img}" class="feed_profile_img">
 				</c:if>
-	            
 	            <a href="#" class="feed_profile_id">&nbsp;${mainFollowingFeed.member_id}</a>
 	            <a class="feed_time">&nbsp;${mainFollowingFeed.feed_date_time}</a>
 	        </div>
@@ -68,14 +67,21 @@
 		    <span id="closeFeedDetail" class="feed_detail_close_btn">&times;</span>
 		    <div class="feed_detail_content_div">
 		        <div class="feed_detail_img_div">
-		            <img src="/img/feed_sample.jpg" class="feed_detail_img">
+		            <img src="/upload/feed/${mainFollowingFeed.feed_img}" class="feed_detail_img">
 		        </div>
 		
 		        <div class="feed_detail_content_content_div">
 		            <div class="feed_detail_info_div">
 		                <div class="feed_detail_info_span">
-		                    <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_img"></a>
-		                    <a href="#" class="feed_profile_id">&nbsp;ramiee__l</a>
+		                    
+		                    <c:if test="${empty mainFollowingFeed.member_img}">
+								<img src="/img/default_photo2.png" class="feed_detail_profile_img">
+							</c:if>
+							<c:if test="${!empty mainFollowingFeed.member_img}">
+								<img src="/upload/member/${mainFollowingFeed.member_img}" class="feed_detail_profile_img">
+							</c:if>
+							
+		                    <a href="#" class="feed_profile_id">&nbsp;${mainFollowingFeed.member_id}</a>
 		                </div>
 		                <div class="feed_detail_more_view_btn_div">
 		                    <img src="/img/3dots.png" class="feed_detail_more_view_btn" data-bs-toggle="dropdown" aria-expanded="false">
@@ -90,10 +96,10 @@
 		            </div>
 		            <div class="feed_detail_content_content">
 		                <p class="feed_detail_content_content_p">
-		                    사랑스러운 우리 뭉이 😍<br><br>오래오래 행복하자!<br><br><br>❤❤❤❤❤❤
+		                    ${mainFollowingFeed.feed_content}
 		                </p>
 		            </div>
-		            <div class="feed_detail_content_time_div">2시간</div>
+		            <div class="feed_detail_content_time_div">${mainFollowingFeed.feed_date_time}</div>
 		            <div class="feed_detail_content_comment_div">
 		                <!-- 첫 번째 댓글 -->
 		                <div class="feed_detail_comment_div">
@@ -157,7 +163,7 @@
 		                </div>
 		                <div class="feed_detail_like_div">
 		                    <div class="feed_detail_like">
-		                        좋아요 1004개
+		                        좋아요 ${mainFollowingFeed.feed_like_count}개
 		                    </div>
 		                </div>
 		                <div class="feed_detail_comment_write_write_div">
@@ -258,12 +264,12 @@
 		                </c:if>
 		                <c:if test="${suggestedFollowers.num_of_followers ne 0}">
 		                	<span class="suggestion_follow_who">${suggestedFollowers.my_following_list_arr[0]}님 외 
-		                	<span id="suggestedFollowListId${loop.index}" data-index="${loop.index}"
+		                	<span id="suggestedFollowListId${loop.index}"
 		                		class="suggestedFollowList" data-bs-toggle="dropdown" aria-expanded="false">
 		                		${suggestedFollowers.num_of_followers}명</span>이 팔로우합니다.
 		                	
 								<div class="dropdown">
-									<ul class="dropdown-menu" id="follow_list_ul${loop.index}">
+									<ul class="dropdown-menu">
 										<c:forEach var="suggestedFollowList" items="${suggestedFollowers.my_following_list_arr}">
 											<li><a class="dropdown-item menu_font" href="#">${suggestedFollowList}</a></li>
 										</c:forEach>
@@ -271,22 +277,14 @@
 			                	</div>
 							</span>
 		                </c:if>
-		                
-					    
-		                
 	                </div>
-	                
-	                
 	            </div>
-	            
 	        </div>
 	        <div class="suggestion_list_follow_btn_div">
 	            <input type="button" value="팔로우" id="follow${suggestedFollowers.following_idx_of_my_following}" onclick="addFollowing(${suggestedFollowers.following_idx_of_my_following})" class="btn btn-primary suggestion_list_follow_btn">
 	        </div>
 	    </div>
-	    
     </c:forEach>
-    
 </div>
 </div>
 

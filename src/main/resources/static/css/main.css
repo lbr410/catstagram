@@ -41,12 +41,14 @@ body {
     font-weight: bold;
     font-size: 14px;
     margin-left: 5px;
+    vertical-align: middle;
 }
 
 .feed_time {
     text-decoration: none;
     color: #7e7e7e;
     font-size: 14px;
+    vertical-align: middle;
 }
 
 .feed_img_div {
