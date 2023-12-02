@@ -107,7 +107,7 @@
 		                        <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_comment_img"></a> 
 		                        <span class="feed_detail_comment_comment">
 		                            <a href="#" class="feed_detail_comment_id">ss_hhwan</a>
-		                            뭉이가 너무 사랑스럽네요 💕ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br><br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>
+		                            뭉이가 너무 사랑스럽네요 💕ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br>
 		                        </span>
 		                    </span>
 		                    <span class="feed_detail_comment_icon">
@@ -425,18 +425,6 @@
     			}
     		}
     	}
-    }
-    
-    
-    
-    
-    
-    function adjustParentHeight() {
-        var img = document.getElementById('dynamicHeightImg');
-        var parentDiv = document.getElementById('dynamicHeightDiv');
-
-        // 이미지의 높이에 따라 부모 div의 높이를 동적으로 설정
-        parentDiv.style.height = img.clientHeight + 'px';
     }
 </script>
 </html>
