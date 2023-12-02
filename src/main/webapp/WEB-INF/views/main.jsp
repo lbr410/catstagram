@@ -56,7 +56,7 @@
 	            </span>
 	        </div>
 	        <div class="feed_comment_insert_div">
-	            <input type="text" name="comment_content" placeholder="댓글 달기..." maxlength="1000" class="feed_comment_insert_input">
+	            <input type="text" name="comment_content" placeholder="댓글 달기..." maxlength="1000" class="feed_comment_insert_input" onkeydown="feedCommentInsert(event)">
 	            <img src="/img/dm.png" class="feed_comment_insert_icon_img">
 	        </div>
 	        <hr>
@@ -425,6 +425,14 @@
     			}
     		}
     	}
+    }
+    
+    function feedCommentInsert(event) {
+        if (event.key === 'Enter') {
+            // 엔터 키가 눌렸을 때 수행할 동작
+            //event.preventDefault(); // 폼 전송 방지
+            window.alert('asdfsdf'); // 원하는 함수 호출
+        }
     }
 </script>
 </html>
