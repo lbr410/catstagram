@@ -43,7 +43,7 @@
 	            <span class="feed_content_content">${mainFollowingFeed.feed_content}</span>
 	        </div>
 	        <div class="feed_detail_btn_div">
-	            <a id="feedDetailBtn" class="feed_detail_btn">피드 상세 보기</a>
+	            <a id="feedDetailBtn${loop.index}" class="feed_detail_btn">피드 상세 보기</a>
 	        </div>
 	        <div class="feed_comment_div">
 	            <span class="feed_comment">
@@ -63,7 +63,7 @@
 	    </div>
 	    
 		<!-- feed detail -->
-		<div id="feedDetail" class="feed_detail_div">
+		<div id="feedDetail${loop.index}" class="feed_detail_div">
 		    <span id="closeFeedDetail" class="feed_detail_close_btn">&times;</span>
 		    <div class="feed_detail_content_div">
 		        <div class="feed_detail_img_div">
@@ -294,7 +294,7 @@
 </body>
 <script>
     // 피드 상세 보기
-    document.getElementById('feedDetailBtn').addEventListener('click', function() {
+    /*document.getElementById('feedDetailBtn').addEventListener('click', function() {
         let modal = document.getElementById('feedDetail');
         modal.style.display = 'flex';
         let modalContent = document.querySelector('feed_detail_content_div');
@@ -314,6 +314,39 @@
         if(event.target === document.getElementById('feedDetail')) {
             document.getElementById('feedDetail').style.display = 'none';
         }
+    });*/
+    
+    
+    
+    
+ 	// 피드 상세 보기
+    document.addEventListener('DOMContentLoaded', function() {
+        // forEach 루프로 각각의 피드에 대한 이벤트 리스너 추가
+        <c:forEach var="mainFollowingFeed" items="${mainFollowingFeed}" varStatus="loop">
+            document.getElementById('feedDetailBtn${loop.index}').addEventListener('click', function() {
+                // 해당 피드의 모달을 보이게 함
+                document.getElementById('feedDetail${loop.index}').style.display = 'flex';
+                let modalContent = document.querySelector('.feed_detail_content_div');
+                let windowHeight = window.innerHeight;
+                let modalHeight = modalContent.clientHeight;
+                let topMargin = (windowHeight - modalHeight) / 2;
+                modalContent.style.marginTop = topMargin + 'px';
+            });
+        </c:forEach>
+
+		// X버튼 누르면 피드 상세 보기 닫기
+        document.querySelectorAll('.feed_detail_close_btn').forEach(function(closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                this.closest('.feed_detail_div').style.display = 'none';
+            });
+        });
+
+		// 피드 상세 보기 영역이 아닌 부분 클릭해도 피드 상세 보기 닫기
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('feed_detail_div')) {
+                event.target.style.display = 'none';
+            }
+        });
     });
 
     // 위 화살표 버튼을 클릭하면 맨 위로 스크롤
@@ -392,6 +425,18 @@
     			}
     		}
     	}
+    }
+    
+    
+    
+    
+    
+    function adjustParentHeight() {
+        var img = document.getElementById('dynamicHeightImg');
+        var parentDiv = document.getElementById('dynamicHeightDiv');
+
+        // 이미지의 높이에 따라 부모 div의 높이를 동적으로 설정
+        parentDiv.style.height = img.clientHeight + 'px';
     }
 </script>
 </html>

@@ -57,14 +57,33 @@ body {
     /*width: 600px;
     height: 350px;*/
     /*text-align: center;*/
-    width: 600px;
-    height: 350px;
+    /*width: 600px;*/
+    /*height: 350px;*/
+    
+    max-height: 500px;
+    position: relative; /* 상대 위치 지정 */
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .feed_feed_img {
-    width: 598px;
-    height: 348px;
+    /*width: 598px;
+    height: 348px;*/
     border: 1px solid #d9d9d9;
+    
+    
+    
+    /*width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;*/
+    
+    
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
 }
 
 .feed_icon_div {
