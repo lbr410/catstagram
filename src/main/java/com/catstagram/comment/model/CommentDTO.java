@@ -20,4 +20,5 @@ public class CommentDTO {
 	private String feed_content;
 	private int comment_like_count;
 	private Date comment_date;
+	private String member_id;
 }

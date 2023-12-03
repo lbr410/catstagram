@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.catstagram.comment.service.CommentService;
 import com.catstagram.etc.model.MainFollowingFeedDTO;
 import com.catstagram.feed.service.FeedService;
 import com.catstagram.follow.model.FollowDTO;
@@ -22,6 +23,9 @@ public class MainController {
 	
 	@Autowired
 	private FeedService feedService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	// 메인 페이지
 	@GetMapping("/catstagram/main")
@@ -48,6 +52,9 @@ public class MainController {
 				
 				// 피드 내용 개행 처리
 				mainFollowingFeed.get(i).setFeed_content(mainFollowingFeed.get(i).getFeed_content().replaceAll("\n", "<br>"));
+				
+				
+				//mainFollowingFeed.get(i).setFeed_comment_list(commentService.feedCommentList(mainFollowingFeed.get(i).getFeed_idx()));
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -67,9 +74,9 @@ public class MainController {
 			e.printStackTrace();
 		}
 		
-		mav.addObject("suggestedFollowersInMain", suggestedFollowersInMain);
 		mav.addObject("mainFollowingFeed", mainFollowingFeed);
+		mav.addObject("suggestedFollowersInMain", suggestedFollowersInMain);
 		mav.setViewName("main");
 		return mav;
-	}
+	}	
 }

@@ -1,7 +1,10 @@
 package com.catstagram.comment.service;
 
+import java.util.List;
+
 import com.catstagram.comment.model.CommentDTO;
 
 public interface CommentService {
+	public List<CommentDTO> feedCommentList(int feed_idx) throws Exception;
 	public int feedCommentInsert(CommentDTO dto) throws Exception;
 }
