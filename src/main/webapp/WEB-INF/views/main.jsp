@@ -293,32 +293,6 @@
 <%@ include file="footer.jsp" %>
 </body>
 <script>
-    // 피드 상세 보기
-    /*document.getElementById('feedDetailBtn').addEventListener('click', function() {
-        let modal = document.getElementById('feedDetail');
-        modal.style.display = 'flex';
-        let modalContent = document.querySelector('feed_detail_content_div');
-        let windowHeight = window.innerHeight;
-        let modalHeight = modalContent.clientHeight;
-        let topMargin = (windowHeight - modalHeight) / 2;
-        modalContent.style.marginTop = topMargin + 'px';
-    });
-
-    // X버튼 누르면 피드 상세 보기 닫기
-    document.getElementById('closeFeedDetail').addEventListener('click', function() {
-        document.getElementById('feedDetail').style.display = 'none';
-    });
-
-    // 피드 상세 보기 영역이 아닌 부분 클릭해도 피드 상세 보기 닫기
-    document.addEventListener('click', function(event) {
-        if(event.target === document.getElementById('feedDetail')) {
-            document.getElementById('feedDetail').style.display = 'none';
-        }
-    });*/
-    
-    
-    
-    
  	// 피드 상세 보기
     document.addEventListener('DOMContentLoaded', function() {
         // forEach 루프로 각각의 피드에 대한 이벤트 리스너 추가
@@ -427,6 +401,7 @@
     	}
     }
     
+    // 피드 댓글 달기(엔터키 눌렀을 시 실행되게)
     function feedCommentInsert(event) {
         if (event.key === 'Enter') {
             // 엔터 키가 눌렸을 때 수행할 동작
