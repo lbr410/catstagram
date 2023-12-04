@@ -1,6 +1,9 @@
 package com.catstagram.etc.model;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.catstagram.comment.model.CommentDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,4 +28,5 @@ public class MainFollowingFeedDTO {
 	private Date feed_date;
 	private int feed_date_minute;
 	private String feed_date_time;
+	private List<CommentDTO> feed_comment_list;
 }

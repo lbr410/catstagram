@@ -6,7 +6,9 @@
 	<!-- 피드(게시글) 댓글 목록 -->
 	<select id="feedCommentList" parameterType="Integer" resultType="com.catstagram.comment.model.CommentDTO">
 		select
-			c.comment_idx, c.feed_idx, c.member_idx, c.comment_content, c.comment_like_count, c.comment_date, m.member_id, m.member_img
+			c.comment_idx, c.feed_idx, c.member_idx, c.comment_content, c.comment_like_count, c.comment_date,
+			m.member_id, m.member_img,
+			trunc((sysdate-c.comment_date) * 24 * 60) as comment_date_minute
 		from
 			catstagram_comment c, catstagram_member m
 		where

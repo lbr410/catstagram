@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,19 +46,26 @@
 	        <div class="feed_detail_btn_div">
 	            <a id="feedDetailBtn${loop.index}" class="feed_detail_btn">피드 상세 보기</a>
 	        </div>
-	        <div class="feed_comment_div">
-	            <span class="feed_comment">
-	                <a href="#" class="feed_comment_id">ss_hhwan</a>
-	                <div class="feed_comment_comment">뭉이가 너무 사랑스럽네요 💕ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
-	            </span>
-	            <span class="feed_comment_icon">
-	                <img src="/img/heart.png" class="feed_comment_icon_heart_img">
-	                <img src="/img/trash.png" class="feed_comment_icon_trash_img">
-	            </span>
-	        </div>
+	        <c:if test="${!empty mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_content}">
+		        <div class="feed_comment_div">
+		            <span class="feed_comment">
+		                <a href="#" class="feed_comment_id">${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].member_id}</a>
+		                <div class="feed_comment_comment">
+		                	${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_content}
+		                </div>
+		            </span>
+		            <span class="feed_comment_icon">
+		                <img src="/img/heart.png" class="feed_comment_icon_heart_img">
+		                <img src="/img/trash.png" class="feed_comment_icon_trash_img">
+		            </span>
+		        </div>
+	        </c:if>
+	        <!-- 댓글 달기 기능 진행 중 / 이 주석은 나중에 지울 것 -->
 	        <div class="feed_comment_insert_div">
-	            <input type="text" name="comment_content" placeholder="댓글 달기..." maxlength="1000" class="feed_comment_insert_input" onkeydown="feedCommentInsert(event)">
-	            <img src="/img/dm.png" class="feed_comment_insert_icon_img">
+	            <input type="text" name="comment_content" placeholder="댓글 달기..." 
+		            id="feedComment${mainFollowingFeed.feed_idx}" maxlength="1000" 
+		            class="feed_comment_insert_input" onkeydown="feedCommentInsertEnterKey(event, ${mainFollowingFeed.feed_idx})">
+	            <img src="/img/dm.png" class="feed_comment_insert_icon_img" onclick="feedCommentInsertClick(${mainFollowingFeed.feed_idx})">
 	        </div>
 	        <hr>
 	    </div>
@@ -101,59 +109,31 @@
 		            </div>
 		            <div class="feed_detail_content_time_div">${mainFollowingFeed.feed_date_time}</div>
 		            <div class="feed_detail_content_comment_div">
-		                <!-- 첫 번째 댓글 -->
-		                <div class="feed_detail_comment_div">
-		                    <span class="feed_detail_comment">
-		                        <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_comment_img"></a> 
-		                        <span class="feed_detail_comment_comment">
-		                            <a href="#" class="feed_detail_comment_id">ss_hhwan</a>
-		                            adfdsfadsfadsf
-		                        </span>
-		                    </span>
-		                    <span class="feed_detail_comment_icon">
-		                        <img src="/img/heart.png" class="feed_comment_icon_heart_img">
-		                        <img src="/img/trash.png" class="feed_comment_icon_trash_img">
-		                    </span>
-		                </div>
-		                <div class="feed_detail_comment_time_like_div">
-		                    1시간&nbsp;&nbsp;좋아요 1개
-		                </div>
-		
-		                <!-- 두 번째 댓글 -->
-		                <div class="feed_detail_comment_div">
-		                    <span class="feed_detail_comment">
-		                        <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_comment_img"></a> 
-		                        <span class="feed_detail_comment_comment">
-		                            <a href="#" class="feed_detail_comment_id">ss_hhwan</a>
-		                            뭉이가 너무 사랑스럽네요 💕
-		                        </span>
-		                    </span>
-		                    <span class="feed_detail_comment_icon">
-		                        <img src="/img/heart.png" class="feed_comment_icon_heart_img">
-		                        <img src="/img/trash.png" class="feed_comment_icon_trash_img">
-		                    </span>
-		                </div>
-		                <div class="feed_detail_comment_time_like_div">
-		                    1시간&nbsp;&nbsp;
-		                </div>
-		
-		                <!-- 세 번째 댓글 -->
-		                <div class="feed_detail_comment_div">
-		                    <span class="feed_detail_comment">
-		                        <a href="#"><img src="/img/profile2.jpg" class="feed_detail_profile_comment_img"></a> 
-		                        <span class="feed_detail_comment_comment">
-		                            <a href="#" class="feed_detail_comment_id">ss_hhwan</a>
-		                            뭉이가 너무 사랑스럽네요 💕
-		                        </span>
-		                    </span>
-		                    <span class="feed_detail_comment_icon">
-		                        <img src="/img/heart.png" class="feed_comment_icon_heart_img">
-		                        <img src="/img/trash.png" class="feed_comment_icon_trash_img">
-		                    </span>
-		                </div>
-		                <div class="feed_detail_comment_time_like_div">
-		                    1시간&nbsp;&nbsp;좋아요 1개
-		                </div>
+		                <c:forEach var="feedContentList" items="${mainFollowingFeed.feed_comment_list}">
+			                <div class="feed_detail_comment_div">
+			                    <span class="feed_detail_comment"> 
+			                        
+			                        <c:if test="${empty feedContentList.member_img}">
+										<img src="/img/default_photo2.png" class="feed_detail_profile_comment_img">
+									</c:if>
+									<c:if test="${!empty feedContentList.member_img}">
+										<img src="/upload/member/${feedContentList.member_img}" class="feed_detail_profile_comment_img">
+									</c:if>
+			                        
+			                        <span class="feed_detail_comment_comment">
+			                            <a href="#" class="feed_detail_comment_id">${feedContentList.member_id}</a>
+			                            ${feedContentList.comment_content}
+			                        </span>
+			                    </span>
+			                    <span class="feed_detail_comment_icon">
+			                        <img src="/img/heart.png" class="feed_comment_icon_heart_img">
+			                        <img src="/img/trash.png" class="feed_comment_icon_trash_img">
+			                    </span>
+			                </div>
+			                <div class="feed_detail_comment_time_like_div">
+			                    ${feedContentList.comment_date_time}&nbsp;&nbsp;좋아요 ${feedContentList.comment_like_count}개
+			                </div>
+		                </c:forEach>
 		            </div>
 		
 		            <div class="feed_detail_comment_write_div">
@@ -176,57 +156,8 @@
 		        </div>
 		    </div>
 		</div>
-	    
-	    
-    </c:forEach>
-    
-   
-    <!-- 테스트로 남겨둔 것. 나중에 지우기! -->
-    <div>
-        <div>
-            <a href="#"><img src="/img/profile2.jpg" class="feed_profile_img"></a>
-            <a href="#" class="feed_profile_id">&nbsp;ramiee__l</a>
-            <a class="feed_time">&nbsp;2시간</a>
-        </div>
-        <div class="feed_img_div">
-            <img src="/img/feed_sample.jpg" class="feed_feed_img">
-        </div>
-        <div class="feed_icon_div">
-            <a href="#"><img src="/img/heart.png" class="feed_icon_heart_img"></a>
-            <a href="#"><img src="/img/reple.png" class="feed_icon_reple_img"></a>
-        </div>
-        <div class="like_div">
-            <span class="like_span">좋아요 1004개</span>
-        </div>
-        <div class="feed_content_div">
-            <a href="#" class="feed_content_id">ramiee__l</a>
-            <span class="feed_content_content">사랑스러운 우리 뭉이 😘 뭘 그렇게 보니? 귀여운 것❤ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ<br><br><br><br><br></span>
-        </div>
-        <div class="feed_detail_btn_div">
-            <a id="feedDetailBtn" class="feed_detail_btn">피드 상세 보기</a>
-        </div>
-        <div class="feed_comment_div">
-            <span class="feed_comment">
-                <a href="#" class="feed_comment_id">ss_hhwan</a>
-                <div class="feed_comment_comment">뭉이가 너무 사랑스럽네요 💕ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
-            </span>
-            <span class="feed_comment_icon">
-                <img src="/img/heart.png" class="feed_comment_icon_heart_img">
-                <img src="/img/trash.png" class="feed_comment_icon_trash_img">
-            </span>
-        </div>
-        <div class="feed_comment_insert_div">
-            <input type="text" name="comment_content" placeholder="댓글 달기..." maxlength="1000" class="feed_comment_insert_input">
-            <img src="/img/dm.png" class="feed_comment_insert_icon_img">
-        </div>
-        <hr>
-    </div>
-    
+    </c:forEach>    
 </div>
-
-
-
-
 
 <!-- Menu of Right -->
 <div class="suggestion_div">
@@ -402,12 +333,39 @@
     }
     
     // 피드 댓글 달기(엔터키 눌렀을 시 실행되게)
-    function feedCommentInsert(event) {
-        if (event.key === 'Enter') {
+    function feedCommentInsertEnterKey(event, feed_idx) {
+    	const param = 'feed_idx='+feed_idx;
+        if(event.key === 'Enter') {
             // 엔터 키가 눌렸을 때 수행할 동작
-            //event.preventDefault(); // 폼 전송 방지
-            window.alert('asdfsdf'); // 원하는 함수 호출
+        	if(prop.value == '') {
+        		window.alert('댓글을 입력해주세요.');
+        	} else {
+        		//event.preventDefault(); // 폼 전송 방지
+                //window.alert('prop : '+prop.value);
+                //window.alert('feed_idx : '+feed_idx);
+                //window.alert('asdfsdf'); // 원하는 함수 호출
+                //sendRequest('feedCommentInsert', param, feedCommentInsertCallBack, 'POST');
+                feedCommentInsert();
+        	}
         }
+    }
+    
+    function feedCommentInsertClick(feed_idx) {
+    	const feedComment = document.getElementById('feedComment'+feed_idx).value;
+    	window.alert(feed_idx);
+    	window.alert(feedComment);
+    }
+    
+    function feedCommentInsert() {
+    	
+    }
+    
+    function feedCommentInsertCallBack() {
+    	if(XHR.readyState == 4) {
+    		if(XHR.status == 200) {
+    			
+    		}
+    	}
     }
 </script>
 </html>
