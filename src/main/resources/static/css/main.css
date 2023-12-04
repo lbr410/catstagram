@@ -512,8 +512,24 @@ body {
     margin-right: 7px;
 }
 
+.feed_detail_comment_id2 {
+    color: #555555;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 12px;
+}
+
 .feed_detail_comment_comment {
     margin-left: 10px;
+    color: #555555;
+    padding-right: 5px;
+    display: inline-block;
+    width: 370px;
+    margin-top: 5px;
+}
+
+.feed_detail_comment_comment2 {
+    margin-left: 15px;
     color: #555555;
     padding-right: 5px;
     display: inline-block;

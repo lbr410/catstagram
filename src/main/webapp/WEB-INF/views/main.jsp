@@ -47,7 +47,7 @@
 	            <a id="feedDetailBtn${loop.index}" class="feed_detail_btn">피드 상세 보기</a>
 	        </div>
 	        <c:if test="${!empty mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_content}">
-		        <div class="feed_comment_div">
+		        <div class="feed_comment_div" id="feedCommentDiv${mainFollowingFeed.feed_idx}">
 		            <span class="feed_comment">
 		                <a href="#" class="feed_comment_id">${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].member_id}</a>
 		                <div class="feed_comment_comment">
@@ -108,7 +108,8 @@
 		                </p>
 		            </div>
 		            <div class="feed_detail_content_time_div">${mainFollowingFeed.feed_date_time}</div>
-		            <div class="feed_detail_content_comment_div">
+		            <div class="feed_detail_content_comment_div" id="feedDetailContentCommentDiv${mainFollowingFeed.feed_idx}">
+		            	<!-- 피드 상세 보기 댓글 목록 / 이 주석 나중에 지우기 -->
 		                <c:forEach var="feedContentList" items="${mainFollowingFeed.feed_comment_list}">
 			                <div class="feed_detail_comment_div">
 			                    <span class="feed_detail_comment"> 
@@ -334,38 +335,137 @@
     
     // 피드 댓글 달기(엔터키 눌렀을 시 실행되게)
     function feedCommentInsertEnterKey(event, feed_idx) {
-    	const param = 'feed_idx='+feed_idx;
-        if(event.key === 'Enter') {
+    	let feedComment = document.getElementById('feedComment'+feed_idx).value;
+        if(event.key == 'Enter') {
             // 엔터 키가 눌렸을 때 수행할 동작
-        	if(prop.value == '') {
+        	if(feedComment == '') {
         		window.alert('댓글을 입력해주세요.');
         	} else {
         		//event.preventDefault(); // 폼 전송 방지
-                //window.alert('prop : '+prop.value);
-                //window.alert('feed_idx : '+feed_idx);
-                //window.alert('asdfsdf'); // 원하는 함수 호출
-                //sendRequest('feedCommentInsert', param, feedCommentInsertCallBack, 'POST');
-                feedCommentInsert();
+                feedCommentInsert(feed_idx, feedComment);
         	}
         }
     }
     
+    // 피드 댓글 달기(버튼 클릭 시)
     function feedCommentInsertClick(feed_idx) {
-    	const feedComment = document.getElementById('feedComment'+feed_idx).value;
-    	window.alert(feed_idx);
-    	window.alert(feedComment);
+    	let feedComment = document.getElementById('feedComment'+feed_idx).value;
+    	if(feedComment == '') {
+    		window.alert('댓글을 입력해주세요.');
+    	} else {
+	    	feedCommentInsert(feed_idx, feedComment);
+    	}
     }
     
-    function feedCommentInsert() {
-    	
-    }
-    
-    function feedCommentInsertCallBack() {
-    	if(XHR.readyState == 4) {
-    		if(XHR.status == 200) {
+    // 피드 댓글 달기
+    function feedCommentInsert(feed_idx, feedComment) {
+    	const XHR = new XMLHttpRequest();
+    	XHR.onreadystatechange = function() {
+    		if(XHR.readyState == 4 && XHR.status == 200) {
+    			const result = JSON.parse(XHR.responseText);
     			
+    			// 피드 미리 보기 댓글
+    			const feedCommentDiv = document.getElementById('feedCommentDiv'+feed_idx);
+    			feedCommentDiv.innerHTML = '';
+    			
+    			const commentSpan2 = document.createElement('span');
+    			commentSpan2.classList.add('feed_comment');
+    			
+    			const commentIdLink2 = document.createElement('a');
+    			commentIdLink2.href = '#';
+				commentIdLink2.classList.add('feed_comment_id');
+				commentIdLink2.textContent = result[result.length-1].member_id;
+    			
+				const commentDiv2 = document.createElement('div');
+				commentDiv2.classList.add('feed_comment_comment');
+				commentDiv2.innerHTML = result[result.length-1].comment_content;
+				commentSpan2.appendChild(commentIdLink2);
+				commentSpan2.appendChild(commentDiv2);
+				
+				const commentSpan3 = document.createElement('span');
+				commentSpan3.classList.add('feed_comment_icon');
+				
+				let heartImgElement2 = document.createElement('img');
+				heartImgElement2.src = '/img/heart.png';
+				heartImgElement2.classList.add('feed_comment_icon_heart_img');
+				commentSpan3.appendChild(heartImgElement2);
+				
+				let trashImgElement2 = document.createElement('img');
+				trashImgElement2.src = '/img/trash.png';
+				trashImgElement2.classList.add('feed_comment_icon_trash_img');
+				commentSpan3.appendChild(trashImgElement2);
+				
+				feedCommentDiv.appendChild(commentSpan2);
+				feedCommentDiv.appendChild(commentSpan3);
+				
+    			// 피드 상세 보기 댓글 목록
+    			const feedDetailContentCommentDiv = document.getElementById('feedDetailContentCommentDiv'+feed_idx);
+    			feedDetailContentCommentDiv.innerHTML = '';
+    			
+    			for(let i=0; i<result.length; i++) {
+    				const commentDiv = document.createElement('div');
+        			commentDiv.classList.add('feed_detail_comment_div');
+        			
+        			const commentSpan = document.createElement('span');
+        			commentSpan.classList.add('feed_detail_comment');
+        			
+        			if(result[i].member_img) {
+        				let imgElement = document.createElement('img');
+        				imgElement.src = '/upload/member/'+result[i].member_img;
+        				imgElement.classList.add('feed_detail_profile_comment_img');
+        				commentSpan.appendChild(imgElement);
+        			} else {
+        				let imgElement = document.createElement('img');
+        				imgElement.src = '/img/default_photo2.png';
+        				imgElement.classList.add('feed_detail_profile_comment_img');
+        				commentSpan.appendChild(imgElement);
+        			}
+        			
+        			const commentCommentSpan = document.createElement('span');
+        			commentCommentSpan.classList.add('feed_detail_comment_comment2');
+        			commentSpan.appendChild(commentCommentSpan);
+        			
+        			const commentIdLink = document.createElement('a');
+    				commentIdLink.textContent = result[i].member_id;
+    				commentIdLink.href = '#';
+    				commentIdLink.classList.add('feed_detail_comment_id2');
+    				
+    				const commentContent = document.createTextNode(result[i].comment_content);
+    				
+    				commentCommentSpan.appendChild(commentIdLink);
+					commentCommentSpan.appendChild(commentContent);
+										
+					const commentIconSpan = document.createElement('span');
+					commentIconSpan.classList.add('feed_detail_comment_icon');
+					
+					let heartImgElement = document.createElement('img');
+					heartImgElement.src = '/img/heart.png';
+					heartImgElement.classList.add('feed_comment_icon_heart_img');
+    				commentIconSpan.appendChild(heartImgElement);
+    				
+    				let trashImgElement = document.createElement('img');
+    				trashImgElement.src = '/img/trash.png';
+    				trashImgElement.classList.add('feed_comment_icon_trash_img');
+    				commentIconSpan.appendChild(trashImgElement);
+
+					commentDiv.appendChild(commentSpan);
+					commentDiv.appendChild(commentIconSpan);
+
+					const commentTimeLikeDiv = document.createElement('div');
+					commentTimeLikeDiv.classList.add('feed_detail_comment_time_like_div');
+					commentTimeLikeDiv.innerHTML = result[i].comment_date_time + '&nbsp;&nbsp;좋아요 ' + result[i].comment_like_count +'개';
+
+					feedDetailContentCommentDiv.appendChild(commentDiv);
+					feedDetailContentCommentDiv.appendChild(commentTimeLikeDiv);
+    			}			
     		}
     	}
+    	
+    	XHR.open('POST', 'feedCommentInsert', true);
+    	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    	XHR.send('feed_idx='+feed_idx+'&comment_content='+feedComment);
+    	
+    	document.getElementById('feedComment'+feed_idx).value = '';
     }
 </script>
 </html>

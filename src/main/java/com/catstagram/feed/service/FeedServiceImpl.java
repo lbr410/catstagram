@@ -27,7 +27,6 @@ public class FeedServiceImpl implements FeedService {
 		for(int i=0; i<dto.size(); i++) {
 			dto.get(i).setFeed_comment_list(commentMapper.feedCommentList(dto.get(i).getFeed_idx()));
 			for(int j=0; j<dto.get(i).getFeed_comment_list().size(); j++) {
-				dto.get(i).getFeed_comment_list().get(j).setComment_date_time(null);
 				// 댓글이 작성된지 1시간 미만일 경우
 				if(dto.get(i).getFeed_comment_list().get(j).getComment_date_minute() < 60) {
 					dto.get(i).getFeed_comment_list().get(j).setComment_date_time(dto.get(i).getFeed_comment_list().get(j).getComment_date_minute()+"분");

@@ -22,6 +22,6 @@
 		insert into
 			catstagram_comment
 		values
-			(catstagram_comment_idx.nextval, #{feed_idx}, #{member_idx}, #{feed_content}, 0, sysdate)
+			(catstagram_comment_idx.nextval, #{feed_idx}, #{member_idx}, #{comment_content}, 0, sysdate)
 	</insert>
 </mapper>

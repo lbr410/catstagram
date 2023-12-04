@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.catstagram.comment.model.CommentDTO;
-import com.catstagram.comment.service.CommentService;
 import com.catstagram.etc.model.MainFollowingFeedDTO;
 import com.catstagram.feed.service.FeedService;
 import com.catstagram.follow.model.FollowDTO;
@@ -24,9 +22,6 @@ public class MainController {
 	
 	@Autowired
 	private FeedService feedService;
-	
-	@Autowired
-	private CommentService commentService;
 	
 	// 메인 페이지
 	@GetMapping("/catstagram/main")
@@ -56,19 +51,6 @@ public class MainController {
 				
 				// 피드 내용 개행 처리
 				mainFollowingFeed.get(i).setFeed_content(mainFollowingFeed.get(i).getFeed_content().replaceAll("\n", "<br>"));
-				
-				
-//				mainFollowingFeed.get(i).setFeed_comment_list(commentService.feedCommentList(mainFollowingFeed.get(i).getFeed_idx()));
-//				for(int j=0; j<mainFollowingFeed.get(i).getFeed_comment_list().size(); j++) {
-//					System.out.println(mainFollowingFeed.get(i).getFeed_comment_list().get(j).getComment_content());
-//				}
-				
-				//int feed_idx = mainFollowingFeed.get(i).getFeed_idx();
-				
-				//mainFollowingFeed.get(i).setFeed_comment_list(commentService.feedCommentList(feed_idx));
-				//mav.addObject("feedCommentList"+i, mainFollowingFeed.get(i).getFeed_comment_list());
-				
-				//System.out.println(mainFollowingFeed.get(i).getFeed_comment_list().size() != 0 ? mainFollowingFeed.get(i).getFeed_comment_list().get(0) : "");
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
