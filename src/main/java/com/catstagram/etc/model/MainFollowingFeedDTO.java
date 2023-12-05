@@ -17,7 +17,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MainFollowingFeedDTO {
-	private int follow_idx;
+	//private int follow_idx;
 	private int member_idx;
 	private String member_id;
 	private String member_img;

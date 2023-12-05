@@ -19,7 +19,7 @@ public class FeedServiceImpl implements FeedService {
 	@Autowired
 	private CommentMapper commentMapper;
 	
-	// 메인 페이지에서 팔로잉(내가 친구 추가한 사람들)이 올린 피드 목록
+	// 메인 페이지에서 팔로잉(내가 친구 추가한 사람들)이 올린 피드 목록와 내가 쓴 피드
 	@Override
 	public List<MainFollowingFeedDTO> mainFollowingFeed(int sidx) throws Exception {
 		List<MainFollowingFeedDTO> dto = mapper.mainFollowingFeed(sidx);

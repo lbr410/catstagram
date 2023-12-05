@@ -27,4 +27,11 @@ public class CommentServiceImpl implements CommentService {
 		int result = mapper.feedCommentInsert(dto);
 		return result;
 	}
+	
+	// 피드(게시글) 댓글 삭제
+	@Override
+	public int feedCommentDel(int comment_idx) throws Exception {
+		int result = mapper.feedCommentDel(comment_idx);
+		return result;
+	}
 }

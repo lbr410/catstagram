@@ -64,4 +64,17 @@ public class CommentController {
 
 		return list;
 	}
+	
+	// 피드(게시글) 댓글 삭제
+	@PostMapping("/catstagram/feedCommentDel")
+	public String feedCommentDel(@RequestParam("comment_idx") int comment_idx) {
+		System.out.println("comment_idx : "+comment_idx);
+		try {
+			commentService.feedCommentDel(comment_idx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "main";
+	}
 }

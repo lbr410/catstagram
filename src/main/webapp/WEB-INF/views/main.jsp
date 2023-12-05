@@ -16,7 +16,6 @@
 <%@ include file="header.jsp" %>
 <div class="all_div">
 <div class="feed_div">
-    <!-- first -->
     <c:forEach var="mainFollowingFeed" items="${mainFollowingFeed}" varStatus="loop">
 	    <div>
 	        <div>
@@ -46,26 +45,33 @@
 	        <div class="feed_detail_btn_div">
 	            <a id="feedDetailBtn${loop.index}" class="feed_detail_btn">피드 상세 보기</a>
 	        </div>
-	        <c:if test="${!empty mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_content}">
-		        <div class="feed_comment_div" id="feedCommentDiv${mainFollowingFeed.feed_idx}">
-		            <span class="feed_comment">
-		                <a href="#" class="feed_comment_id">${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].member_id}</a>
-		                <div class="feed_comment_comment">
-		                	${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_content}
-		                </div>
-		            </span>
-		            <span class="feed_comment_icon">
-		                <img src="/img/heart.png" class="feed_comment_icon_heart_img">
-		                <img src="/img/trash.png" class="feed_comment_icon_trash_img">
-		            </span>
-		        </div>
-	        </c:if>
-	        <!-- 댓글 달기 기능 진행 중 / 이 주석은 나중에 지울 것 -->
+	        
+	        
+		    <div class="feed_comment_div" id="feedCommentDiv${mainFollowingFeed.feed_idx}">
+		        <c:if test="${!empty mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_content}">
+			            <span class="feed_comment" id="feedCommentContentSpan${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_idx}">
+			                <a href="#" class="feed_comment_id">${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].member_id}</a>
+			                <div class="feed_comment_comment">
+			                	${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_content}
+			                </div>
+			            </span>
+			            <span class="feed_comment_icon" id="feedCommentIconSpan${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_idx}">
+			                <c:if test="${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].member_idx eq sessionScope.sidx
+			                				|| mainFollowingFeed.member_idx eq sessionScope.sidx}">
+			                	<img src="/img/trash.png" class="feed_comment_icon_trash_img"
+			                	onclick="feedCommentDel(${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_idx})">
+			                </c:if>
+			                <img src="/img/heart.png" class="feed_comment_icon_heart_img">
+			            </span>
+		        </c:if>
+		    </div>
+		    
+		    
 	        <div class="feed_comment_insert_div">
 	            <input type="text" name="comment_content" placeholder="댓글 달기..." 
 		            id="feedComment${mainFollowingFeed.feed_idx}" maxlength="1000" 
-		            class="feed_comment_insert_input" onkeydown="feedCommentInsertEnterKey(event, ${mainFollowingFeed.feed_idx})">
-	            <img src="/img/dm.png" class="feed_comment_insert_icon_img" onclick="feedCommentInsertClick(${mainFollowingFeed.feed_idx})">
+		            class="feed_comment_insert_input" onkeydown="feedCommentInsertEnterKey(event, ${mainFollowingFeed.feed_idx}, ${mainFollowingFeed.member_idx})">
+	            <img src="/img/dm.png" class="feed_comment_insert_icon_img" onclick="feedCommentInsertClick(${mainFollowingFeed.feed_idx}, ${mainFollowingFeed.member_idx})">
 	        </div>
 	        <hr>
 	    </div>
@@ -91,16 +97,19 @@
 							
 		                    <a href="#" class="feed_profile_id">&nbsp;${mainFollowingFeed.member_id}</a>
 		                </div>
-		                <div class="feed_detail_more_view_btn_div">
-		                    <img src="/img/3dots.png" class="feed_detail_more_view_btn" data-bs-toggle="dropdown" aria-expanded="false">
-		                    <div class="dropdown-center">
-		                        <ul class="dropdown-menu dropdown-menu2">
-		                            <li><a class="dropdown-item menu_font" href="#">수정</a></li>
-		                            <li><hr class="dropdown-divider"></li>
-		                            <li><a class="dropdown-item menu_font" href="#">삭제</a></li>
-		                        </ul>
-		                    </div>
-		                </div>
+		                
+		                <c:if test="${mainFollowingFeed.member_idx eq sessionScope.sidx}">
+			                <div class="feed_detail_more_view_btn_div">
+			                    <img src="/img/3dots.png" class="feed_detail_more_view_btn" data-bs-toggle="dropdown" aria-expanded="false">
+			                    <div class="dropdown-center">
+			                        <ul class="dropdown-menu dropdown-menu2">
+			                            <li><a class="dropdown-item menu_font" href="#">수정</a></li>
+			                            <li><hr class="dropdown-divider"></li>
+			                            <li><a class="dropdown-item menu_font" href="#">삭제</a></li>
+			                        </ul>
+			                    </div>
+			                </div>
+		                </c:if>
 		            </div>
 		            <div class="feed_detail_content_content">
 		                <p class="feed_detail_content_content_p">
@@ -108,12 +117,12 @@
 		                </p>
 		            </div>
 		            <div class="feed_detail_content_time_div">${mainFollowingFeed.feed_date_time}</div>
+		            
+		            
 		            <div class="feed_detail_content_comment_div" id="feedDetailContentCommentDiv${mainFollowingFeed.feed_idx}">
-		            	<!-- 피드 상세 보기 댓글 목록 / 이 주석 나중에 지우기 -->
 		                <c:forEach var="feedContentList" items="${mainFollowingFeed.feed_comment_list}">
-			                <div class="feed_detail_comment_div">
+			                <div class="feed_detail_comment_div" id="feedDetailCommentDiv${feedContentList.comment_idx}">
 			                    <span class="feed_detail_comment"> 
-			                        
 			                        <c:if test="${empty feedContentList.member_img}">
 										<img src="/img/default_photo2.png" class="feed_detail_profile_comment_img">
 									</c:if>
@@ -127,15 +136,21 @@
 			                        </span>
 			                    </span>
 			                    <span class="feed_detail_comment_icon">
-			                        <img src="/img/heart.png" class="feed_comment_icon_heart_img">
-			                        <img src="/img/trash.png" class="feed_comment_icon_trash_img">
+			                        <c:if test="${mainFollowingFeed.member_idx eq sessionScope.sidx
+			                        				|| feedContentList.member_idx eq sessionScope.sidx}">
+				                        <img src="/img/trash.png" class="feed_comment_icon_trash_img"
+				                        onclick="feedCommentDel(${feedContentList.comment_idx})">
+			                        </c:if>
+			                        <img src="/img/heart.png" class="feed_comment_icon_heart_img2">
 			                    </span>
 			                </div>
-			                <div class="feed_detail_comment_time_like_div">
+			                <div class="feed_detail_comment_time_like_div" id="feedDetailCommentTimeLikeDiv${feedContentList.comment_idx}">
 			                    ${feedContentList.comment_date_time}&nbsp;&nbsp;좋아요 ${feedContentList.comment_like_count}개
 			                </div>
 		                </c:forEach>
 		            </div>
+		            
+		            
 		
 		            <div class="feed_detail_comment_write_div">
 		                <div class="feed_detail_icon_div">
@@ -149,8 +164,10 @@
 		                </div>
 		                <div class="feed_detail_comment_write_write_div">
 		                    <div class="feed_detail_comment_input">
-		                        <input type="text" name="comment_content" placeholder="댓글 달기..." maxlength="1000" class="feed_detail_comment_insert_input">
-		                        <img src="/img/dm.png" class="feed_comment_insert_icon_img">
+		                        <input type="text" name="comment_content" placeholder="댓글 달기..."
+		                        	id="feedDetailComment${mainFollowingFeed.feed_idx}"
+		                        	maxlength="1000" class="feed_detail_comment_insert_input" onkeydown="feedDetailCommentInsertEnterKey(event, ${mainFollowingFeed.feed_idx}, ${mainFollowingFeed.member_idx})">
+		                        <img src="/img/dm.png" class="feed_comment_insert_icon_img" onclick="feedDetailCommentInsertClick(${mainFollowingFeed.feed_idx}, ${mainFollowingFeed.member_idx})">
 		                    </div>
 		                </div>
 		            </div>
@@ -219,8 +236,6 @@
     </c:forEach>
 </div>
 </div>
-
-
 <img src="/img/upArrow.png" id="scrollToTopBtn" class="scroll_to_top_btn" onclick="scrollToTop()">
 <%@ include file="footer.jsp" %>
 </body>
@@ -333,8 +348,8 @@
     	}
     }
     
-    // 피드 댓글 달기(엔터키 눌렀을 시 실행되게)
-    function feedCommentInsertEnterKey(event, feed_idx) {
+    // 피드 미리보기 댓글 달기(엔터키 눌렀을 시 실행되게)
+    function feedCommentInsertEnterKey(event, feed_idx, member_idx) {
     	let feedComment = document.getElementById('feedComment'+feed_idx).value;
         if(event.key == 'Enter') {
             // 엔터 키가 눌렸을 때 수행할 동작
@@ -342,34 +357,58 @@
         		window.alert('댓글을 입력해주세요.');
         	} else {
         		//event.preventDefault(); // 폼 전송 방지
-                feedCommentInsert(feed_idx, feedComment);
+                feedCommentInsert(feed_idx, feedComment, member_idx);
         	}
         }
     }
     
-    // 피드 댓글 달기(버튼 클릭 시)
-    function feedCommentInsertClick(feed_idx) {
+    // 피드 미리보기 댓글 달기(버튼 클릭 시)
+    function feedCommentInsertClick(feed_idx, member_idx) {
     	let feedComment = document.getElementById('feedComment'+feed_idx).value;
     	if(feedComment == '') {
     		window.alert('댓글을 입력해주세요.');
     	} else {
-	    	feedCommentInsert(feed_idx, feedComment);
+	    	feedCommentInsert(feed_idx, feedComment, member_idx);
+    	}
+    }
+    
+    // 피드 상세보기 댓글 달기(엔터키 눌렀을 시 실행되게)
+    function feedDetailCommentInsertEnterKey(event, feed_idx, member_idx) {
+    	let feedDetailComment = document.getElementById('feedDetailComment'+feed_idx).value;
+        if(event.key == 'Enter') {
+            // 엔터 키가 눌렸을 때 수행할 동작
+        	if(feedDetailComment == '') {
+        		window.alert('댓글을 입력해주세요.');
+        	} else {
+        		//event.preventDefault(); // 폼 전송 방지
+                feedCommentInsert(feed_idx, feedDetailComment, member_idx);
+        	}
+        }
+    }
+    
+    // 피드 상세보기 댓글 달기(버튼 클릭 시)
+    function feedDetailCommentInsertClick(feed_idx, member_idx) {
+    	let feedDetailComment = document.getElementById('feedDetailComment'+feed_idx).value;
+    	if(feedDetailComment == '') {
+    		window.alert('댓글을 입력해주세요.');
+    	} else {
+	    	feedCommentInsert(feed_idx, feedDetailComment, member_idx);
     	}
     }
     
     // 피드 댓글 달기
-    function feedCommentInsert(feed_idx, feedComment) {
+    function feedCommentInsert(feed_idx, feedComment, member_idx) {
     	const XHR = new XMLHttpRequest();
     	XHR.onreadystatechange = function() {
     		if(XHR.readyState == 4 && XHR.status == 200) {
     			const result = JSON.parse(XHR.responseText);
-    			
     			// 피드 미리 보기 댓글
     			const feedCommentDiv = document.getElementById('feedCommentDiv'+feed_idx);
     			feedCommentDiv.innerHTML = '';
     			
     			const commentSpan2 = document.createElement('span');
     			commentSpan2.classList.add('feed_comment');
+    			commentSpan2.setAttribute('id', 'feedCommentContentSpan'+result[result.length-1].comment_idx);
     			
     			const commentIdLink2 = document.createElement('a');
     			commentIdLink2.href = '#';
@@ -384,16 +423,22 @@
 				
 				const commentSpan3 = document.createElement('span');
 				commentSpan3.classList.add('feed_comment_icon');
-				
-				let heartImgElement2 = document.createElement('img');
-				heartImgElement2.src = '/img/heart.png';
-				heartImgElement2.classList.add('feed_comment_icon_heart_img');
-				commentSpan3.appendChild(heartImgElement2);
+				commentSpan3.setAttribute('id', 'feedCommentIconSpan'+result[result.length-1].comment_idx);
 				
 				let trashImgElement2 = document.createElement('img');
 				trashImgElement2.src = '/img/trash.png';
 				trashImgElement2.classList.add('feed_comment_icon_trash_img');
-				commentSpan3.appendChild(trashImgElement2);
+				trashImgElement2.onclick = () => {
+					feedCommentDel(result[result.length-1].comment_idx);
+				}
+				if(member_idx == ${sessionScope.sidx} || result[result.length-1].member_idx == ${sessionScope.sidx}) {
+					commentSpan3.appendChild(trashImgElement2);
+				}
+				
+				let heartImgElement2 = document.createElement('img');
+				heartImgElement2.src = '/img/heart.png';
+				heartImgElement2.classList.add('feed_comment_icon_heart_img2');
+				commentSpan3.appendChild(heartImgElement2);
 				
 				feedCommentDiv.appendChild(commentSpan2);
 				feedCommentDiv.appendChild(commentSpan3);
@@ -405,6 +450,7 @@
     			for(let i=0; i<result.length; i++) {
     				const commentDiv = document.createElement('div');
         			commentDiv.classList.add('feed_detail_comment_div');
+        			commentDiv.setAttribute('id', 'feedDetailCommentDiv'+result[i].comment_idx);
         			
         			const commentSpan = document.createElement('span');
         			commentSpan.classList.add('feed_detail_comment');
@@ -438,15 +484,20 @@
 					const commentIconSpan = document.createElement('span');
 					commentIconSpan.classList.add('feed_detail_comment_icon');
 					
-					let heartImgElement = document.createElement('img');
-					heartImgElement.src = '/img/heart.png';
-					heartImgElement.classList.add('feed_comment_icon_heart_img');
-    				commentIconSpan.appendChild(heartImgElement);
-    				
     				let trashImgElement = document.createElement('img');
     				trashImgElement.src = '/img/trash.png';
     				trashImgElement.classList.add('feed_comment_icon_trash_img');
-    				commentIconSpan.appendChild(trashImgElement);
+    				trashImgElement.onclick = () => {
+    					feedCommentDel(result[i].comment_idx);
+					}
+    				if(member_idx == ${sessionScope.sidx} || result[i].member_idx == ${sessionScope.sidx}) {
+    					commentIconSpan.appendChild(trashImgElement);
+    				}
+    				
+					let heartImgElement = document.createElement('img');
+					heartImgElement.src = '/img/heart.png';
+					heartImgElement.classList.add('feed_comment_icon_heart_img2');
+    				commentIconSpan.appendChild(heartImgElement);
 
 					commentDiv.appendChild(commentSpan);
 					commentDiv.appendChild(commentIconSpan);
@@ -454,6 +505,7 @@
 					const commentTimeLikeDiv = document.createElement('div');
 					commentTimeLikeDiv.classList.add('feed_detail_comment_time_like_div');
 					commentTimeLikeDiv.innerHTML = result[i].comment_date_time + '&nbsp;&nbsp;좋아요 ' + result[i].comment_like_count +'개';
+					commentTimeLikeDiv.setAttribute('id', 'feedDetailCommentTimeLikeDiv'+result[i].comment_idx);
 
 					feedDetailContentCommentDiv.appendChild(commentDiv);
 					feedDetailContentCommentDiv.appendChild(commentTimeLikeDiv);
@@ -466,6 +518,37 @@
     	XHR.send('feed_idx='+feed_idx+'&comment_content='+feedComment);
     	
     	document.getElementById('feedComment'+feed_idx).value = '';
+    	document.getElementById('feedDetailComment'+feed_idx).value = '';
+    }
+    
+    // 피드 댓글 삭제
+    function feedCommentDel(comment_idx) {
+    	const XHR = new XMLHttpRequest();
+    	XHR.onreadystatechange = function() {
+    		if(XHR.readyState == 4 && XHR.status == 200) {
+    			const feedCommentContentSpan = document.getElementById('feedCommentContentSpan'+comment_idx);
+    			const feedCommentIconSpan = document.getElementById('feedCommentIconSpan'+comment_idx);
+    			const feedDetailCommentDiv = document.getElementById('feedDetailCommentDiv'+comment_idx);
+    			const feedDetailCommentTimeLikeDiv = document.getElementById('feedDetailCommentTimeLikeDiv'+comment_idx);
+    			
+    			if(feedCommentContentSpan) {
+    				feedCommentContentSpan.remove();    				
+    			}
+    			if(feedCommentIconSpan) {
+    				feedCommentIconSpan.remove();    				
+    			}
+    			if(feedDetailCommentDiv) {
+	    			feedDetailCommentDiv.remove();    				
+    			}
+    			if(feedDetailCommentTimeLikeDiv) {
+	    			feedDetailCommentTimeLikeDiv.remove();    				
+    			}
+    		}
+    	}
+    	
+    	XHR.open('POST', 'feedCommentDel', true);
+    	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    	XHR.send('comment_idx='+comment_idx);
     }
 </script>
 </html>

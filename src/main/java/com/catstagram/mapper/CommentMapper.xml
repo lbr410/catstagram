@@ -24,4 +24,9 @@
 		values
 			(catstagram_comment_idx.nextval, #{feed_idx}, #{member_idx}, #{comment_content}, 0, sysdate)
 	</insert>
+	
+	<!-- 피드(게시글) 댓글 삭제 -->
+	<delete id="feedCommentDel" parameterType="Integer">
+		delete from catstagram_comment where comment_idx = #{comment_idx}
+	</delete>
 </mapper>
