@@ -34,7 +34,7 @@
 	        <div class="feed_icon_div">
 	        	<c:if test="${empty mainFollowingFeed.feed_like_idx}">
 		            <img src="/img/heart.png" class="feed_icon_heart_img"
-		            onclick="likeFeed(${mainFollowingFeed.feed_idx}); likeFeedWithFirework(${mainFollowingFeed.feed_idx})" id="previewHeart${mainFollowingFeed.feed_idx}"> <!-- 미리보기 좋아요 / 나중에 주석 지우기 -->
+		            onclick="likeFeed(${mainFollowingFeed.feed_idx})" id="previewHeart${mainFollowingFeed.feed_idx}"> <!-- 미리보기 좋아요 / 나중에 주석 지우기 -->
 	            </c:if>
 	            <c:if test="${!empty mainFollowingFeed.feed_like_idx}">
 		            <img src="/img/heart2.png" class="feed_icon_heart_img"
@@ -42,8 +42,13 @@
 	            </c:if>
 	            <img src="/img/reple.png" class="feed_icon_reple_img" id="repleBtn${loop.index}">
 	        </div>
-	        <div class="like_div">
-	            <span class="like_span">좋아요 <span id="previewLikeCount${mainFollowingFeed.feed_idx}">${mainFollowingFeed.feed_like_count}</span>개</span>
+	        <div class="like_div" id="previewLikeCountSpan${mainFollowingFeed.feed_idx}">
+	            <c:if test="${mainFollowingFeed.feed_like_count ne 0}">
+	            	좋아요 <span id="previewLikeCount${mainFollowingFeed.feed_idx}">${mainFollowingFeed.feed_like_count}</span>개
+	            </c:if>
+	            <c:if test="${mainFollowingFeed.feed_like_count eq 0}">
+	            	아직 좋아요가 없습니다.
+	            </c:if>
 	        </div>
 	        <div class="feed_content_div">
 	            <a href="#" class="feed_content_id">${mainFollowingFeed.member_id}</a>
@@ -178,8 +183,13 @@
 		                    <img src="/img/reple.png" class="feed_icon_reple_img">
 		                </div>
 		                <div class="feed_detail_like_div">
-		                    <div class="feed_detail_like">
-		                        좋아요 <span id="detailLikeCount${mainFollowingFeed.feed_idx}">${mainFollowingFeed.feed_like_count}</span>개
+		                    <div class="feed_detail_like" id="detailLikeCountSpan${mainFollowingFeed.feed_idx}">
+		                        <c:if test="${mainFollowingFeed.feed_like_count ne 0}">
+	            					좋아요 <span id="detailLikeCount${mainFollowingFeed.feed_idx}">${mainFollowingFeed.feed_like_count}</span>개
+	            				</c:if>
+	            				<c:if test="${mainFollowingFeed.feed_like_count eq 0}">
+	            					아직 좋아요가 없습니다.
+	            				</c:if>
 		                    </div>
 		                </div>
 		                <div class="feed_detail_comment_write_write_div">
@@ -603,10 +613,16 @@
     			newPreviewFeedLike.classList = 'feed_icon_heart_img';
     			newPreviewFeedLike.id = 'previewHeartFull'+feed_idx;
     			newPreviewFeedLike.onclick = () => {
-    				likeFeedCancel(feed_idx);
+    				likeFeedCancel(feed_idx); 			    
     			}
+    			newPreviewFeedLike.style.transition = 'transform 0.2s ease-in-out';
+    			newPreviewFeedLike.style.transform = 'scale(1.2)';  // 커졌다가
+    			setTimeout(() => {
+    			    newPreviewFeedLike.style.transform = 'scale(1)';  // 다시 원래 크기로
+    			}, 100);
+    			
     			oldPreviewFeedLike.parentNode.replaceChild(newPreviewFeedLike, oldPreviewFeedLike);
-    			document.getElementById('previewLikeCount'+feed_idx).innerHTML = feedLikeCount;
+    			document.getElementById('previewLikeCountSpan'+feed_idx).innerHTML = '좋아요 '+feedLikeCount+'개';
     			
     			// 상세보기 피드
     			let oldDetailFeedLike = document.getElementById('detailHeart'+feed_idx);
@@ -617,8 +633,13 @@
     			newDetailFeedLike.onclick = () => {
     				likeFeedCancel(feed_idx);
     			}
+    			newDetailFeedLike.style.transition = 'transform 0.2s ease-in-out';
+    			newDetailFeedLike.style.transform = 'scale(1.2)';  // 커졌다가
+    			setTimeout(() => {
+    				newDetailFeedLike.style.transform = 'scale(1)';  // 다시 원래 크기로
+    			}, 100);
     			oldDetailFeedLike.parentNode.replaceChild(newDetailFeedLike, oldDetailFeedLike);
-    			document.getElementById('detailLikeCount'+ feed_idx).innerHTML = feedLikeCount;
+    			document.getElementById('detailLikeCountSpan'+feed_idx).innerHTML = '좋아요 '+feedLikeCount+'개';
     		}
     	}
     	
@@ -645,7 +666,11 @@
     				likeFeed(feed_idx);
     			}
     			oldPreviewFeedLike.parentNode.replaceChild(newPreviewFeedLike, oldPreviewFeedLike);
-    			document.getElementById('previewLikeCount'+feed_idx).innerHTML = feedLikeCount;
+    			if(feedLikeCount == 0) {
+    				document.getElementById('previewLikeCountSpan'+feed_idx).innerHTML = '아직 좋아요가 없습니다.';
+    			} else {    				
+	    			document.getElementById('previewLikeCountSpan'+feed_idx).innerHTML = '좋아요 '+feedLikeCount+'개';
+    			}
     			
     			// 상세보기 피드
     			let oldDetailFeedLike = document.getElementById('detailHeartFull'+feed_idx);
@@ -657,7 +682,11 @@
     				likeFeed(feed_idx);
     			}
     			oldDetailFeedLike.parentNode.replaceChild(newDetailFeedLike, oldDetailFeedLike);
-    			document.getElementById('detailLikeCount'+ feed_idx).innerHTML = feedLikeCount;
+    			if(feedLikeCount == 0) {
+    				document.getElementById('detailLikeCountSpan'+feed_idx).innerHTML = '아직 좋아요가 없습니다.';
+    			} else {
+	    			document.getElementById('detailLikeCountSpan'+feed_idx).innerHTML = '좋아요 '+feedLikeCount+'개';    				
+    			}
     		}
     	}
     	
