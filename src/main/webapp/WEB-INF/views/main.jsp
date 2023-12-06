@@ -15,52 +15,52 @@
 <body>
 <%@ include file="header.jsp" %>
 <div class="all_div">
-<div class="feed_div">
-    <c:forEach var="mainFollowingFeed" items="${mainFollowingFeed}" varStatus="loop">
-	    <div>
-	        <div>
-	            <c:if test="${empty mainFollowingFeed.member_img}">
-					<img src="/img/default_photo2.png" class="feed_profile_img">
-				</c:if>
-				<c:if test="${!empty mainFollowingFeed.member_img}">
-					<img src="/upload/member/${mainFollowingFeed.member_img}" class="feed_profile_img">
-				</c:if>
-	            <a href="#" class="feed_profile_id">&nbsp;${mainFollowingFeed.member_id}</a>
-	            <a class="feed_time">&nbsp;${mainFollowingFeed.feed_date_time}</a>
-	        </div>
-	        <div class="feed_img_div">
-	            <img src="/upload/feed/${mainFollowingFeed.feed_img}" class="feed_feed_img">
-	        </div>
-	        <div class="feed_icon_div">
-	        	<c:if test="${empty mainFollowingFeed.feed_like_idx}">
-		            <img src="/img/heart.png" class="feed_icon_heart_img"
-		            onclick="likeFeed(${mainFollowingFeed.feed_idx})" id="previewHeart${mainFollowingFeed.feed_idx}"> <!-- 미리보기 좋아요 / 나중에 주석 지우기 -->
-	            </c:if>
-	            <c:if test="${!empty mainFollowingFeed.feed_like_idx}">
-		            <img src="/img/heart2.png" class="feed_icon_heart_img"
-		            onclick="likeFeedCancel(${mainFollowingFeed.feed_idx})" id="previewHeartFull${mainFollowingFeed.feed_idx}">
-	            </c:if>
-	            <img src="/img/reple.png" class="feed_icon_reple_img" id="repleBtn${loop.index}">
-	        </div>
-	        <div class="like_div" id="previewLikeCountSpan${mainFollowingFeed.feed_idx}">
-	            <c:if test="${mainFollowingFeed.feed_like_count ne 0}">
-	            	좋아요 <span id="previewLikeCount${mainFollowingFeed.feed_idx}">${mainFollowingFeed.feed_like_count}</span>개
-	            </c:if>
-	            <c:if test="${mainFollowingFeed.feed_like_count eq 0}">
-	            	아직 좋아요가 없습니다.
-	            </c:if>
-	        </div>
-	        <div class="feed_content_div">
-	            <a href="#" class="feed_content_id">${mainFollowingFeed.member_id}</a>
-	            <span class="feed_content_content">${mainFollowingFeed.feed_content}</span>
-	        </div>
-	        <div class="feed_detail_btn_div">
-	            <a id="feedDetailBtn${loop.index}" class="feed_detail_btn">피드 상세 보기</a>
-	        </div>
-	        
-	        
-		    <div class="feed_comment_div" id="feedCommentDiv${mainFollowingFeed.feed_idx}">
-		        <c:if test="${!empty mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_content}">
+	<div class="feed_div">
+	    <c:forEach var="mainFollowingFeed" items="${mainFollowingFeed}" varStatus="loop">
+		    <div>
+		        <div>
+		            <c:if test="${empty mainFollowingFeed.member_img}">
+						<img src="/img/default_photo2.png" class="feed_profile_img">
+					</c:if>
+					<c:if test="${!empty mainFollowingFeed.member_img}">
+						<img src="/upload/member/${mainFollowingFeed.member_img}" class="feed_profile_img">
+					</c:if>
+		            <a href="#" class="feed_profile_id">&nbsp;${mainFollowingFeed.member_id}</a>
+		            <a class="feed_time">&nbsp;${mainFollowingFeed.feed_date_time}</a>
+		        </div>
+		        <div class="feed_img_div">
+		            <img src="/upload/feed/${mainFollowingFeed.feed_img}" class="feed_feed_img">
+		        </div>
+		        <div class="feed_icon_div">
+		        	<c:if test="${empty mainFollowingFeed.feed_like_idx}">
+			            <img src="/img/heart.png" class="feed_icon_heart_img"
+			            onclick="likeFeed(${mainFollowingFeed.feed_idx})" id="previewHeart${mainFollowingFeed.feed_idx}"> <!-- 미리보기 좋아요 / 나중에 주석 지우기 -->
+		            </c:if>
+		            <c:if test="${!empty mainFollowingFeed.feed_like_idx}">
+			            <img src="/img/heart2.png" class="feed_icon_heart_img"
+			            onclick="likeFeedCancel(${mainFollowingFeed.feed_idx})" id="previewHeartFull${mainFollowingFeed.feed_idx}">
+		            </c:if>
+		            <img src="/img/reple.png" class="feed_icon_reple_img" id="repleBtn${loop.index}">
+		        </div>
+		        <div class="like_div" id="previewLikeCountSpan${mainFollowingFeed.feed_idx}">
+		            <c:if test="${mainFollowingFeed.feed_like_count ne 0}">
+		            	좋아요 <span id="previewLikeCount${mainFollowingFeed.feed_idx}">${mainFollowingFeed.feed_like_count}</span>개
+		            </c:if>
+		            <c:if test="${mainFollowingFeed.feed_like_count eq 0}">
+		            	아직 좋아요가 없습니다.
+		            </c:if>
+		        </div>
+		        <div class="feed_content_div">
+		            <a href="#" class="feed_content_id">${mainFollowingFeed.member_id}</a>
+		            <span class="feed_content_content">${mainFollowingFeed.feed_content}</span>
+		        </div>
+		        <div class="feed_detail_btn_div">
+		            <a id="feedDetailBtn${loop.index}" class="feed_detail_btn">피드 상세 보기</a>
+		        </div>
+		        
+		        
+			    <div class="feed_comment_div" id="feedCommentDiv${mainFollowingFeed.feed_idx}">
+			        <c:if test="${!empty mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_content}">
 			            <span class="feed_comment" id="feedCommentContentSpan${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_idx}">
 			                <a href="#" class="feed_comment_id">${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].member_id}</a>
 			                <div class="feed_comment_comment">
@@ -75,196 +75,196 @@
 			                </c:if>
 			                <img src="/img/heart.png" class="feed_comment_icon_heart_img">
 			            </span>
-		        </c:if>
+			        </c:if>
+			    </div>
+			    
+			    
+		        <div class="feed_comment_insert_div">
+		            <input type="text" name="comment_content" placeholder="댓글 달기..." 
+			            id="feedComment${mainFollowingFeed.feed_idx}" maxlength="1000" 
+			            class="feed_comment_insert_input" onkeydown="feedCommentInsertEnterKey(event, ${mainFollowingFeed.feed_idx}, ${mainFollowingFeed.member_idx})">
+		            <img src="/img/dm.png" class="feed_comment_insert_icon_img" onclick="feedCommentInsertClick(${mainFollowingFeed.feed_idx}, ${mainFollowingFeed.member_idx})">
+		        </div>
+		        <hr>
 		    </div>
 		    
-		    
-	        <div class="feed_comment_insert_div">
-	            <input type="text" name="comment_content" placeholder="댓글 달기..." 
-		            id="feedComment${mainFollowingFeed.feed_idx}" maxlength="1000" 
-		            class="feed_comment_insert_input" onkeydown="feedCommentInsertEnterKey(event, ${mainFollowingFeed.feed_idx}, ${mainFollowingFeed.member_idx})">
-	            <img src="/img/dm.png" class="feed_comment_insert_icon_img" onclick="feedCommentInsertClick(${mainFollowingFeed.feed_idx}, ${mainFollowingFeed.member_idx})">
-	        </div>
-	        <hr>
-	    </div>
-	    
-		<!-- feed detail -->
-		<div id="feedDetail${loop.index}" class="feed_detail_div">
-		    <span id="closeFeedDetail" class="feed_detail_close_btn">&times;</span>
-		    <div class="feed_detail_content_div">
-		        <div class="feed_detail_img_div">
-		            <img src="/upload/feed/${mainFollowingFeed.feed_img}" class="feed_detail_img">
-		        </div>
-		
-		        <div class="feed_detail_content_content_div">
-		            <div class="feed_detail_info_div">
-		                <div class="feed_detail_info_span">
-		                    
-		                    <c:if test="${empty mainFollowingFeed.member_img}">
-								<img src="/img/default_photo2.png" class="feed_detail_profile_img">
-							</c:if>
-							<c:if test="${!empty mainFollowingFeed.member_img}">
-								<img src="/upload/member/${mainFollowingFeed.member_img}" class="feed_detail_profile_img">
-							</c:if>
-							
-		                    <a href="#" class="feed_profile_id">&nbsp;${mainFollowingFeed.member_id}</a>
-		                </div>
-		                
-		                <c:if test="${mainFollowingFeed.member_idx eq sessionScope.sidx}">
-			                <div class="feed_detail_more_view_btn_div">
-			                    <img src="/img/3dots.png" class="feed_detail_more_view_btn" data-bs-toggle="dropdown" aria-expanded="false">
-			                    <div class="dropdown-center">
-			                        <ul class="dropdown-menu dropdown-menu2">
-			                            <li><a class="dropdown-item menu_font" href="/catstagram/feedUpdate?feed_idx=${mainFollowingFeed.feed_idx}">수정</a></li>
-			                            <li><hr class="dropdown-divider"></li>
-		                            	<li>
-			                            	<form id="feedDelForm${mainFollowingFeed.feed_idx}" action="/catstagram/feedDel" method="post">
-		                            			<input type="hidden" name="feed_idx" value="${mainFollowingFeed.feed_idx}">
-		                            			<a class="dropdown-item menu_font" onclick="feedDel(${mainFollowingFeed.feed_idx})">삭제</a>
-		                            		</form>
-	                            		</li>
-			                        </ul>
+			<!-- feed detail -->
+			<div id="feedDetail${loop.index}" class="feed_detail_div">
+			    <span id="closeFeedDetail" class="feed_detail_close_btn">&times;</span>
+			    <div class="feed_detail_content_div">
+			        <div class="feed_detail_img_div">
+			            <img src="/upload/feed/${mainFollowingFeed.feed_img}" class="feed_detail_img">
+			        </div>
+			
+			        <div class="feed_detail_content_content_div">
+			            <div class="feed_detail_info_div">
+			                <div class="feed_detail_info_span">
+			                    
+			                    <c:if test="${empty mainFollowingFeed.member_img}">
+									<img src="/img/default_photo2.png" class="feed_detail_profile_img">
+								</c:if>
+								<c:if test="${!empty mainFollowingFeed.member_img}">
+									<img src="/upload/member/${mainFollowingFeed.member_img}" class="feed_detail_profile_img">
+								</c:if>
+								
+			                    <a href="#" class="feed_profile_id">&nbsp;${mainFollowingFeed.member_id}</a>
+			                </div>
+			                
+			                <c:if test="${mainFollowingFeed.member_idx eq sessionScope.sidx}">
+				                <div class="feed_detail_more_view_btn_div">
+				                    <img src="/img/3dots.png" class="feed_detail_more_view_btn" data-bs-toggle="dropdown" aria-expanded="false">
+				                    <div class="dropdown-center">
+				                        <ul class="dropdown-menu dropdown-menu2">
+				                            <li><a class="dropdown-item menu_font" href="/catstagram/feedUpdate?feed_idx=${mainFollowingFeed.feed_idx}">수정</a></li>
+				                            <li><hr class="dropdown-divider"></li>
+			                            	<li>
+				                            	<form id="feedDelForm${mainFollowingFeed.feed_idx}" action="/catstagram/feedDel" method="post">
+			                            			<input type="hidden" name="feed_idx" value="${mainFollowingFeed.feed_idx}">
+			                            			<a class="dropdown-item menu_font" onclick="feedDel(${mainFollowingFeed.feed_idx})">삭제</a>
+			                            		</form>
+		                            		</li>
+				                        </ul>
+				                    </div>
+				                </div>
+			                </c:if>
+			            </div>
+			            <div class="feed_detail_content_content">
+			                <p class="feed_detail_content_content_p">
+			                    ${mainFollowingFeed.feed_content}
+			                </p>
+			            </div>
+			            <div class="feed_detail_content_time_div">${mainFollowingFeed.feed_date_time}</div>
+			            
+			            
+			            <div class="feed_detail_content_comment_div" id="feedDetailContentCommentDiv${mainFollowingFeed.feed_idx}">
+			                <c:forEach var="feedContentList" items="${mainFollowingFeed.feed_comment_list}">
+				                <div class="feed_detail_comment_div" id="feedDetailCommentDiv${feedContentList.comment_idx}">
+				                    <span class="feed_detail_comment"> 
+				                        <c:if test="${empty feedContentList.member_img}">
+											<img src="/img/default_photo2.png" class="feed_detail_profile_comment_img">
+										</c:if>
+										<c:if test="${!empty feedContentList.member_img}">
+											<img src="/upload/member/${feedContentList.member_img}" class="feed_detail_profile_comment_img">
+										</c:if>
+				                        
+				                        <span class="feed_detail_comment_comment">
+				                            <a href="#" class="feed_detail_comment_id">${feedContentList.member_id}</a>
+				                            ${feedContentList.comment_content}
+				                        </span>
+				                    </span>
+				                    <span class="feed_detail_comment_icon">
+				                        <c:if test="${mainFollowingFeed.member_idx eq sessionScope.sidx
+				                        				|| feedContentList.member_idx eq sessionScope.sidx}">
+					                        <img src="/img/trash.png" class="feed_comment_icon_trash_img"
+					                        onclick="feedCommentDel(${feedContentList.comment_idx})">
+				                        </c:if>
+				                        <img src="/img/heart.png" class="feed_comment_icon_heart_img2">
+				                    </span>
+				                </div>
+				                <div class="feed_detail_comment_time_like_div" id="feedDetailCommentTimeLikeDiv${feedContentList.comment_idx}">
+				                    ${feedContentList.comment_date_time}&nbsp;&nbsp;좋아요 ${feedContentList.comment_like_count}개
+				                </div>
+			                </c:forEach>
+			            </div>
+			            
+			            
+			
+			            <div class="feed_detail_comment_write_div">
+			                <div class="feed_detail_icon_div">
+			                	<!-- 상세보기 좋아요 / 나중에 주석 지우기 -->
+			                    <c:if test="${empty mainFollowingFeed.feed_like_idx}">
+						            <img src="/img/heart.png" class="feed_icon_heart_img"
+						            onclick="likeFeed(${mainFollowingFeed.feed_idx})" id="detailHeart${mainFollowingFeed.feed_idx}">
+					            </c:if>
+					            <c:if test="${!empty mainFollowingFeed.feed_like_idx}">
+						            <img src="/img/heart2.png" class="feed_icon_heart_img"
+						            onclick="likeFeedCancel(${mainFollowingFeed.feed_idx})" id="detailHeartFull${mainFollowingFeed.feed_idx}">
+					            </c:if>
+			                    <img src="/img/reple.png" class="feed_icon_reple_img">
+			                </div>
+			                <div class="feed_detail_like_div">
+			                    <div class="feed_detail_like" id="detailLikeCountSpan${mainFollowingFeed.feed_idx}">
+			                        <c:if test="${mainFollowingFeed.feed_like_count ne 0}">
+		            					좋아요 <span id="detailLikeCount${mainFollowingFeed.feed_idx}">${mainFollowingFeed.feed_like_count}</span>개
+		            				</c:if>
+		            				<c:if test="${mainFollowingFeed.feed_like_count eq 0}">
+		            					아직 좋아요가 없습니다.
+		            				</c:if>
 			                    </div>
 			                </div>
-		                </c:if>
-		            </div>
-		            <div class="feed_detail_content_content">
-		                <p class="feed_detail_content_content_p">
-		                    ${mainFollowingFeed.feed_content}
-		                </p>
-		            </div>
-		            <div class="feed_detail_content_time_div">${mainFollowingFeed.feed_date_time}</div>
-		            
-		            
-		            <div class="feed_detail_content_comment_div" id="feedDetailContentCommentDiv${mainFollowingFeed.feed_idx}">
-		                <c:forEach var="feedContentList" items="${mainFollowingFeed.feed_comment_list}">
-			                <div class="feed_detail_comment_div" id="feedDetailCommentDiv${feedContentList.comment_idx}">
-			                    <span class="feed_detail_comment"> 
-			                        <c:if test="${empty feedContentList.member_img}">
-										<img src="/img/default_photo2.png" class="feed_detail_profile_comment_img">
-									</c:if>
-									<c:if test="${!empty feedContentList.member_img}">
-										<img src="/upload/member/${feedContentList.member_img}" class="feed_detail_profile_comment_img">
-									</c:if>
-			                        
-			                        <span class="feed_detail_comment_comment">
-			                            <a href="#" class="feed_detail_comment_id">${feedContentList.member_id}</a>
-			                            ${feedContentList.comment_content}
-			                        </span>
-			                    </span>
-			                    <span class="feed_detail_comment_icon">
-			                        <c:if test="${mainFollowingFeed.member_idx eq sessionScope.sidx
-			                        				|| feedContentList.member_idx eq sessionScope.sidx}">
-				                        <img src="/img/trash.png" class="feed_comment_icon_trash_img"
-				                        onclick="feedCommentDel(${feedContentList.comment_idx})">
-			                        </c:if>
-			                        <img src="/img/heart.png" class="feed_comment_icon_heart_img2">
-			                    </span>
+			                <div class="feed_detail_comment_write_write_div">
+			                    <div class="feed_detail_comment_input">
+			                        <input type="text" name="comment_content" placeholder="댓글 달기..."
+			                        	id="feedDetailComment${mainFollowingFeed.feed_idx}"
+			                        	maxlength="1000" class="feed_detail_comment_insert_input" onkeydown="feedDetailCommentInsertEnterKey(event, ${mainFollowingFeed.feed_idx}, ${mainFollowingFeed.member_idx})">
+			                        <img src="/img/dm.png" class="feed_comment_insert_icon_img" onclick="feedDetailCommentInsertClick(${mainFollowingFeed.feed_idx}, ${mainFollowingFeed.member_idx})">
+			                    </div>
 			                </div>
-			                <div class="feed_detail_comment_time_like_div" id="feedDetailCommentTimeLikeDiv${feedContentList.comment_idx}">
-			                    ${feedContentList.comment_date_time}&nbsp;&nbsp;좋아요 ${feedContentList.comment_like_count}개
-			                </div>
-		                </c:forEach>
-		            </div>
-		            
-		            
-		
-		            <div class="feed_detail_comment_write_div">
-		                <div class="feed_detail_icon_div">
-		                	<!-- 상세보기 좋아요 / 나중에 주석 지우기 -->
-		                    <c:if test="${empty mainFollowingFeed.feed_like_idx}">
-					            <img src="/img/heart.png" class="feed_icon_heart_img"
-					            onclick="likeFeed(${mainFollowingFeed.feed_idx})" id="detailHeart${mainFollowingFeed.feed_idx}">
-				            </c:if>
-				            <c:if test="${!empty mainFollowingFeed.feed_like_idx}">
-					            <img src="/img/heart2.png" class="feed_icon_heart_img"
-					            onclick="likeFeedCancel(${mainFollowingFeed.feed_idx})" id="detailHeartFull${mainFollowingFeed.feed_idx}">
-				            </c:if>
-		                    <img src="/img/reple.png" class="feed_icon_reple_img">
-		                </div>
-		                <div class="feed_detail_like_div">
-		                    <div class="feed_detail_like" id="detailLikeCountSpan${mainFollowingFeed.feed_idx}">
-		                        <c:if test="${mainFollowingFeed.feed_like_count ne 0}">
-	            					좋아요 <span id="detailLikeCount${mainFollowingFeed.feed_idx}">${mainFollowingFeed.feed_like_count}</span>개
-	            				</c:if>
-	            				<c:if test="${mainFollowingFeed.feed_like_count eq 0}">
-	            					아직 좋아요가 없습니다.
-	            				</c:if>
-		                    </div>
-		                </div>
-		                <div class="feed_detail_comment_write_write_div">
-		                    <div class="feed_detail_comment_input">
-		                        <input type="text" name="comment_content" placeholder="댓글 달기..."
-		                        	id="feedDetailComment${mainFollowingFeed.feed_idx}"
-		                        	maxlength="1000" class="feed_detail_comment_insert_input" onkeydown="feedDetailCommentInsertEnterKey(event, ${mainFollowingFeed.feed_idx}, ${mainFollowingFeed.member_idx})">
-		                        <img src="/img/dm.png" class="feed_comment_insert_icon_img" onclick="feedDetailCommentInsertClick(${mainFollowingFeed.feed_idx}, ${mainFollowingFeed.member_idx})">
-		                    </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+	    </c:forEach>    
+	</div>
+	
+	<!-- Menu of Right -->
+	<div class="suggestion_div">
+	    <div>
+	        <c:if test="${empty sessionScope.simg}">
+				<img src="/img/default_photo2.png" class="feed_profile_img">
+			</c:if>
+			<c:if test="${!empty sessionScope.simg}">
+				<img src="/upload/member/${sessionScope.simg}" class="feed_profile_img">
+			</c:if>
+	        <div class="id_and_name_div">
+	            <a href="#" class="id_and_name_id">${sessionScope.sid}</a><br>
+	            <a href="#" class="id_and_name_name">${sessionScope.sname}</a>
+	        </div>
+	    </div>
+	
+	    <div class="suggestion_list_msg_div">
+	        <div class="suggestion_list_msg">회원님을 위한 추천<a href="/catstagram/suggestedFollows" class="more_suggested_follow">더보기</a></div>
+	    </div>
+	
+	    <c:forEach var="suggestedFollowers" items="${suggestedFollowersInMain}" varStatus="loop">
+		    <div class="suggestion_list_div">
+		        <div class="img_and_id_and_name_div">
+		        	<c:if test="${empty suggestedFollowers.following_img_of_my_following}">
+						<img src="/img/default_photo2.png" class="feed_profile_img2">
+					</c:if>
+					<c:if test="${!empty suggestedFollowers.following_img_of_my_following}">
+						<img src="/upload/member/${suggestedFollowers.following_img_of_my_following}" class="feed_profile_img2">
+					</c:if>
+		            <div class="id_and_name_div">
+		            	<div class="id_and_name_div2">
+			                <a href="#" class="suggestion_list_id">${suggestedFollowers.following_id_of_my_following}</a><br>
+			                <c:if test="${suggestedFollowers.num_of_followers eq 0}">
+			                	<a class="suggestion_follow_who">${suggestedFollowers.my_following_list_arr[0]}님이 팔로우합니다.</a>
+			                </c:if>
+			                <c:if test="${suggestedFollowers.num_of_followers ne 0}">
+			                	<span class="suggestion_follow_who">${suggestedFollowers.my_following_list_arr[0]}님 외 
+			                	<span id="suggestedFollowListId${loop.index}"
+			                		class="suggestedFollowList" data-bs-toggle="dropdown" aria-expanded="false">
+			                		${suggestedFollowers.num_of_followers}명</span>이 팔로우합니다.
+			                	
+									<div class="dropdown">
+										<ul class="dropdown-menu">
+											<c:forEach var="suggestedFollowList" items="${suggestedFollowers.my_following_list_arr}">
+												<li><a class="dropdown-item menu_font" href="#">${suggestedFollowList}</a></li>
+											</c:forEach>
+										</ul>
+				                	</div>
+								</span>
+			                </c:if>
 		                </div>
 		            </div>
 		        </div>
+		        <div class="suggestion_list_follow_btn_div">
+		            <input type="button" value="팔로우" id="follow${suggestedFollowers.following_idx_of_my_following}" onclick="addFollowing(${suggestedFollowers.following_idx_of_my_following})" class="btn btn-primary suggestion_list_follow_btn">
+		        </div>
 		    </div>
-		</div>
-    </c:forEach>    
-</div>
-
-<!-- Menu of Right -->
-<div class="suggestion_div">
-    <div>
-        <c:if test="${empty sessionScope.simg}">
-			<img src="/img/default_photo2.png" class="feed_profile_img">
-		</c:if>
-		<c:if test="${!empty sessionScope.simg}">
-			<img src="/upload/member/${sessionScope.simg}" class="feed_profile_img">
-		</c:if>
-        <div class="id_and_name_div">
-            <a href="#" class="id_and_name_id">${sessionScope.sid}</a><br>
-            <a href="#" class="id_and_name_name">${sessionScope.sname}</a>
-        </div>
-    </div>
-
-    <div class="suggestion_list_msg_div">
-        <div class="suggestion_list_msg">회원님을 위한 추천<a href="/catstagram/suggestedFollows" class="more_suggested_follow">더보기</a></div>
-    </div>
-
-    <c:forEach var="suggestedFollowers" items="${suggestedFollowersInMain}" varStatus="loop">
-	    <div class="suggestion_list_div">
-	        <div class="img_and_id_and_name_div">
-	        	<c:if test="${empty suggestedFollowers.following_img_of_my_following}">
-					<img src="/img/default_photo2.png" class="feed_profile_img2">
-				</c:if>
-				<c:if test="${!empty suggestedFollowers.following_img_of_my_following}">
-					<img src="/upload/member/${suggestedFollowers.following_img_of_my_following}" class="feed_profile_img2">
-				</c:if>
-	            <div class="id_and_name_div">
-	            	<div class="id_and_name_div2">
-		                <a href="#" class="suggestion_list_id">${suggestedFollowers.following_id_of_my_following}</a><br>
-		                <c:if test="${suggestedFollowers.num_of_followers eq 0}">
-		                	<a class="suggestion_follow_who">${suggestedFollowers.my_following_list_arr[0]}님이 팔로우합니다.</a>
-		                </c:if>
-		                <c:if test="${suggestedFollowers.num_of_followers ne 0}">
-		                	<span class="suggestion_follow_who">${suggestedFollowers.my_following_list_arr[0]}님 외 
-		                	<span id="suggestedFollowListId${loop.index}"
-		                		class="suggestedFollowList" data-bs-toggle="dropdown" aria-expanded="false">
-		                		${suggestedFollowers.num_of_followers}명</span>이 팔로우합니다.
-		                	
-								<div class="dropdown">
-									<ul class="dropdown-menu">
-										<c:forEach var="suggestedFollowList" items="${suggestedFollowers.my_following_list_arr}">
-											<li><a class="dropdown-item menu_font" href="#">${suggestedFollowList}</a></li>
-										</c:forEach>
-									</ul>
-			                	</div>
-							</span>
-		                </c:if>
-	                </div>
-	            </div>
-	        </div>
-	        <div class="suggestion_list_follow_btn_div">
-	            <input type="button" value="팔로우" id="follow${suggestedFollowers.following_idx_of_my_following}" onclick="addFollowing(${suggestedFollowers.following_idx_of_my_following})" class="btn btn-primary suggestion_list_follow_btn">
-	        </div>
-	    </div>
-    </c:forEach>
-</div>
+	    </c:forEach>
+	</div>
 </div>
 <img src="/img/upArrow.png" id="scrollToTopBtn" class="scroll_to_top_btn" onclick="scrollToTop()">
 <%@ include file="footer.jsp" %>
