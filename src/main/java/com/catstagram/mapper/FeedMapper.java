@@ -12,4 +12,7 @@ public interface FeedMapper {
 	public FeedDTO feedUpdateInfo(int feed_idx);
 	public int feedUpdate(FeedDTO dto);
 	public int feedDel(int feed_idx);
+	public int feedLikeCountPlus(int feed_idx);
+	public int feedLikeCountMinus(int feed_idx);
+	public int feedLikeCount(int feed_idx);
 }

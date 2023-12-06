@@ -66,4 +66,22 @@
 		delete from catstagram_feed where feed_idx = #{feed_idx}
 	</delete>
 	
+	<!-- 피드 좋아요수 증가 -->
+	<update id="feedLikeCountPlus" parameterType="Integer">
+		update catstagram_feed
+		set feed_like_count = feed_like_count + 1
+		where feed_idx = #{feed_idx}
+	</update>
+	
+	<!-- 피드 좋아요수 감소 -->
+	<update id="feedLikeCountMinus" parameterType="Integer">
+		update catstagram_feed
+		set feed_like_count = feed_like_count - 1
+		where feed_idx = #{feed_idx}
+	</update>
+	
+	<!-- 피드 좋아요수 -->
+	<select id="feedLikeCount" parameterType="Integer" resultType="Integer">
+		select feed_like_count from catstagram_feed where feed_idx = #{feed_idx}
+	</select>
 </mapper>

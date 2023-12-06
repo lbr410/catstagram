@@ -32,11 +32,18 @@
 	            <img src="/upload/feed/${mainFollowingFeed.feed_img}" class="feed_feed_img">
 	        </div>
 	        <div class="feed_icon_div">
-	            <a href="#"><img src="/img/heart.png" class="feed_icon_heart_img"></a>
-	            <a href="#"><img src="/img/reple.png" class="feed_icon_reple_img"></a>
+	        	<c:if test="${empty mainFollowingFeed.feed_like_idx}">
+		            <img src="/img/heart.png" class="feed_icon_heart_img"
+		            onclick="likeFeed(${mainFollowingFeed.feed_idx}); likeFeedWithFirework(${mainFollowingFeed.feed_idx})" id="previewHeart${mainFollowingFeed.feed_idx}"> <!-- 미리보기 좋아요 / 나중에 주석 지우기 -->
+	            </c:if>
+	            <c:if test="${!empty mainFollowingFeed.feed_like_idx}">
+		            <img src="/img/heart2.png" class="feed_icon_heart_img"
+		            onclick="likeFeedCancel(${mainFollowingFeed.feed_idx})" id="previewHeartFull${mainFollowingFeed.feed_idx}">
+	            </c:if>
+	            <img src="/img/reple.png" class="feed_icon_reple_img" id="repleBtn${loop.index}">
 	        </div>
 	        <div class="like_div">
-	            <span class="like_span">좋아요 ${mainFollowingFeed.feed_like_count}개</span>
+	            <span class="like_span">좋아요 <span id="previewLikeCount${mainFollowingFeed.feed_idx}">${mainFollowingFeed.feed_like_count}</span>개</span>
 	        </div>
 	        <div class="feed_content_div">
 	            <a href="#" class="feed_content_id">${mainFollowingFeed.member_id}</a>
@@ -159,12 +166,20 @@
 		
 		            <div class="feed_detail_comment_write_div">
 		                <div class="feed_detail_icon_div">
-		                    <a href="#"><img src="/img/heart.png" class="feed_icon_heart_img"></a>
-		                    <a href="#"><img src="/img/reple.png" class="feed_icon_reple_img"></a>
+		                	<!-- 상세보기 좋아요 / 나중에 주석 지우기 -->
+		                    <c:if test="${empty mainFollowingFeed.feed_like_idx}">
+					            <img src="/img/heart.png" class="feed_icon_heart_img"
+					            onclick="likeFeed(${mainFollowingFeed.feed_idx})" id="detailHeart${mainFollowingFeed.feed_idx}">
+				            </c:if>
+				            <c:if test="${!empty mainFollowingFeed.feed_like_idx}">
+					            <img src="/img/heart2.png" class="feed_icon_heart_img"
+					            onclick="likeFeedCancel(${mainFollowingFeed.feed_idx})" id="detailHeartFull${mainFollowingFeed.feed_idx}">
+				            </c:if>
+		                    <img src="/img/reple.png" class="feed_icon_reple_img">
 		                </div>
 		                <div class="feed_detail_like_div">
 		                    <div class="feed_detail_like">
-		                        좋아요 ${mainFollowingFeed.feed_like_count}개
+		                        좋아요 <span id="detailLikeCount${mainFollowingFeed.feed_idx}">${mainFollowingFeed.feed_like_count}</span>개
 		                    </div>
 		                </div>
 		                <div class="feed_detail_comment_write_write_div">
@@ -259,6 +274,18 @@
                 modalContent.style.marginTop = topMargin + 'px';
             });
         </c:forEach>
+        
+        <c:forEach var="mainFollowingFeed" items="${mainFollowingFeed}" varStatus="loop">
+	        document.getElementById('repleBtn${loop.index}').addEventListener('click', function() {
+	            // 해당 피드의 모달을 보이게 함
+	            document.getElementById('feedDetail${loop.index}').style.display = 'flex';
+	            let modalContent = document.querySelector('.feed_detail_content_div');
+	            let windowHeight = window.innerHeight;
+	            let modalHeight = modalContent.clientHeight;
+	            let topMargin = (windowHeight - modalHeight) / 2;
+	            modalContent.style.marginTop = topMargin + 'px';
+	        });
+	    </c:forEach>
 
 		// X버튼 누르면 피드 상세 보기 닫기
         document.querySelectorAll('.feed_detail_close_btn').forEach(function(closeBtn) {
@@ -556,8 +583,87 @@
     	XHR.send('comment_idx='+comment_idx);
     }
     
+    // 피드 삭제
     function feedDel(feed_idx) {
     	document.getElementById('feedDelForm'+feed_idx).submit();
+    }
+    
+    // 피드 좋아요
+   	function likeFeed(feed_idx) {
+    	const XHR = new XMLHttpRequest();
+    	XHR.onreadystatechange = () => {
+    		if(XHR.readyState == 4 && XHR.status == 200) {
+    			const feedLikeCount = JSON.parse(XHR.responseText);
+    			
+    			// 좋아요 하트색 변경 & 좋아요수 증가 보이기
+    			// 미리보기 피드
+    			let oldPreviewFeedLike = document.getElementById('previewHeart'+feed_idx);
+    			let newPreviewFeedLike = document.createElement('img');
+    			newPreviewFeedLike.src = '/img/heart2.png';
+    			newPreviewFeedLike.classList = 'feed_icon_heart_img';
+    			newPreviewFeedLike.id = 'previewHeartFull'+feed_idx;
+    			newPreviewFeedLike.onclick = () => {
+    				likeFeedCancel(feed_idx);
+    			}
+    			oldPreviewFeedLike.parentNode.replaceChild(newPreviewFeedLike, oldPreviewFeedLike);
+    			document.getElementById('previewLikeCount'+feed_idx).innerHTML = feedLikeCount;
+    			
+    			// 상세보기 피드
+    			let oldDetailFeedLike = document.getElementById('detailHeart'+feed_idx);
+    			let newDetailFeedLike = document.createElement('img');
+    			newDetailFeedLike.src = '/img/heart2.png';
+    			newDetailFeedLike.classList = 'feed_icon_heart_img';
+    			newDetailFeedLike.id = 'detailHeartFull'+feed_idx;
+    			newDetailFeedLike.onclick = () => {
+    				likeFeedCancel(feed_idx);
+    			}
+    			oldDetailFeedLike.parentNode.replaceChild(newDetailFeedLike, oldDetailFeedLike);
+    			document.getElementById('detailLikeCount'+ feed_idx).innerHTML = feedLikeCount;
+    		}
+    	}
+    	
+    	XHR.open('POST', 'likeFeed', true);
+    	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    	XHR.send('feed_idx='+feed_idx);
+    }
+    
+    // 피드 좋아요 취소
+    function likeFeedCancel(feed_idx) {
+    	const XHR = new XMLHttpRequest();
+    	XHR.onreadystatechange = () => {
+    		if(XHR.readyState == 4 && XHR.status == 200) {
+    			const feedLikeCount = JSON.parse(XHR.responseText);
+    			
+    			// 좋아요 하트색 변경 & 좋아요수 감소 보이기
+    			// 미리보기 피드
+    			let oldPreviewFeedLike = document.getElementById('previewHeartFull'+feed_idx);
+    			let newPreviewFeedLike = document.createElement('img');
+    			newPreviewFeedLike.src = '/img/heart.png';
+    			newPreviewFeedLike.classList = 'feed_icon_heart_img';
+    			newPreviewFeedLike.id = 'previewHeart'+feed_idx;
+    			newPreviewFeedLike.onclick = () => {
+    				likeFeed(feed_idx);
+    			}
+    			oldPreviewFeedLike.parentNode.replaceChild(newPreviewFeedLike, oldPreviewFeedLike);
+    			document.getElementById('previewLikeCount'+feed_idx).innerHTML = feedLikeCount;
+    			
+    			// 상세보기 피드
+    			let oldDetailFeedLike = document.getElementById('detailHeartFull'+feed_idx);
+    			let newDetailFeedLike = document.createElement('img');
+    			newDetailFeedLike.src = '/img/heart.png';
+    			newDetailFeedLike.classList = 'feed_icon_heart_img';
+    			newDetailFeedLike.id = 'detailHeart'+feed_idx;
+    			newDetailFeedLike.onclick = () => {
+    				likeFeed(feed_idx);
+    			}
+    			oldDetailFeedLike.parentNode.replaceChild(newDetailFeedLike, oldDetailFeedLike);
+    			document.getElementById('detailLikeCount'+ feed_idx).innerHTML = feedLikeCount;
+    		}
+    	}
+    	
+    	XHR.open('POST', 'likeFeedCancel', true);
+    	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    	XHR.send('feed_idx='+feed_idx);
     }
 </script>
 </html>

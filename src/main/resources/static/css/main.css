@@ -107,11 +107,13 @@ body {
     width: 29px;
     height: 25px;
     margin-right: 6px;
+    cursor: pointer;
 }
 
 .feed_icon_reple_img {
     width: 25px;
     height: 25px;
+    cursor: pointer;
 }
 
 .like_div {

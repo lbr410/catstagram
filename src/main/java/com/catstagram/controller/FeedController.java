@@ -11,18 +11,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catstagram.feed.model.FeedDTO;
 import com.catstagram.feed.service.FeedService;
+import com.catstagram.feedLike.model.FeedLikeDTO;
+import com.catstagram.feedLike.service.FeedLikeService;
 
 @Controller
 public class FeedController {
 	
 	@Autowired
 	private FeedService feedService;
+	
+	@Autowired
+	private FeedLikeService feedLikeService;
 	
 	// 피드 등록 페이지로 이동
 	@GetMapping("/catstagram/feedWrite")
@@ -191,5 +197,47 @@ public class FeedController {
 			mav.setViewName("msg/msg");
 		}
 		return mav;
+	}
+	
+	// 피드 좋아요
+	@ResponseBody
+	@PostMapping("/catstagram/likeFeed")
+	public int likeFeed(@RequestParam("feed_idx") int feed_idx, HttpSession session) {
+		int sidx = (Integer)session.getAttribute("sidx");
+		FeedLikeDTO dto = new FeedLikeDTO();
+		dto.setFeed_idx(feed_idx);
+		dto.setMember_idx(sidx);
+		
+		int feedLikeCount = 0;
+		try {
+			feedLikeService.likeFeed(dto);
+			feedService.feedLikeCountPlus(feed_idx);
+			feedLikeCount = feedService.feedLikeCount(feed_idx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return feedLikeCount;
+	}
+	
+	// 피드 좋아요 취소
+	@ResponseBody
+	@PostMapping("/catstagram/likeFeedCancel")
+	public int likeFeedCancel(@RequestParam("feed_idx") int feed_idx, HttpSession session) {
+		int sidx = (Integer)session.getAttribute("sidx");
+		FeedLikeDTO dto = new FeedLikeDTO();
+		dto.setFeed_idx(feed_idx);
+		dto.setMember_idx(sidx);
+		
+		int feedLikeCount = 0;
+		try {
+			feedLikeService.likeFeedCancel(dto);
+			feedService.feedLikeCountMinus(feed_idx);
+			feedLikeCount = feedService.feedLikeCount(feed_idx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return feedLikeCount;
 	}
 }
