@@ -43,4 +43,27 @@
 		values
 			(catstagram_feed_idx.nextval, #{member_idx}, #{feed_img}, #{feed_content}, 0, sysdate)
 	</insert>
+	
+	<!-- 해당 피드 작성자의 idx(피드 수정 페이지 이동 시 필요) -->
+	<select id="feedMemberIdx" parameterType="Integer" resultType="Integer">
+		select member_idx from catstagram_feed where feed_idx = #{feed_idx}
+	</select>
+	
+	<!-- 수정할 피드의 정보 -->
+	<select id="feedUpdateInfo" parameterType="Integer" resultType="com.catstagram.feed.model.FeedDTO">
+		select member_idx, feed_idx, feed_img, feed_content from catstagram_feed where feed_idx = #{feed_idx}
+	</select>
+	
+	<!-- 피드 수정 -->
+	<update id="feedUpdate" parameterType="com.catstagram.feed.model.FeedDTO">
+		update catstagram_feed
+		set feed_content = #{feed_content}
+		where feed_idx = #{feed_idx}
+	</update>
+	
+	<!-- 피드 삭제 -->
+	<delete id="feedDel" parameterType="Integer">
+		delete from catstagram_feed where feed_idx = #{feed_idx}
+	</delete>
+	
 </mapper>

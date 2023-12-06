@@ -23,8 +23,18 @@ public class InfoController {
 	
 	// 회원 정보 수정 페이지로 이동
 	@GetMapping("catstagram/infoUpdate")
-	public String infoUpdateForm() {
-		return "infoUpdate";
+	public ModelAndView infoUpdateForm(HttpSession session) {
+		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		ModelAndView mav = new ModelAndView();
+		
+		if(w_sidx == null) {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");
+		} else {
+			mav.setViewName("infoUpdate");
+		}
+		return mav;
 	}
 	
 	// 회원 정보 수정
@@ -162,6 +172,23 @@ public class InfoController {
 		return mav;
 	}
 	
+	@GetMapping("/catstagram/pwdUpdateOk")
+	public ModelAndView pwdUpdateOkGet(HttpSession session) {
+		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		ModelAndView mav = new ModelAndView();
+		
+		if(w_sidx == null) {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");
+		} else {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram/main");
+			mav.setViewName("msg/msg");
+		}
+		return mav;
+	}
+	
 	// 회원탈퇴
 	@PostMapping("/catstagram/quitOk")
 	public ModelAndView quitOk(HttpSession session, HttpServletResponse resp) {
@@ -178,7 +205,6 @@ public class InfoController {
 		ModelAndView mav = new ModelAndView();
 		String msg = null;
 		if(result>0) {
-			System.out.println("성공 콘솔!!");
 			msg = "나중에 또 만나요. 😭";
 			
 			mav.addObject("msg", msg);
@@ -198,6 +224,23 @@ public class InfoController {
 		} else {
 			msg = "회원탈퇴 실패!";
 			mav.addObject("msg", msg);
+			mav.addObject("goUrl", "/catstagram/main");
+			mav.setViewName("msg/msg");
+		}
+		return mav;
+	}
+	
+	@GetMapping("/catstagram/quitOk")
+	public ModelAndView quitOkGet(HttpSession session) {
+		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		ModelAndView mav = new ModelAndView();
+		
+		if(w_sidx == null) {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");
+		} else {
+			mav.addObject("msg", "잘못된 접근입니다.");
 			mav.addObject("goUrl", "/catstagram/main");
 			mav.setViewName("msg/msg");
 		}

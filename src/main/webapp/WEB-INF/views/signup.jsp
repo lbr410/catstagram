@@ -12,7 +12,7 @@
 </head>
 <body>
 	<form class="signup_form" action="/catstagram/signup" method="post" onsubmit="return validation()">
-		<div class="title">Catstagram</div>
+		<div class="title"><a href="/catstagram" class="title_msg">Catstagram</a></div>
 		<div class="signup_msg_div">친구들의 고양이 일상을 보려면 가입하세요.</div>
 		<div class="input_div">
 			<input type="text" name="member_name" placeholder="성명" class="form-control mx-auto form-control-sm name_input" maxlength="30" required>

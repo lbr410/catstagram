@@ -51,4 +51,32 @@ public class FeedServiceImpl implements FeedService {
 		int result = mapper.feedWrite(dto);
 		return result;
 	}
+	
+	// 수정할 피드의 정보
+	@Override
+	public FeedDTO feedUpdateInfo(int feed_idx) throws Exception {
+		FeedDTO dto = mapper.feedUpdateInfo(feed_idx);
+		return dto;
+	}
+	
+	// 해당 피드 작성자의 idx(피드 수정 페이지 이동 시 필요)
+	@Override
+	public Integer feedMemberIdx(int feed_idx) throws Exception {
+		Integer result = mapper.feedMemberIdx(feed_idx) != null ? mapper.feedMemberIdx(feed_idx) : 0;
+		return result;
+	}
+	
+	// 피드 수정
+	@Override
+	public int feedUpdate(FeedDTO dto) throws Exception {
+		int result = mapper.feedUpdate(dto);
+		return result;
+	}
+	
+	// 피드 삭제
+	@Override
+	public int feedDel(int feed_idx) throws Exception {
+		int result = mapper.feedDel(feed_idx);
+		return result;
+	}
 }

@@ -1,6 +1,7 @@
 package com.catstagram.controller;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -24,12 +25,20 @@ public class IndexController {
 	
 	// 로그인 화면으로 이동
 	@GetMapping("/catstagram")
-	public String index() {
-		return "index";
+	public ModelAndView index(HttpSession session) {
+		Integer sidx = (Integer)session.getAttribute("sidx");
+		ModelAndView mav = new ModelAndView();
+		if(sidx == null) {
+			mav.setViewName("index");
+		} else {
+			mav.addObject("msg", "로그아웃 후 이동할 수 있습니다.");
+			mav.addObject("goUrl", "/catstagram/main");
+			mav.setViewName("msg/msg");
+		}
+		return mav;
 	}
 	
 	// 로그인
-	// ResponseBody 지움
 	@PostMapping("/catstagram/login")
 	public ModelAndView login(@RequestParam("member_id") String id, 
 							  @RequestParam("member_pwd") String pwd,
@@ -82,6 +91,24 @@ public class IndexController {
 		} else if(result == memberService.QUIT) {
 			mav.addObject("msg", "로그인이 불가능한 계정입니다.");
 			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");
+		}
+		return mav;
+	}
+	
+	@GetMapping("/catstagram/login")
+	public ModelAndView loginGetReq(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		ModelAndView mav = new ModelAndView();
+		
+		if(w_sidx == null) {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");
+		} else {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram/main");
 			mav.setViewName("msg/msg");
 		}
 		return mav;

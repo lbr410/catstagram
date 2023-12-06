@@ -1,5 +1,7 @@
 package com.catstagram.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +22,17 @@ public class SignUpController {
 	
 	// 회원가입 페이지로 이동
 	@GetMapping("/catstagram/signup")
-	public String signUp() {
-		return "signup";
+	public ModelAndView signUp(HttpSession session) {
+		Integer sidx = (Integer)session.getAttribute("sidx");
+		ModelAndView mav = new ModelAndView();
+		if(sidx == null) {
+			mav.setViewName("signup");
+		} else {
+			mav.addObject("msg", "로그아웃 후 이동할 수 있습니다.");
+			mav.addObject("goUrl", "/catstagram/main");
+			mav.setViewName("msg/msg");
+		}
+		return mav;
 	}
 	
 	// 아이디 중복 검사
@@ -36,6 +47,23 @@ public class SignUpController {
 		}
 
 		return member_id;
+	}
+	
+	@GetMapping("/catstagram/idCheck")
+	public ModelAndView idCheckGet(HttpSession session) {
+		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		ModelAndView mav = new ModelAndView();
+		
+		if(w_sidx == null) {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");
+		} else {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram/main");
+			mav.setViewName("msg/msg");
+		}
+		return mav;
 	}
 
 	// 회원가입

@@ -8,4 +8,8 @@ import com.catstagram.feed.model.FeedDTO;
 public interface FeedService {
 	public List<MainFollowingFeedDTO> mainFollowingFeed(int sidx) throws Exception;
 	public int feedWrite(FeedDTO dto) throws Exception;
+	public Integer feedMemberIdx(int feed_idx) throws Exception;
+	public FeedDTO feedUpdateInfo(int feed_idx) throws Exception;
+	public int feedUpdate(FeedDTO dto) throws Exception;
+	public int feedDel(int feed_idx) throws Exception;
 }

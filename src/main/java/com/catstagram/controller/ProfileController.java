@@ -24,16 +24,26 @@ public class ProfileController {
 	
 	// 프로필 수정 페이지로 이동 & 이미 저장된 프로필 불러오기
 	@GetMapping("/catstagram/profileUpdate")
-	public String profileUpdateForm(Model model, HttpSession session) {
-		int sidx = (Integer)session.getAttribute("sidx");
-		String content = null;
-		try {
-			content = memberService.profileInfo(sidx);
-		} catch (Exception e) {
-			e.printStackTrace();
+	public ModelAndView profileUpdateForm(HttpSession session) {
+		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		ModelAndView mav = new ModelAndView();
+		
+		if(w_sidx != null) {
+			int sidx = (Integer)session.getAttribute("sidx");
+			String content = null;
+			try {
+				content = memberService.profileInfo(sidx);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			mav.addObject("member_content", content);
+			mav.setViewName("profileUpdate");
+		} else {
+			mav.addObject("msg", "로그인 후 이용 가능합니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");	
 		}
-		model.addAttribute("member_content", content);
-		return "profileUpdate";
+		return mav;
 	}
 	
 	// 프로필 수정
@@ -56,8 +66,18 @@ public class ProfileController {
 	
 	// 프로필 이미지 변경 팝업창 열기
 	@GetMapping("/catstagram/profileImgPopup")
-	public String profileImgPopup() {
-		return "profileImgPopup";
+	public ModelAndView profileImgPopup(HttpSession session) {
+		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		ModelAndView mav = new ModelAndView();
+		
+		if(w_sidx == null) {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");
+		} else {
+			mav.setViewName("profileImgPopup");
+		}
+		return mav;
 	}
 	
 	// 프로필 이미지 변경
@@ -120,6 +140,23 @@ public class ProfileController {
 		mav.addObject("msg", msg);
 		mav.setViewName("msg/msgPopup");
 		
+		return mav;
+	}
+	
+	@GetMapping("/catstagram/profileImgUpdate")
+	public ModelAndView profileImgUpdateGet(HttpSession session) {
+		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		ModelAndView mav = new ModelAndView();
+		
+		if(w_sidx == null) {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");
+		} else {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram/main");
+			mav.setViewName("msg/msg");
+		}
 		return mav;
 	}
 }

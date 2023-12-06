@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,8 +26,18 @@ public class FeedController {
 	
 	// 피드 등록 페이지로 이동
 	@GetMapping("/catstagram/feedWrite")
-	public String feedWriteForm() {
-		return "feedWrite";
+	public ModelAndView feedWriteForm(HttpSession session) {
+		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		ModelAndView mav = new ModelAndView();
+		
+		if(w_sidx == null) {
+			mav.addObject("msg", "로그인 후 이용 가능합니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");
+		} else {
+			mav.setViewName("feedWrite");
+		}
+		return mav;
 	}
 	
 	// 피드 등록
@@ -88,9 +99,97 @@ public class FeedController {
 		return mav;
 	}
 	
-	// 수정할 예정
+	// 피드 수정 페이지로 이동
 	@GetMapping("/catstagram/feedUpdate")
-	public String feedUpdate() {
-		return "feedUpdate";
+	public ModelAndView feedUpdateForm(@RequestParam(value = "feed_idx", defaultValue = "0") int feed_idx, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		Integer sidx = (Integer)session.getAttribute("sidx");
+		Integer feed_idx_c = (Integer)feed_idx;
+		
+		// 해당 피드 작성자의 idx
+		Integer member_idx = 0;
+		try {
+			member_idx = feedService.feedMemberIdx(feed_idx_c);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// 수정할 피드의 정보
+		FeedDTO dto = new FeedDTO();
+		try {
+			dto = feedService.feedUpdateInfo(feed_idx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if(sidx != null) {
+			if(feed_idx_c != null && member_idx.equals(sidx)) {
+				mav.addObject("feedInfo", dto);
+				mav.setViewName("feedUpdate");
+			} else if(feed_idx_c == null || !member_idx.equals(sidx)) {
+				mav.addObject("msg", "잘못된 접근입니다.");
+				mav.addObject("goUrl", "/catstagram/main");
+				mav.setViewName("msg/msg");
+			}
+		} else {
+			mav.addObject("msg", "로그인 후 이용 가능합니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");	
+		}
+		
+		return mav;
+	}
+	
+	// 피드 수정
+	@PostMapping("/catstagram/feedUpdate")
+	public ModelAndView feedUpdate(FeedDTO dto) {
+		int result = 0;
+		try {
+			result = feedService.feedUpdate(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		String msg = result>0 ? "피드를 수정하였습니다." : "피드 수정 실패!";
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "/catstagram/main");
+		mav.setViewName("msg/msg");
+		
+		return mav;
+	}
+	
+	// 피드 삭제
+	@PostMapping("/catstagram/feedDel")
+	public ModelAndView feedDel(@RequestParam("feed_idx") int feed_idx) {
+		int result = 0;
+		try {
+			result = feedService.feedDel(feed_idx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView mav = new ModelAndView();
+		String msg = result>0 ? "피드가 삭제되었습니다." : "피드 삭제 실패!";
+		mav.addObject("msg", msg);
+		mav.addObject("goUrl", "/catstagram/main");
+		mav.setViewName("msg/msg");
+		return mav;
+	}
+
+	@GetMapping("/catstagram/feedDel")
+	public ModelAndView feedDelGet(HttpSession session) {
+		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		ModelAndView mav = new ModelAndView();
+		
+		if(w_sidx == null) {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");
+		} else {
+			mav.addObject("msg", "잘못된 접근입니다.");
+			mav.addObject("goUrl", "/catstagram/main");
+			mav.setViewName("msg/msg");
+		}
+		return mav;
 	}
 }

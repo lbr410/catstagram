@@ -17,6 +17,11 @@
 	margin-top: 49px;
 }
 
+.title_msg {
+	text-decoration: none;
+	color: black;
+}
+
 .signup_msg_div {
 	text-align: center;
 	margin-top: 20px;

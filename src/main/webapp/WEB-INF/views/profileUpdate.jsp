@@ -40,7 +40,7 @@
 <%@ include file="footer.jsp" %>
 </body>
 <script>
-	// 프로필 수정 페이지에 접속하면 프로필 소개의 글자수가 road되게(?)
+	// 프로필 수정 페이지에 접속하면 프로필 소개의 글자수가 load되게(?)
 	window.onload = () => {
 		if(document.getElementById('profileInto').value.length < 10) {
             document.getElementById('textLength').innerHTML = '00'+document.getElementById('profileInto').value.length;

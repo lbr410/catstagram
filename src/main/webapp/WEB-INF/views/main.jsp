@@ -103,9 +103,14 @@
 			                    <img src="/img/3dots.png" class="feed_detail_more_view_btn" data-bs-toggle="dropdown" aria-expanded="false">
 			                    <div class="dropdown-center">
 			                        <ul class="dropdown-menu dropdown-menu2">
-			                            <li><a class="dropdown-item menu_font" href="#">수정</a></li>
+			                            <li><a class="dropdown-item menu_font" href="/catstagram/feedUpdate?feed_idx=${mainFollowingFeed.feed_idx}">수정</a></li>
 			                            <li><hr class="dropdown-divider"></li>
-			                            <li><a class="dropdown-item menu_font" href="#">삭제</a></li>
+		                            	<li>
+			                            	<form id="feedDelForm${mainFollowingFeed.feed_idx}" action="/catstagram/feedDel" method="post">
+		                            			<input type="hidden" name="feed_idx" value="${mainFollowingFeed.feed_idx}">
+		                            			<a class="dropdown-item menu_font" onclick="feedDel(${mainFollowingFeed.feed_idx})">삭제</a>
+		                            		</form>
+	                            		</li>
 			                        </ul>
 			                    </div>
 			                </div>
@@ -549,6 +554,10 @@
     	XHR.open('POST', 'feedCommentDel', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('comment_idx='+comment_idx);
+    }
+    
+    function feedDel(feed_idx) {
+    	document.getElementById('feedDelForm'+feed_idx).submit();
     }
 </script>
 </html>
