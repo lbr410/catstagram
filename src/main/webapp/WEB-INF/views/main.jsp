@@ -498,7 +498,7 @@
 				
 				let heartImgElement2 = document.createElement('img');
 				heartImgElement2.src = '/img/heart.png';
-				heartImgElement2.classList.add('feed_comment_icon_heart_img3');
+				heartImgElement2.classList.add('feed_comment_icon_heart_img');
 				heartImgElement2.id = 'previewCommentHeart'+result[result.length-1].comment_idx;
 				heartImgElement2.onclick = () => {
 					feedCommentLike(result[result.length-1].comment_idx);
