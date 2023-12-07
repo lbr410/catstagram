@@ -29,4 +29,23 @@
 	<delete id="feedCommentDel" parameterType="Integer">
 		delete from catstagram_comment where comment_idx = #{comment_idx}
 	</delete>
+	
+	<!-- 피드 댓글 좋아요수 증가 -->
+	<update id="feedCommentLikeCountPlus" parameterType="Integer">
+		update catstagram_comment
+		set comment_like_count = comment_like_count + 1
+		where comment_idx = #{comment_idx}
+	</update>
+	
+	<!-- 피드 댓글 좋아요수 감소 -->
+	<update id="feedCommentLikeCountMinus" parameterType="Integer">
+		update catstagram_comment
+		set comment_like_count = comment_like_count - 1
+		where comment_idx = #{comment_idx}
+	</update>
+	
+	<!-- 피드 댓글 좋아요수 -->
+	<select id="feedCommentLikeCount" parameterType="Integer" resultType="Integer">
+		select comment_like_count from catstagram_comment where comment_idx = #{comment_idx}
+	</select>
 </mapper>

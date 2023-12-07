@@ -9,16 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.catstagram.comment.model.CommentDTO;
 import com.catstagram.comment.service.CommentService;
+import com.catstagram.commentLike.model.CommentLikeDTO;
+import com.catstagram.commentLike.service.CommentLikeService;
 
 @Controller
 public class CommentController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private CommentLikeService commentLikeService;
 	
 	// 피드(게시글) 댓글 작성
 	@ResponseBody
@@ -38,7 +42,6 @@ public class CommentController {
 			e.printStackTrace();
 		}
 		
-		
 		List<CommentDTO> list = null;
 		try {
 			list = commentService.feedCommentList(feed_idx);
@@ -56,6 +59,12 @@ public class CommentController {
 				} else if(list.get(i).getComment_date_minute() >= 10080) {
 					list.get(i).setComment_date_time((int)Math.floor(list.get(i).getComment_date_minute()/10080)+"주");
 				}
+				
+				// 내가 이 댓글에 좋아요를 눌렀는지에 대한 여부
+				CommentLikeDTO cldto = new CommentLikeDTO();
+				cldto.setComment_idx(list.get(i).getComment_idx());
+				cldto.setMember_idx(sidx);
+				list.get(i).setComment_like_idx(commentLikeService.feedLikeCommentYN(cldto));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,5 +83,49 @@ public class CommentController {
 		}
 		
 		return "main";
+	}
+	
+	// 피드 댓글 좋아요
+	@ResponseBody
+	@PostMapping("/catstagram/likeFeedComment")
+	public int likeFeedComment(@RequestParam("comment_idx") int comment_idx, HttpSession session) {
+		int sidx = (Integer)session.getAttribute("sidx");
+		CommentLikeDTO dto = new CommentLikeDTO();
+		dto.setComment_idx(comment_idx);
+		dto.setMember_idx(sidx);
+		
+		int commentLikeCount = 0;
+		
+		try {
+			commentLikeService.likeFeedComment(dto);
+			commentService.feedCommentLikeCountPlus(comment_idx);
+			commentLikeCount = commentService.feedCommentLikeCount(comment_idx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return commentLikeCount;
+	}
+	
+	// 피드 댓글 좋아요 취소
+	@ResponseBody
+	@PostMapping("/catstagram/likeFeedCommentCancel")
+	public int likeFeedCommentCancel(@RequestParam("comment_idx") int comment_idx, HttpSession session) {
+		int sidx = (Integer)session.getAttribute("sidx");
+		CommentLikeDTO dto = new CommentLikeDTO();
+		dto.setComment_idx(comment_idx);
+		dto.setMember_idx(sidx);
+		
+		int commentLikeCount = 0;
+		
+		try {
+			commentLikeService.likeFeedCommentCancel(dto);
+			commentService.feedCommentLikeCountMinus(comment_idx);
+			commentLikeCount = commentService.feedCommentLikeCount(comment_idx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return commentLikeCount;
 	}
 }

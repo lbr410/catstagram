@@ -24,4 +24,5 @@ public class CommentDTO {
 	private String member_img;
 	private int comment_date_minute;
 	private String comment_date_time;
+	private Integer comment_like_idx; // 내가 이 댓글에 좋아요를 눌렀는지 여부를 알기 위한 변수
 }

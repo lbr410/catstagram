@@ -73,7 +73,17 @@
 			                	<img src="/img/trash.png" class="feed_comment_icon_trash_img"
 			                	onclick="feedCommentDel(${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_idx})">
 			                </c:if>
-			                <img src="/img/heart.png" class="feed_comment_icon_heart_img">
+			                <!-- 미리보기 댓글 좋아요 / 주석 나중에 지우기 -->
+			                <c:if test="${empty mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_like_idx}">
+				                <img src="/img/heart.png" class="feed_comment_icon_heart_img"
+				                id="previewCommentHeart${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_idx}"
+				                onclick="feedCommentLike(${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_idx})">
+			                </c:if>
+			                <c:if test="${!empty mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_like_idx}">
+				                <img src="/img/heart2.png" class="feed_comment_icon_heart_img"
+				                id="previewCommentHeartFull${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_idx}"
+				                onclick="feedCommentLikeCancel(${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_idx})">
+			                </c:if>
 			            </span>
 			        </c:if>
 			    </div>
@@ -158,16 +168,29 @@
 					                        <img src="/img/trash.png" class="feed_comment_icon_trash_img"
 					                        onclick="feedCommentDel(${feedContentList.comment_idx})">
 				                        </c:if>
-				                        <img src="/img/heart.png" class="feed_comment_icon_heart_img2">
+				                        <!-- 상세보기 댓글 좋아요 / 주석 나중에 지우기 -->
+				                        <c:if test="${empty feedContentList.comment_like_idx}">
+							                <img src="/img/heart.png" class="feed_comment_icon_heart_img2"
+					                        id="detailCommentHeart${feedContentList.comment_idx}"
+					                        onclick="feedCommentLike(${feedContentList.comment_idx})">
+						                </c:if>
+						                <c:if test="${!empty feedContentList.comment_like_idx}">
+							                <img src="/img/heart2.png" class="feed_comment_icon_heart_img2"
+							                id="detailCommentHeartFull${feedContentList.comment_idx}"
+							                onclick="feedCommentLikeCancel(${feedContentList.comment_idx})">
+						                </c:if>
 				                    </span>
 				                </div>
 				                <div class="feed_detail_comment_time_like_div" id="feedDetailCommentTimeLikeDiv${feedContentList.comment_idx}">
-				                    ${feedContentList.comment_date_time}&nbsp;&nbsp;좋아요 ${feedContentList.comment_like_count}개
+				                    	${feedContentList.comment_date_time}
+				                    <span id="detailCommentLikeSpan${feedContentList.comment_idx}">
+					                    <c:if test="${feedContentList.comment_like_count ne 0}">
+					                    	&nbsp;&nbsp;좋아요 ${feedContentList.comment_like_count}개
+					                    </c:if>
+				                    </span>
 				                </div>
 			                </c:forEach>
 			            </div>
-			            
-			            
 			
 			            <div class="feed_detail_comment_write_div">
 			                <div class="feed_detail_icon_div">
@@ -394,11 +417,9 @@
     function feedCommentInsertEnterKey(event, feed_idx, member_idx) {
     	let feedComment = document.getElementById('feedComment'+feed_idx).value;
         if(event.key == 'Enter') {
-            // 엔터 키가 눌렸을 때 수행할 동작
         	if(feedComment == '') {
         		window.alert('댓글을 입력해주세요.');
         	} else {
-        		//event.preventDefault(); // 폼 전송 방지
                 feedCommentInsert(feed_idx, feedComment, member_idx);
         	}
         }
@@ -418,11 +439,9 @@
     function feedDetailCommentInsertEnterKey(event, feed_idx, member_idx) {
     	let feedDetailComment = document.getElementById('feedDetailComment'+feed_idx).value;
         if(event.key == 'Enter') {
-            // 엔터 키가 눌렸을 때 수행할 동작
         	if(feedDetailComment == '') {
         		window.alert('댓글을 입력해주세요.');
         	} else {
-        		//event.preventDefault(); // 폼 전송 방지
                 feedCommentInsert(feed_idx, feedDetailComment, member_idx);
         	}
         }
@@ -438,7 +457,7 @@
     	}
     }
     
-    // 피드 댓글 달기
+    // 피드 댓글 달기 & 새로 댓글 목록 불러오기
     function feedCommentInsert(feed_idx, feedComment, member_idx) {
     	const XHR = new XMLHttpRequest();
     	XHR.onreadystatechange = function() {
@@ -479,7 +498,11 @@
 				
 				let heartImgElement2 = document.createElement('img');
 				heartImgElement2.src = '/img/heart.png';
-				heartImgElement2.classList.add('feed_comment_icon_heart_img2');
+				heartImgElement2.classList.add('feed_comment_icon_heart_img3');
+				heartImgElement2.id = 'previewCommentHeart'+result[result.length-1].comment_idx;
+				heartImgElement2.onclick = () => {
+					feedCommentLike(result[result.length-1].comment_idx);
+				}
 				commentSpan3.appendChild(heartImgElement2);
 				
 				feedCommentDiv.appendChild(commentSpan2);
@@ -537,8 +560,21 @@
     				}
     				
 					let heartImgElement = document.createElement('img');
-					heartImgElement.src = '/img/heart.png';
-					heartImgElement.classList.add('feed_comment_icon_heart_img2');
+					if(result[i].comment_like_idx == null) {
+						heartImgElement.src = '/img/heart.png';
+						heartImgElement.classList.add('feed_comment_icon_heart_img2');
+						heartImgElement.id = 'detailCommentHeart'+result[i].comment_idx;
+						heartImgElement.onclick = () => {
+							feedCommentLike(result[i].comment_idx);
+						}
+					} else {
+						heartImgElement.src = '/img/heart2.png';
+						heartImgElement.classList.add('feed_comment_icon_heart_img2');
+						heartImgElement.id = 'detailCommentHeartFull'+result[i].comment_idx;
+						heartImgElement.onclick = () => {
+							feedCommentLikeCancel(result[i].comment_idx);
+						}
+					}
     				commentIconSpan.appendChild(heartImgElement);
 
 					commentDiv.appendChild(commentSpan);
@@ -546,8 +582,14 @@
 
 					const commentTimeLikeDiv = document.createElement('div');
 					commentTimeLikeDiv.classList.add('feed_detail_comment_time_like_div');
-					commentTimeLikeDiv.innerHTML = result[i].comment_date_time + '&nbsp;&nbsp;좋아요 ' + result[i].comment_like_count +'개';
+					const detailCommentLikeSpan = document.createElement('span');
+					detailCommentLikeSpan.setAttribute('id', 'detailCommentLikeSpan'+result[i].comment_idx);
+					commentTimeLikeDiv.innerHTML = result[i].comment_date_time;
+					if(result[i].comment_like_count != 0) {
+						detailCommentLikeSpan.innerHTML = '&nbsp;&nbsp;&nbsp;좋아요 ' + result[i].comment_like_count +'개';
+					}
 					commentTimeLikeDiv.setAttribute('id', 'feedDetailCommentTimeLikeDiv'+result[i].comment_idx);
+					commentTimeLikeDiv.appendChild(detailCommentLikeSpan);
 
 					feedDetailContentCommentDiv.appendChild(commentDiv);
 					feedDetailContentCommentDiv.appendChild(commentTimeLikeDiv);
@@ -613,7 +655,7 @@
     			newPreviewFeedLike.classList = 'feed_icon_heart_img';
     			newPreviewFeedLike.id = 'previewHeartFull'+feed_idx;
     			newPreviewFeedLike.onclick = () => {
-    				likeFeedCancel(feed_idx); 			    
+    				likeFeedCancel(feed_idx);
     			}
     			newPreviewFeedLike.style.transition = 'transform 0.2s ease-in-out';
     			newPreviewFeedLike.style.transform = 'scale(1.2)';  // 커졌다가
@@ -693,6 +735,101 @@
     	XHR.open('POST', 'likeFeedCancel', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('feed_idx='+feed_idx);
+    }
+    
+    // 피드 댓글 좋아요
+    function feedCommentLike(comment_idx) {
+    	const XHR = new XMLHttpRequest();
+    	XHR.onreadystatechange = () => {
+    		if(XHR.readyState == 4 && XHR.status == 200) {
+    			const commentLikeCount = JSON.parse(XHR.responseText);
+
+    			// 좋아요 하트색 변경 & 좋아요수 증가 보이기
+    			// 미리보기 피드 댓글
+    			let oldPreviewFeedCommentLike = document.getElementById('previewCommentHeart'+comment_idx);
+    			let newPreviewFeedCommentLike = document.createElement('img');
+    			if(oldPreviewFeedCommentLike && newPreviewFeedCommentLike) {
+	    			newPreviewFeedCommentLike.src = '/img/heart2.png';
+	    			newPreviewFeedCommentLike.classList = 'feed_comment_icon_heart_img'; // 하트아이콘 css
+	    			newPreviewFeedCommentLike.id = 'previewCommentHeartFull'+comment_idx;
+	    			newPreviewFeedCommentLike.onclick = () => {
+	    				feedCommentLikeCancel(comment_idx);
+	    			}
+	    			newPreviewFeedCommentLike.style.transition = 'transform 0.2s ease-in-out';
+	    			newPreviewFeedCommentLike.style.transform = 'scale(1.2)';  // 커졌다가
+	    			setTimeout(() => {
+	    				newPreviewFeedCommentLike.style.transform = 'scale(1)';  // 다시 원래 크기로
+	    			}, 100);
+	    			
+	    			oldPreviewFeedCommentLike.parentNode.replaceChild(newPreviewFeedCommentLike, oldPreviewFeedCommentLike);
+    			}
+    			
+    			// 상세보기 피드 댓글
+    			let oldDetailFeedCommentLike = document.getElementById('detailCommentHeart'+comment_idx);
+    			let newDetailFeedCommentLike = document.createElement('img');
+    			newDetailFeedCommentLike.src = '/img/heart2.png';
+    			newDetailFeedCommentLike.classList = 'feed_comment_icon_heart_img2';
+    			newDetailFeedCommentLike.id = 'detailCommentHeartFull'+comment_idx;
+    			newDetailFeedCommentLike.onclick = () => {
+    				feedCommentLikeCancel(comment_idx);
+    			}
+    			newDetailFeedCommentLike.style.transition = 'transform 0.2s ease-in-out';
+    			newDetailFeedCommentLike.style.transform = 'scale(1.2)';  // 커졌다가
+    			setTimeout(() => {
+    				newDetailFeedCommentLike.style.transform = 'scale(1)';  // 다시 원래 크기로
+    			}, 100);
+    			oldDetailFeedCommentLike.parentNode.replaceChild(newDetailFeedCommentLike, oldDetailFeedCommentLike);
+    			
+    			document.getElementById('detailCommentLikeSpan'+comment_idx).innerHTML = '&nbsp;&nbsp;&nbsp;좋아요 '+commentLikeCount+'개';
+    			
+    		}
+    	}
+    	XHR.open('POST', 'likeFeedComment', true);
+    	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    	XHR.send('comment_idx='+comment_idx);
+    }
+    
+    // 피드 댓글 좋아요 취소
+    function feedCommentLikeCancel(comment_idx) {
+    	const XHR = new XMLHttpRequest();
+    	XHR.onreadystatechange = () => {
+    		if(XHR.readyState == 4 && XHR.status == 200) {
+				const commentLikeCount = JSON.parse(XHR.responseText);
+    			
+    			// 좋아요 하트색 변경 & 좋아요수 감소 보이기
+    			// 미리보기 피드 댓글
+    			let oldPreviewFeedCommentLike = document.getElementById('previewCommentHeartFull'+comment_idx);
+    			let newPreviewFeedCommentLike = document.createElement('img');
+    			if(oldPreviewFeedCommentLike && newPreviewFeedCommentLike) {
+	    			newPreviewFeedCommentLike.src = '/img/heart.png';
+	    			newPreviewFeedCommentLike.classList = 'feed_comment_icon_heart_img'; // 하트아이콘 css
+	    			newPreviewFeedCommentLike.id = 'previewCommentHeart'+comment_idx;
+	    			newPreviewFeedCommentLike.onclick = () => {
+	    				feedCommentLike(comment_idx);
+	    			}
+	    			oldPreviewFeedCommentLike.parentNode.replaceChild(newPreviewFeedCommentLike, oldPreviewFeedCommentLike);
+    			}
+    			
+    			// 상세보기 피드 댓글
+    			let oldDetailFeedCommentLike = document.getElementById('detailCommentHeartFull'+comment_idx);
+    			let newDetailFeedCommentLike = document.createElement('img');
+    			newDetailFeedCommentLike.src = '/img/heart.png';
+    			newDetailFeedCommentLike.classList = 'feed_comment_icon_heart_img2';
+    			newDetailFeedCommentLike.id = 'detailCommentHeart'+comment_idx;
+    			newDetailFeedCommentLike.onclick = () => {
+    				feedCommentLike(comment_idx);
+    			}
+    			oldDetailFeedCommentLike.parentNode.replaceChild(newDetailFeedCommentLike, oldDetailFeedCommentLike);
+    			if(commentLikeCount == 0) {
+    				document.getElementById('detailCommentLikeSpan'+comment_idx).innerHTML = '';
+    			} else {
+	    			document.getElementById('detailCommentLikeSpan'+comment_idx).innerHTML = '&nbsp;&nbsp;&nbsp;좋아요 '+commentLikeCount+'개';    				
+    			}
+    		}
+    	}
+    	XHR.open('POST', 'likeFeedCommentCancel', true);
+    	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    	XHR.send('comment_idx='+comment_idx);
     }
 </script>
 </html>

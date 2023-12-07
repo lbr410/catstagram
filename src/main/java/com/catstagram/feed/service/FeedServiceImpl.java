@@ -5,9 +5,11 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.catstagram.commentLike.model.CommentLikeDTO;
 import com.catstagram.etc.model.MainFollowingFeedDTO;
 import com.catstagram.feed.model.FeedDTO;
 import com.catstagram.feedLike.model.FeedLikeDTO;
+import com.catstagram.mapper.CommentLikeMapper;
 import com.catstagram.mapper.CommentMapper;
 import com.catstagram.mapper.FeedLikeMapper;
 import com.catstagram.mapper.FeedMapper;
@@ -23,6 +25,9 @@ public class FeedServiceImpl implements FeedService {
 	
 	@Autowired
 	private FeedLikeMapper feedLikeMapper;
+	
+	@Autowired
+	private CommentLikeMapper commentLikeMapper;
 	
 	// 메인 페이지에서 팔로잉(내가 친구 추가한 사람들)이 올린 피드 목록와 내가 쓴 피드
 	@Override
@@ -54,6 +59,12 @@ public class FeedServiceImpl implements FeedService {
 				} else if(dto.get(i).getFeed_comment_list().get(j).getComment_date_minute() >= 10080) {
 					dto.get(i).getFeed_comment_list().get(j).setComment_date_time((int)Math.floor(dto.get(i).getFeed_comment_list().get(j).getComment_date_minute()/10080)+"주");
 				}
+				
+				// 내가 이 댓글에 좋아요를 눌렀는지에 대한 여부
+				CommentLikeDTO cldto = new CommentLikeDTO();
+				cldto.setComment_idx(dto.get(i).getFeed_comment_list().get(j).getComment_idx());
+				cldto.setMember_idx(sidx);
+				dto.get(i).getFeed_comment_list().get(j).setComment_like_idx(commentLikeMapper.feedLikeCommentYN(cldto));
 			}
 		}
 		return dto;
