@@ -16,10 +16,10 @@
 <div class="follow_nav_div">
     <ul class="nav nav-underline">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/catstagram/follower">팔로워</a>
+            <a class="nav-link active" aria-current="page" href="/catstagram/account/follower">팔로워</a>
         </li>
         <li class="nav-item nav_bottom_border">
-            <a class="nav-link" href="/catstagram/following">팔로잉</a>
+            <a class="nav-link" href="/catstagram/account/following">팔로잉</a>
         </li>
     </ul>
 </div>
@@ -63,7 +63,7 @@
     			listItem.remove();
     		}
     	}
-    	XHR.open('POST', 'delFollower', true);
+    	XHR.open('POST', '/catstagram/account/delFollower', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('to='+member_idx);
     }

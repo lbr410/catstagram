@@ -11,7 +11,7 @@
 <script type="text/javascript" src="/js/xmlHttpRequest.js"></script>
 </head>
 <body>
-	<form class="signup_form" action="/catstagram/signup" method="post" onsubmit="return validation()">
+	<form class="signup_form" action="/catstagram/account/signup" method="post" onsubmit="return validation()">
 		<div class="title"><a href="/catstagram" class="title_msg">Catstagram</a></div>
 		<div class="signup_msg_div">친구들의 고양이 일상을 보려면 가입하세요.</div>
 		<div class="input_div">
@@ -41,7 +41,7 @@
 		const id = props.value;
 		const param = 'id='+id;
 		
-		sendRequest('idCheck', param, idChkCallBack, 'POST');
+		sendRequest('/catstagram/account/idCheck', param, idChkCallBack, 'POST');
 	}
 
 	function idChkCallBack() {

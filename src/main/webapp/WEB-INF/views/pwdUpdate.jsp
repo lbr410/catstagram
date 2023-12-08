@@ -15,7 +15,7 @@
 <div class="menu_title_div">
     <div class="menu_title">비밀번호 수정</div>
 </div>
-<form class="info_form" method="post" action="pwdUpdateOk" onsubmit="return validation()">
+<form class="info_form" method="post" action="/catstagram/account/pwdUpdateOk" onsubmit="return validation()">
     <div class="info_div">
         <span class="menu_span">비밀번호</span>
         <input type="password" name="member_pwd" id="userpwd" placeholder="비밀번호(8~12자 영문;숫자/특수문자 조합)" class="form-control form-control-sm input_textbox_deco" maxlength="12" oninput="pwdChk()" required> 
@@ -25,7 +25,7 @@
         <input type="password" id="userpwdchk" placeholder="비밀번호 확인" class="form-control form-control-sm input_textbox_deco" maxlength="12" oninput="pwdChk()" required> 
     </div>
     <div class="info_btn">
-        <input type="button" value="취소" onclick="javascript: location.href='/catstagram/infoUpdate'" class="btn btn-secondary info_cancel_btn">
+        <input type="button" value="취소" onclick="javascript: location.href='/catstagram/account/infoUpdate'" class="btn btn-secondary info_cancel_btn">
         <input type="submit" value="수정" class="btn btn-primary info_ok_btn">
     </div>
 </form>

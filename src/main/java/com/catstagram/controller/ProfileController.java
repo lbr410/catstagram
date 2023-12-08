@@ -23,7 +23,7 @@ public class ProfileController {
 	private MemberService memberService;
 	
 	// 프로필 수정 페이지로 이동 & 이미 저장된 프로필 불러오기
-	@GetMapping("/catstagram/profileUpdate")
+	@GetMapping("/catstagram/account/profileUpdate")
 	public ModelAndView profileUpdateForm(HttpSession session) {
 		Integer w_sidx = (Integer)session.getAttribute("sidx");
 		ModelAndView mav = new ModelAndView();
@@ -39,7 +39,7 @@ public class ProfileController {
 			mav.addObject("member_content", content);
 			mav.setViewName("profileUpdate");
 		} else {
-			mav.addObject("msg", "로그인 후 이용 가능합니다.");
+			mav.addObject("msg", "잘못된 접근입니다.");
 			mav.addObject("goUrl", "/catstagram");
 			mav.setViewName("msg/msg");	
 		}
@@ -47,7 +47,7 @@ public class ProfileController {
 	}
 	
 	// 프로필 수정
-	@PostMapping("/catstagram/profileUpdate")
+	@PostMapping("/catstagram/account/profileUpdate")
 	public String profileUpdate(Model model, MemberDTO dto, HttpSession session) {
 		int sidx = (Integer)session.getAttribute("sidx");
 		dto.setMember_idx(sidx);
@@ -60,12 +60,12 @@ public class ProfileController {
 		
 		String msg = result>0 ? "프로필을 수정하였습니다." : "프로필 수정 실패!";
 		model.addAttribute("msg", msg);
-		model.addAttribute("goUrl", "/catstagram/profileUpdate");
+		model.addAttribute("goUrl", "/catstagram/account/profileUpdate");
 		return "msg/msg";
 	}
 	
 	// 프로필 이미지 변경 팝업창 열기
-	@GetMapping("/catstagram/profileImgPopup")
+	@GetMapping("/catstagram/account/profileImgPopup")
 	public ModelAndView profileImgPopup(HttpSession session) {
 		Integer w_sidx = (Integer)session.getAttribute("sidx");
 		ModelAndView mav = new ModelAndView();
@@ -81,7 +81,7 @@ public class ProfileController {
 	}
 	
 	// 프로필 이미지 변경
-	@PostMapping("/catstagram/profileImgUpdate")
+	@PostMapping("/catstagram/account/profileImgUpdate")
 	public ModelAndView profileImgUpdate(HttpSession session, MultipartHttpServletRequest req) {
 		MultipartFile upl = req.getFile("member_img");
 		String upload = upl.getOriginalFilename();
@@ -143,20 +143,13 @@ public class ProfileController {
 		return mav;
 	}
 	
-	@GetMapping("/catstagram/profileImgUpdate")
-	public ModelAndView profileImgUpdateGet(HttpSession session) {
-		Integer w_sidx = (Integer)session.getAttribute("sidx");
+	@GetMapping("/catstagram/account/profileImgUpdate")
+	public ModelAndView profileImgUpdateGet() {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", "잘못된 접근입니다.");
+		mav.addObject("goUrl", "/catstagram");
+		mav.setViewName("msg/msg");
 		
-		if(w_sidx == null) {
-			mav.addObject("msg", "잘못된 접근입니다.");
-			mav.addObject("goUrl", "/catstagram");
-			mav.setViewName("msg/msg");
-		} else {
-			mav.addObject("msg", "잘못된 접근입니다.");
-			mav.addObject("goUrl", "/catstagram/main");
-			mav.setViewName("msg/msg");
-		}
 		return mav;
 	}
 }

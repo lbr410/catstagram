@@ -21,7 +21,7 @@ public class SignUpController {
 	private MemberService memberService;
 	
 	// 회원가입 페이지로 이동
-	@GetMapping("/catstagram/signup")
+	@GetMapping("/catstagram/account/signup")
 	public ModelAndView signUp(HttpSession session) {
 		Integer sidx = (Integer)session.getAttribute("sidx");
 		ModelAndView mav = new ModelAndView();
@@ -29,7 +29,7 @@ public class SignUpController {
 			mav.setViewName("signup");
 		} else {
 			mav.addObject("msg", "로그아웃 후 이동할 수 있습니다.");
-			mav.addObject("goUrl", "/catstagram/main");
+			mav.addObject("goUrl", "/catstagram");
 			mav.setViewName("msg/msg");
 		}
 		return mav;
@@ -37,7 +37,7 @@ public class SignUpController {
 	
 	// 아이디 중복 검사
 	@ResponseBody
-	@PostMapping("/catstagram/idCheck")
+	@PostMapping("/catstagram/account/idCheck")
 	public String idCheck(@RequestParam("id") String id) {
 		String member_id = null;
 		try {
@@ -49,25 +49,17 @@ public class SignUpController {
 		return member_id;
 	}
 	
-	@GetMapping("/catstagram/idCheck")
+	@GetMapping("/catstagram/account/idCheck")
 	public ModelAndView idCheckGet(HttpSession session) {
-		Integer w_sidx = (Integer)session.getAttribute("sidx");
 		ModelAndView mav = new ModelAndView();
-		
-		if(w_sidx == null) {
-			mav.addObject("msg", "잘못된 접근입니다.");
-			mav.addObject("goUrl", "/catstagram");
-			mav.setViewName("msg/msg");
-		} else {
-			mav.addObject("msg", "잘못된 접근입니다.");
-			mav.addObject("goUrl", "/catstagram/main");
-			mav.setViewName("msg/msg");
-		}
+		mav.addObject("msg", "잘못된 접근입니다.");
+		mav.addObject("goUrl", "/catstagram");
+		mav.setViewName("msg/msg");
 		return mav;
 	}
 
 	// 회원가입
-	@PostMapping("/catstagram/signup")
+	@PostMapping("/catstagram/account/signup")
 	public ModelAndView signup(MemberDTO dto) {
 		dto.setMember_pwd(Encryption.sha256(dto.getMember_pwd())); // 비밀번호 암호화
 		int result = 0;

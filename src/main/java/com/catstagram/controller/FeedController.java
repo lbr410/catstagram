@@ -31,13 +31,13 @@ public class FeedController {
 	private FeedLikeService feedLikeService;
 	
 	// 피드 등록 페이지로 이동
-	@GetMapping("/catstagram/feedWrite")
+	@GetMapping("/catstagram/account/feedWrite")
 	public ModelAndView feedWriteForm(HttpSession session) {
 		Integer w_sidx = (Integer)session.getAttribute("sidx");
 		ModelAndView mav = new ModelAndView();
 		
 		if(w_sidx == null) {
-			mav.addObject("msg", "로그인 후 이용 가능합니다.");
+			mav.addObject("msg", "잘못된 접근입니다.");
 			mav.addObject("goUrl", "/catstagram");
 			mav.setViewName("msg/msg");
 		} else {
@@ -47,7 +47,7 @@ public class FeedController {
 	}
 	
 	// 피드 등록
-	@PostMapping("/catstagram/feedWrite")
+	@PostMapping("/catstagram/account/feedWrite")
 	public ModelAndView feedWrite(HttpSession session, MultipartHttpServletRequest req) {
 		MultipartFile upl = req.getFile("feed_img");
 		String upload = upl.getOriginalFilename();
@@ -100,13 +100,13 @@ public class FeedController {
 		String msg = result>0 ? "피드 등록 완료!" : "피드 등록 실패!";
 		
 		mav.addObject("msg", msg);
-		mav.addObject("goUrl", "/catstagram/main");
+		mav.addObject("goUrl", "/catstagram");
 		mav.setViewName("msg/msg");
 		return mav;
 	}
 	
 	// 피드 수정 페이지로 이동
-	@GetMapping("/catstagram/feedUpdate")
+	@GetMapping("/catstagram/account/feedUpdate")
 	public ModelAndView feedUpdateForm(@RequestParam(value = "feed_idx", defaultValue = "0") int feed_idx, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Integer sidx = (Integer)session.getAttribute("sidx");
@@ -128,26 +128,20 @@ public class FeedController {
 			e.printStackTrace();
 		}
 
-		if(sidx != null) {
-			if(feed_idx_c != null && member_idx.equals(sidx)) {
-				mav.addObject("feedInfo", dto);
-				mav.setViewName("feedUpdate");
-			} else if(feed_idx_c == null || !member_idx.equals(sidx)) {
-				mav.addObject("msg", "잘못된 접근입니다.");
-				mav.addObject("goUrl", "/catstagram/main");
-				mav.setViewName("msg/msg");
-			}
-		} else {
-			mav.addObject("msg", "로그인 후 이용 가능합니다.");
+		if(feed_idx_c != null && member_idx.equals(sidx)) {
+			mav.addObject("feedInfo", dto);
+			mav.setViewName("feedUpdate");
+		} else if(feed_idx_c == null || !member_idx.equals(sidx) || sidx == null) {
+			mav.addObject("msg", "잘못된 접근입니다.");
 			mav.addObject("goUrl", "/catstagram");
-			mav.setViewName("msg/msg");	
+			mav.setViewName("msg/msg");
 		}
 		
 		return mav;
 	}
 	
 	// 피드 수정
-	@PostMapping("/catstagram/feedUpdate")
+	@PostMapping("/catstagram/account/feedUpdate")
 	public ModelAndView feedUpdate(FeedDTO dto) {
 		int result = 0;
 		try {
@@ -159,14 +153,14 @@ public class FeedController {
 		ModelAndView mav = new ModelAndView();
 		String msg = result>0 ? "피드를 수정하였습니다." : "피드 수정 실패!";
 		mav.addObject("msg", msg);
-		mav.addObject("goUrl", "/catstagram/main");
+		mav.addObject("goUrl", "/catstagram");
 		mav.setViewName("msg/msg");
 		
 		return mav;
 	}
 	
 	// 피드 삭제
-	@PostMapping("/catstagram/feedDel")
+	@PostMapping("/catstagram/account/feedDel")
 	public ModelAndView feedDel(@RequestParam("feed_idx") int feed_idx) {
 		int result = 0;
 		try {
@@ -177,31 +171,24 @@ public class FeedController {
 		ModelAndView mav = new ModelAndView();
 		String msg = result>0 ? "피드가 삭제되었습니다." : "피드 삭제 실패!";
 		mav.addObject("msg", msg);
-		mav.addObject("goUrl", "/catstagram/main");
+		mav.addObject("goUrl", "/catstagram");
 		mav.setViewName("msg/msg");
 		return mav;
 	}
 
-	@GetMapping("/catstagram/feedDel")
-	public ModelAndView feedDelGet(HttpSession session) {
-		Integer w_sidx = (Integer)session.getAttribute("sidx");
+	@GetMapping("/catstagram/account/feedDel")
+	public ModelAndView feedDelGet() {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", "잘못된 접근입니다.");
+		mav.addObject("goUrl", "/catstagram");
+		mav.setViewName("msg/msg");
 		
-		if(w_sidx == null) {
-			mav.addObject("msg", "잘못된 접근입니다.");
-			mav.addObject("goUrl", "/catstagram");
-			mav.setViewName("msg/msg");
-		} else {
-			mav.addObject("msg", "잘못된 접근입니다.");
-			mav.addObject("goUrl", "/catstagram/main");
-			mav.setViewName("msg/msg");
-		}
 		return mav;
 	}
 	
 	// 피드 좋아요
 	@ResponseBody
-	@PostMapping("/catstagram/likeFeed")
+	@PostMapping("/catstagram/account/likeFeed")
 	public int likeFeed(@RequestParam("feed_idx") int feed_idx, HttpSession session) {
 		int sidx = (Integer)session.getAttribute("sidx");
 		FeedLikeDTO dto = new FeedLikeDTO();
@@ -222,7 +209,7 @@ public class FeedController {
 	
 	// 피드 좋아요 취소
 	@ResponseBody
-	@PostMapping("/catstagram/likeFeedCancel")
+	@PostMapping("/catstagram/account/likeFeedCancel")
 	public int likeFeedCancel(@RequestParam("feed_idx") int feed_idx, HttpSession session) {
 		int sidx = (Integer)session.getAttribute("sidx");
 		FeedLikeDTO dto = new FeedLikeDTO();

@@ -15,7 +15,7 @@
 <div class="menu_title_div">
     <div class="menu_title">회원 정보 수정</div>
 </div>
-<form class="info_form" method="post" action="infoUpdate" onsubmit="return validation()">
+<form class="info_form" method="post" action="/catstagram/account/infoUpdate" onsubmit="return validation()">
     <div class="info_div">
         <span class="menu_span">성명</span>
         <input type="text" name="member_name" placeholder="성명" value="${sessionScope.sname}" class="form-control form-control-sm input_textbox_deco" maxlength="30" required> 
@@ -25,12 +25,12 @@
         <input type="text" id="userid" name="member_id" placeholder="아이디(영문 또는 숫자 또는 .,_,. 기호)" value="${sessionScope.sid}" class="form-control form-control-sm input_textbox_deco" maxlength="30" oninput="idChk(this)" required> 
     </div>
     <div class="info_btn">
-        <input type="button" value="취소" class="btn btn-secondary info_cancel_btn" onclick="javascript: location.href='/catstagram/main'">
+        <input type="button" value="취소" class="btn btn-secondary info_cancel_btn" onclick="javascript: location.href='/catstagram'">
         <input type="submit" value="수정" class="btn btn-primary info_ok_btn">
     </div>
     <div class="update_quit_div">
-		<span class="pwd_update_btn" onclick="javascript: location.href='/catstagram/pwdUpdate?page=p'">비밀번호 수정하기</span>
-		<span class="quit_btn" onclick="javascript: location.href='/catstagram/quit?page=q'">회원탈퇴</span>
+		<span class="pwd_update_btn" onclick="javascript: location.href='/catstagram/account/pwdUpdate?page=p'">비밀번호 수정하기</span>
+		<span class="quit_btn" onclick="javascript: location.href='/catstagram/account/quit?page=q'">회원탈퇴</span>
 	</div>
 </form>
 <%@ include file="footer.jsp" %>
@@ -41,7 +41,7 @@
 		const id = props.value;
 		const param = 'id='+id;
 		
-		sendRequest('idCheck', param, idChkCallBack, 'POST');
+		sendRequest('/catstagram/account/idCheck', param, idChkCallBack, 'POST');
 	}
 
     function idChkCallBack() {

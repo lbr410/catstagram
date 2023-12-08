@@ -12,7 +12,7 @@
 <script type="text/javascript" src="/js/xmlHttpRequest.js"></script>
 </head>
 <body>
-	<form class="login_form" action="/catstagram/login" method="post">
+	<form class="login_form" action="/catstagram/account/login" method="post">
 		<div class="title"><a href="/catstagram" class="title_msg">Catstagram</a></div>
 		<div class="id_input_div">
 			<input type="text" name="member_id" id="userid" placeholder="아이디" class="form-control mx-auto form-control-sm id_input" maxlength="30" value="${cookie.saveid.value}" required>
@@ -38,7 +38,7 @@
 		<!-- <div class="pwd_result_div" id="pwd_result"></div> -->
 	</form>
 	<div class="signup_div">
-		계정이 필요하신가요? <a class="signup_btn" onclick="javascript: location.href='/catstagram/signup'">가입하기</a>
+		계정이 필요하신가요? <a class="signup_btn" onclick="javascript: location.href='/catstagram/account/signup'">가입하기</a>
 	</div>
 	<%@ include file="footer.jsp" %>
 </body>

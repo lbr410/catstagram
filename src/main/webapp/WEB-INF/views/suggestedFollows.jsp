@@ -96,7 +96,7 @@
     			}
     		}
     	}
-    	XHR.open('POST', 'following', true);
+    	XHR.open('POST', '/catstagram/account/following', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('to='+member_idx);
     }
@@ -104,7 +104,7 @@
     // 팔로잉 취소(친구삭제)
     function cancelFollowing(member_idx) {
     	const param = 'to='+member_idx;
-    	sendRequest('cancelFollowing', param, cancelFollowingCallBack, 'POST');
+    	sendRequest('/catstagram/account/cancelFollowing', param, cancelFollowingCallBack, 'POST');
     }
     
     function cancelFollowingCallBack() {

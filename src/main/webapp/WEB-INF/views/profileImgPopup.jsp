@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/css/profileImgPopup.css">
 </head>
 <body>
-    <form class="profile_img_div" action="/catstagram/profileImgUpdate" method="post" onsubmit="return validation()" enctype="multipart/form-data">
+    <form class="profile_img_div" action="/catstagram/account/profileImgUpdate" method="post" onsubmit="return validation()" enctype="multipart/form-data">
         <div class="profile_img_update_div">
         	<c:if test="${empty sessionScope.simg}">
         		<img src="/img/default_photo2.png" class="profile_update_img" id="profileImgPreview">

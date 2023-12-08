@@ -16,7 +16,7 @@
     <div class="menu_title">프로필 수정</div>
 </div>
 
-<form class="profile_update_div" action="/catstagram/profileUpdate" method="post">
+<form class="profile_update_div" action="/catstagram/account/profileUpdate" method="post">
     <div class="profile_update_img_div">
     	<c:if test="${empty sessionScope.simg}">
         	<img src="/img/default_photo2.png" class="profile_update_img" id="profileImgPreview">
@@ -29,7 +29,7 @@
         <textarea class="profile_update_content_textarea" id="profileInto" name="member_intro" maxlength="100" oninput="textCheck()" placeholder="소개 입력...">${member_content}</textarea>
         <div class="textCount">(<span id="textLength">000</span> / 100)</div>
         <div class="profile_update_btn_div">
-            <input type="button" value="취소" class="btn btn-secondary profile_update_cancel_btn" onclick="javascript: location.href='/catstagram/main'">
+            <input type="button" value="취소" class="btn btn-secondary profile_update_cancel_btn" onclick="javascript: location.href='/catstagram'">
             <input type="submit" value="수정" class="btn btn-primary profile_update_btn">
         </div>
     </div>
@@ -64,7 +64,7 @@
     
     // 프로필 이미지 수정 팝업
     function profileImgPopup() {
-        window.open('/catstagram/profileImgPopup', 'popup', 'width=500, height=500');
+        window.open('/catstagram/account/profileImgPopup', 'popup', 'width=500, height=500');
     }
 </script>
 </html>

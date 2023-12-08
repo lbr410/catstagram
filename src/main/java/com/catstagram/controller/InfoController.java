@@ -22,7 +22,7 @@ public class InfoController {
 	private MemberService memberService;
 	
 	// 회원 정보 수정 페이지로 이동
-	@GetMapping("catstagram/infoUpdate")
+	@GetMapping("catstagram/account/infoUpdate")
 	public ModelAndView infoUpdateForm(HttpSession session) {
 		Integer w_sidx = (Integer)session.getAttribute("sidx");
 		ModelAndView mav = new ModelAndView();
@@ -38,7 +38,7 @@ public class InfoController {
 	}
 	
 	// 회원 정보 수정
-	@PostMapping("/catstagram/infoUpdate")
+	@PostMapping("/catstagram/account/infoUpdate")
 	public ModelAndView infoUpdate(MemberDTO dto, HttpSession session) {
 		int sidx = (Integer)session.getAttribute("sidx");
 		
@@ -64,7 +64,7 @@ public class InfoController {
 	}
 	
 	// 비밀번호 확인 페이지(비밀번호 수정)
-	@GetMapping("/catstagram/pwdUpdate")
+	@GetMapping("/catstagram/account/pwdUpdate")
 	public ModelAndView pwdChkFormForPwdUpdate(@RequestParam(value = "page", defaultValue = "") String page,
 								   HttpSession session) {
 		Integer sidx = (Integer)session.getAttribute("sidx");
@@ -73,24 +73,17 @@ public class InfoController {
 		if(!page.equals("") && page.equals("p") && page != null && sidx != null) {
 			mav.addObject("page", page);
 			mav.setViewName("pwdChk");
-		} else if(page.equals("") || page == null || !page.equals("p")) {
-			if(sidx != null) { // 로그인한 상태
-				mav.addObject("goUrl", "/catstagram/main");
-			} else { // 로그인하지 않은 상태
-				mav.addObject("goUrl", "/catstagram"); 
-			}
+		} else if(page.equals("") || page == null || !page.equals("p") || sidx == null) {
 			mav.addObject("msg", "잘못된 접근입니다.");
-			mav.setViewName("msg/msg");
-		} else if(sidx == null) {
-			mav.addObject("msg", "로그인 후 이용 가능합니다.");
 			mav.addObject("goUrl", "/catstagram"); 
 			mav.setViewName("msg/msg");
 		}
+
 		return mav;
 	}
 	
 	// 비밀번호 확인 페이지(회원탈퇴)
-	@GetMapping("/catstagram/quit")
+	@GetMapping("/catstagram/account/quit")
 	public ModelAndView pwdChkFormForQuit(@RequestParam(value = "page", defaultValue = "") String page,
 								   HttpSession session) {
 		Integer sidx = (Integer)session.getAttribute("sidx");
@@ -99,24 +92,17 @@ public class InfoController {
 		if(!page.equals("") && page.equals("q") && page != null && sidx != null) {
 			mav.addObject("page", page);
 			mav.setViewName("pwdChk");
-		} else if(page.equals("") || page == null || !page.equals("q")) {
-			if(sidx != null) { // 로그인한 상태
-				mav.addObject("goUrl", "/catstagram/main");
-			} else { // 로그인하지 않은 상태
-				mav.addObject("goUrl", "/catstagram"); 
-			}
+		} else if(page.equals("") || page == null || !page.equals("q") || sidx == null) {
+			mav.addObject("goUrl", "/catstagram");
 			mav.addObject("msg", "잘못된 접근입니다.");
 			mav.setViewName("msg/msg");
-		} else if(sidx == null) {
-			mav.addObject("msg", "로그인 후 이용 가능합니다.");
-			mav.addObject("goUrl", "/catstagram"); 
-			mav.setViewName("msg/msg");
 		}
+
 		return mav;
 	}
 	
 	// 비밀번호 확인
-	@PostMapping({"/catstagram/pwdUpdate", "/catstagram/quit"})
+	@PostMapping({"/catstagram/account/pwdUpdate", "/catstagram/account/quit"})
 	public ModelAndView pwdChk(@RequestParam(value = "page", defaultValue = "") String page,
 						 	   @RequestParam("member_pwd") String member_pwd, HttpSession session) {
 		Integer sidx = (Integer)session.getAttribute("sidx");
@@ -136,11 +122,7 @@ public class InfoController {
 					mav.setViewName("quit");
 				}
 			} else if(page.equals("") || page == null) {
-				if(sidx != null) { // 로그인한 상태
-					mav.addObject("goUrl", "/catstagram/main");
-				} else { // 로그인하지 않은 상태
-					mav.addObject("goUrl", "/catstagram"); 
-				}
+				mav.addObject("goUrl", "/catstagram");
 				mav.addObject("msg", "잘못된 접근입니다.");
 				mav.setViewName("msg/msg");
 			}
@@ -152,7 +134,7 @@ public class InfoController {
 	}
 	
 	// 비밀번호 변경
-	@PostMapping("/catstagram/pwdUpdateOk")
+	@PostMapping("/catstagram/account/pwdUpdateOk")
 	public ModelAndView pwdUpdateOk(@RequestParam("member_pwd") String pwd, HttpSession session) {
 		int sidx = (Integer)session.getAttribute("sidx");
 		MemberDTO dto = new MemberDTO();
@@ -167,30 +149,22 @@ public class InfoController {
 		String msg = result>0 ? "비밀번호가 수정되었습니다." : "비밀번호 수정 실패!";
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", msg);
-		mav.addObject("goUrl", "/catstagram/main");
+		mav.addObject("goUrl", "/catstagram");
 		mav.setViewName("msg/msg");
 		return mav;
 	}
 	
-	@GetMapping("/catstagram/pwdUpdateOk")
-	public ModelAndView pwdUpdateOkGet(HttpSession session) {
-		Integer w_sidx = (Integer)session.getAttribute("sidx");
+	@GetMapping("/catstagram/account/pwdUpdateOk")
+	public ModelAndView pwdUpdateOkGet() {
 		ModelAndView mav = new ModelAndView();
-		
-		if(w_sidx == null) {
-			mav.addObject("msg", "잘못된 접근입니다.");
-			mav.addObject("goUrl", "/catstagram");
-			mav.setViewName("msg/msg");
-		} else {
-			mav.addObject("msg", "잘못된 접근입니다.");
-			mav.addObject("goUrl", "/catstagram/main");
-			mav.setViewName("msg/msg");
-		}
+		mav.addObject("msg", "잘못된 접근입니다.");
+		mav.addObject("goUrl", "/catstagram");
+		mav.setViewName("msg/msg");
 		return mav;
 	}
 	
 	// 회원탈퇴
-	@PostMapping("/catstagram/quitOk")
+	@PostMapping("/catstagram/account/quitOk")
 	public ModelAndView quitOk(HttpSession session, HttpServletResponse resp) {
 		int sidx = (Integer)session.getAttribute("sidx");
 		String sid = (String)session.getAttribute("sid");
@@ -224,26 +198,18 @@ public class InfoController {
 		} else {
 			msg = "회원탈퇴 실패!";
 			mav.addObject("msg", msg);
-			mav.addObject("goUrl", "/catstagram/main");
+			mav.addObject("goUrl", "/catstagram");
 			mav.setViewName("msg/msg");
 		}
 		return mav;
 	}
 	
-	@GetMapping("/catstagram/quitOk")
-	public ModelAndView quitOkGet(HttpSession session) {
-		Integer w_sidx = (Integer)session.getAttribute("sidx");
+	@GetMapping("/catstagram/account/quitOk")
+	public ModelAndView quitOkGet() {
 		ModelAndView mav = new ModelAndView();
-		
-		if(w_sidx == null) {
-			mav.addObject("msg", "잘못된 접근입니다.");
-			mav.addObject("goUrl", "/catstagram");
-			mav.setViewName("msg/msg");
-		} else {
-			mav.addObject("msg", "잘못된 접근입니다.");
-			mav.addObject("goUrl", "/catstagram/main");
-			mav.setViewName("msg/msg");
-		}
+		mav.addObject("msg", "잘못된 접근입니다.");
+		mav.addObject("goUrl", "/catstagram");
+		mav.setViewName("msg/msg");
 		return mav;
 	}
 }

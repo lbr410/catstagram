@@ -10,20 +10,20 @@
 </head>
 <body class="header_body">
 	<div class="header_div">
-		<a href="/catstagram/main">
+		<a href="/catstagram">
 			<div class="logo_div">
 				<img src="/img/logo.png" class="logo_img">
 				<span class="logo_title">Catstagram</span>
 			</div>
 		</a>
-		<form action="/catstagram/search" method="get" class="search_div">
+		<form action="/catstagram/account/search" method="get" class="search_div">
 			<input type="text" class="search_input" name="id" placeholder="검색" maxlength="30" required>
 			<input type="submit" value="" class="search-btn">
 		</form>
 		<div class="menu_div">
-			<img src="/img/home.png" class="menu_img" onclick="javascript: location.href='/catstagram/main'">
+			<img src="/img/home.png" class="menu_img" onclick="javascript: location.href='/catstagram'">
 			<img src="/img/dm.png" class="menu_img">
-			<img src="/img/feed.png" class="menu_img" onclick="javascript: location.href='/catstagram/feedWrite'">
+			<img src="/img/feed.png" class="menu_img" onclick="javascript: location.href='/catstagram/account/feedWrite'">
 			
 			<span class="position-relative">
 				<img src="/img/heart.png" class="menu_img">
@@ -41,9 +41,9 @@
 				<ul class="dropdown-menu dropdown-menu-end">
 					<li><a class="dropdown-item menu_font" href="#">My Catstagram</a></li>
 					<li><hr class="dropdown-divider"></li>
-				    <li><a class="dropdown-item menu_font" href="/catstagram/infoUpdate">회원 정보 수정</a></li>
+				    <li><a class="dropdown-item menu_font" href="/catstagram/account/infoUpdate">회원 정보 수정</a></li>
 				    <li><hr class="dropdown-divider"></li>
-				    <li><a class="dropdown-item menu_font" href="logout">로그아웃</a></li>
+				    <li><a class="dropdown-item menu_font" href="/catstagram/account/logout">로그아웃</a></li>
 				</ul>
 			</div>
 		</div>

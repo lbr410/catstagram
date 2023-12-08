@@ -28,7 +28,7 @@ public class FollowController {
 	
 	// 팔로잉(친구추가)
 	@ResponseBody
-	@PostMapping("/catstagram/following")
+	@PostMapping("/catstagram/account/following")
 	public int following(@RequestParam("to") int to, HttpSession session) {
 		FollowDTO dto = new FollowDTO();
 		int sidx = (Integer)session.getAttribute("sidx");
@@ -46,7 +46,7 @@ public class FollowController {
 	
 	// 팔로잉 취소(친구삭제)
 	@ResponseBody
-	@PostMapping("/catstagram/cancelFollowing")
+	@PostMapping("/catstagram/account/cancelFollowing")
 	public int cancelFollowing(@RequestParam("to") int to, HttpSession session) {
 		FollowDTO dto = new FollowDTO();
 		int sidx = (Integer)session.getAttribute("sidx");
@@ -63,13 +63,13 @@ public class FollowController {
 	}
 	
 	// 팔로워 목록 페이지(나를 친구 추가한 사람)
-	@GetMapping("/catstagram/follower")
+	@GetMapping("/catstagram/account/follower")
 	public ModelAndView followerForm(HttpSession session) {
 		Integer w_sidx = (Integer)session.getAttribute("sidx");
 		ModelAndView mav = new ModelAndView();
 		
 		if(w_sidx == null) {
-			mav.addObject("msg", "로그인 후 이용 가능합니다.");
+			mav.addObject("msg", "잘못된 접근입니다.");
 			mav.addObject("goUrl", "/catstagram");
 			mav.setViewName("msg/msg");
 		} else {
@@ -82,7 +82,7 @@ public class FollowController {
 	}
 	
 	// 나를 팔로워한(친구 추가한) 사람을 팔로워 목록에서 삭제하기
-	@PostMapping("/catstagram/delFollower")
+	@PostMapping("/catstagram/account/delFollower")
 	public String delFollower(@RequestParam("to") int member_idx, HttpSession session) {
 		int sidx = (Integer)session.getAttribute("sidx");
 		try {
@@ -94,13 +94,13 @@ public class FollowController {
 	}
 	
 	// 팔로잉 목록 페이지(내가 친구 추가한 사람)
-	@GetMapping("/catstagram/following")
+	@GetMapping("/catstagram/account/following")
 	public ModelAndView followingForm(HttpSession session) {
 		Integer w_sidx = (Integer)session.getAttribute("sidx");
 		ModelAndView mav = new ModelAndView();
 		
 		if(w_sidx == null) {
-			mav.addObject("msg", "로그인 후 이용 가능합니다.");
+			mav.addObject("msg", "잘못된 접근입니다.");
 			mav.addObject("goUrl", "/catstagram");
 			mav.setViewName("msg/msg");
 		} else {
@@ -113,13 +113,13 @@ public class FollowController {
 	}
 	
 	// 팔로우 추천 페이지
-	@GetMapping("/catstagram/suggestedFollows")
+	@GetMapping("/catstagram/account/suggestedFollows")
 	public ModelAndView suggestedFollows(HttpSession session) {
 		Integer w_sidx = (Integer)session.getAttribute("sidx");
 		ModelAndView mav = new ModelAndView();
 		
 		if(w_sidx == null) {
-			mav.addObject("msg", "로그인 후 이용 가능합니다.");
+			mav.addObject("msg", "잘못된 접근입니다.");
 			mav.addObject("goUrl", "/catstagram");
 			mav.setViewName("msg/msg");
 		} else {

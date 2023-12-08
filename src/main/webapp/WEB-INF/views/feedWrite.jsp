@@ -15,7 +15,7 @@
     <div class="menu_title">피드 작성</div>
 </div>
 
-<form class="feed_write_div" action="/catstagram/feedWrite" method="post" enctype="multipart/form-data">
+<form class="feed_write_div" action="/catstagram/account/feedWrite" method="post" enctype="multipart/form-data">
     <div class="feed_write_img_div">
         <img src="/img/preview.png" class="feed_write_img" id="feedImgPreview">
     </div>
@@ -26,7 +26,7 @@
         <div class="textCount">(<span id="textLength">000</span> / 500)</div>
 
         <div class="feed_write_btn_div">
-            <input type="button" value="취소" class="btn btn-secondary feed_write_cancel_btn" onclick="javascript: location.href='/catstagram/main'">
+            <input type="button" value="취소" class="btn btn-secondary feed_write_cancel_btn" onclick="javascript: location.href='/catstagram'">
             <input type="submit" value="등록" class="btn btn-primary feed_write_btn">
         </div>
     </div>

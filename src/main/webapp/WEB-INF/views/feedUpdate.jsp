@@ -15,7 +15,7 @@
     <div class="menu_title">피드 수정</div>
 </div>
 
-<form class="feed_write_div" action="feedUpdate" method="post">
+<form class="feed_write_div" action="/catstagram/account/feedUpdate" method="post">
     <div class="feed_write_img_div">
         <img src="/upload/feed/${feedInfo.feed_img}" class="feed_write_img" id="feedImgPreview">
     </div>
@@ -23,7 +23,7 @@
         <textarea class="feed_write_content_textarea" id="feedWriteContent" name="feed_content" maxlength="500" oninput="textCheck()" required>${feedInfo.feed_content}</textarea>
         <div class="textCount">(<span id="textLength">000</span> / 500)</div>
         <div class="feed_write_btn_div">
-            <input type="button" value="취소" class="btn btn-secondary feed_write_cancel_btn" onclick="javascript: location.href='/catstagram/main'">
+            <input type="button" value="취소" class="btn btn-secondary feed_write_cancel_btn" onclick="javascript: location.href='/catstagram'">
             <input type="submit" value="수정" class="btn btn-primary feed_write_btn">
         </div>
     </div>

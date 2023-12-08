@@ -16,10 +16,10 @@
 <div class="follow_nav_div">
     <ul class="nav nav-underline">
         <li class="nav-item nav_bottom_border">
-            <a class="nav-link" href="/catstagram/follower">팔로워</a>
+            <a class="nav-link" href="/catstagram/account/follower">팔로워</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/catstagram/following">팔로잉</a>
+            <a class="nav-link active" aria-current="page" href="/catstagram/account/following">팔로잉</a>
         </li>
         
     </ul>
@@ -86,7 +86,7 @@
     			}
     		}
     	}
-    	XHR.open('POST', 'following', true);
+    	XHR.open('POST', '/catstagram/account/following', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('to='+member_idx);
     }
@@ -94,7 +94,7 @@
     // 팔로잉 취소(친구삭제)
     function cancelFollowing(member_idx) {
     	const param = 'to='+member_idx;
-    	sendRequest('cancelFollowing', param, cancelFollowingCallBack, 'POST');
+    	sendRequest('/catstagram/account/cancelFollowing', param, cancelFollowingCallBack, 'POST');
     }
     
     function cancelFollowingCallBack() {

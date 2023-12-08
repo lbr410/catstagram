@@ -26,7 +26,7 @@ public class CommentController {
 	
 	// 피드(게시글) 댓글 작성
 	@ResponseBody
-	@PostMapping("/catstagram/feedCommentInsert")
+	@PostMapping("/catstagram/account/feedCommentInsert")
 	public List<CommentDTO> feedCommentInsert(@RequestParam("feed_idx") int feed_idx,
 										  @RequestParam("comment_content") String comment_content,
 										  HttpSession session) {
@@ -74,7 +74,7 @@ public class CommentController {
 	}
 	
 	// 피드(게시글) 댓글 삭제
-	@PostMapping("/catstagram/feedCommentDel")
+	@PostMapping("/catstagram/account/feedCommentDel")
 	public String feedCommentDel(@RequestParam("comment_idx") int comment_idx) {
 		try {
 			commentService.feedCommentDel(comment_idx);
@@ -87,7 +87,7 @@ public class CommentController {
 	
 	// 피드 댓글 좋아요
 	@ResponseBody
-	@PostMapping("/catstagram/likeFeedComment")
+	@PostMapping("/catstagram/account/likeFeedComment")
 	public int likeFeedComment(@RequestParam("comment_idx") int comment_idx, HttpSession session) {
 		int sidx = (Integer)session.getAttribute("sidx");
 		CommentLikeDTO dto = new CommentLikeDTO();
@@ -95,7 +95,6 @@ public class CommentController {
 		dto.setMember_idx(sidx);
 		
 		int commentLikeCount = 0;
-		
 		try {
 			commentLikeService.likeFeedComment(dto);
 			commentService.feedCommentLikeCountPlus(comment_idx);
@@ -109,7 +108,7 @@ public class CommentController {
 	
 	// 피드 댓글 좋아요 취소
 	@ResponseBody
-	@PostMapping("/catstagram/likeFeedCommentCancel")
+	@PostMapping("/catstagram/account/likeFeedCommentCancel")
 	public int likeFeedCommentCancel(@RequestParam("comment_idx") int comment_idx, HttpSession session) {
 		int sidx = (Integer)session.getAttribute("sidx");
 		CommentLikeDTO dto = new CommentLikeDTO();
@@ -117,7 +116,6 @@ public class CommentController {
 		dto.setMember_idx(sidx);
 		
 		int commentLikeCount = 0;
-		
 		try {
 			commentLikeService.likeFeedCommentCancel(dto);
 			commentService.feedCommentLikeCountMinus(comment_idx);

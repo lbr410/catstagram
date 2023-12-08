@@ -20,7 +20,7 @@ public class SearchController {
 	private MemberService memberService;
 	
 	// 회원 아이디 검색
-	@GetMapping("/catstagram/search")
+	@GetMapping("/catstagram/account/search")
 	public ModelAndView search(@RequestParam(value = "id", defaultValue = "") String search_id, HttpSession session) {
 		String sid = (String)session.getAttribute("sid");
 		Integer sidx = (Integer)session.getAttribute("sidx");
@@ -36,18 +36,10 @@ public class SearchController {
 			mav.addObject("list", list);
 			mav.addObject("search_id", search_id);
 			mav.setViewName("search");
-		} else if(search_id.equals("") || search_id == null) {
-			if(sidx != null) { // 로그인한 상태
-				mav.addObject("goUrl", "/catstagram/main");
-			} else { // 로그인하지 않은 상태
-				mav.addObject("goUrl", "/catstagram"); 
-			}
+		} else if(search_id.equals("") || search_id == null || sidx == null || sid == null) {
+			mav.addObject("goUrl", "/catstagram"); 
 			mav.addObject("msg", "잘못된 접근입니다.");
 			mav.setViewName("msg/msg");	
-		} else if(sidx == null || sid == null) {
-			mav.addObject("msg", "로그인 후 이용 가능합니다.");
-			mav.addObject("goUrl", "/catstagram"); 
-			mav.setViewName("msg/msg");
 		}
 		
 		return mav;

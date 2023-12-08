@@ -34,7 +34,7 @@
 		        <div class="feed_icon_div">
 		        	<c:if test="${empty mainFollowingFeed.feed_like_idx}">
 			            <img src="/img/heart.png" class="feed_icon_heart_img"
-			            onclick="likeFeed(${mainFollowingFeed.feed_idx})" id="previewHeart${mainFollowingFeed.feed_idx}"> <!-- 미리보기 좋아요 / 나중에 주석 지우기 -->
+			            onclick="likeFeed(${mainFollowingFeed.feed_idx})" id="previewHeart${mainFollowingFeed.feed_idx}">
 		            </c:if>
 		            <c:if test="${!empty mainFollowingFeed.feed_like_idx}">
 			            <img src="/img/heart2.png" class="feed_icon_heart_img"
@@ -73,7 +73,6 @@
 			                	<img src="/img/trash.png" class="feed_comment_icon_trash_img"
 			                	onclick="feedCommentDel(${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_idx})">
 			                </c:if>
-			                <!-- 미리보기 댓글 좋아요 / 주석 나중에 지우기 -->
 			                <c:if test="${empty mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_like_idx}">
 				                <img src="/img/heart.png" class="feed_comment_icon_heart_img"
 				                id="previewCommentHeart${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_idx}"
@@ -87,7 +86,6 @@
 			            </span>
 			        </c:if>
 			    </div>
-			    
 			    
 		        <div class="feed_comment_insert_div">
 		            <input type="text" name="comment_content" placeholder="댓글 달기..." 
@@ -125,10 +123,10 @@
 				                    <img src="/img/3dots.png" class="feed_detail_more_view_btn" data-bs-toggle="dropdown" aria-expanded="false">
 				                    <div class="dropdown-center">
 				                        <ul class="dropdown-menu dropdown-menu2">
-				                            <li><a class="dropdown-item menu_font" href="/catstagram/feedUpdate?feed_idx=${mainFollowingFeed.feed_idx}">수정</a></li>
+				                            <li><a class="dropdown-item menu_font" href="/catstagram/account/feedUpdate?feed_idx=${mainFollowingFeed.feed_idx}">수정</a></li>
 				                            <li><hr class="dropdown-divider"></li>
 			                            	<li>
-				                            	<form id="feedDelForm${mainFollowingFeed.feed_idx}" action="/catstagram/feedDel" method="post">
+				                            	<form id="feedDelForm${mainFollowingFeed.feed_idx}" action="/catstagram/account/feedDel" method="post">
 			                            			<input type="hidden" name="feed_idx" value="${mainFollowingFeed.feed_idx}">
 			                            			<a class="dropdown-item menu_font" onclick="feedDel(${mainFollowingFeed.feed_idx})">삭제</a>
 			                            		</form>
@@ -144,7 +142,6 @@
 			                </p>
 			            </div>
 			            <div class="feed_detail_content_time_div">${mainFollowingFeed.feed_date_time}</div>
-			            
 			            
 			            <div class="feed_detail_content_comment_div" id="feedDetailContentCommentDiv${mainFollowingFeed.feed_idx}">
 			                <c:forEach var="feedContentList" items="${mainFollowingFeed.feed_comment_list}">
@@ -168,7 +165,6 @@
 					                        <img src="/img/trash.png" class="feed_comment_icon_trash_img"
 					                        onclick="feedCommentDel(${feedContentList.comment_idx})">
 				                        </c:if>
-				                        <!-- 상세보기 댓글 좋아요 / 주석 나중에 지우기 -->
 				                        <c:if test="${empty feedContentList.comment_like_idx}">
 							                <img src="/img/heart.png" class="feed_comment_icon_heart_img2"
 					                        id="detailCommentHeart${feedContentList.comment_idx}"
@@ -194,7 +190,6 @@
 			
 			            <div class="feed_detail_comment_write_div">
 			                <div class="feed_detail_icon_div">
-			                	<!-- 상세보기 좋아요 / 나중에 주석 지우기 -->
 			                    <c:if test="${empty mainFollowingFeed.feed_like_idx}">
 						            <img src="/img/heart.png" class="feed_icon_heart_img"
 						            onclick="likeFeed(${mainFollowingFeed.feed_idx})" id="detailHeart${mainFollowingFeed.feed_idx}">
@@ -246,7 +241,7 @@
 	    </div>
 	
 	    <div class="suggestion_list_msg_div">
-	        <div class="suggestion_list_msg">회원님을 위한 추천<a href="/catstagram/suggestedFollows" class="more_suggested_follow">더보기</a></div>
+	        <div class="suggestion_list_msg">회원님을 위한 추천<a href="/catstagram/account/suggestedFollows" class="more_suggested_follow">더보기</a></div>
 	    </div>
 	
 	    <c:forEach var="suggestedFollowers" items="${suggestedFollowersInMain}" varStatus="loop">
@@ -283,7 +278,8 @@
 		            </div>
 		        </div>
 		        <div class="suggestion_list_follow_btn_div">
-		            <input type="button" value="팔로우" id="follow${suggestedFollowers.following_idx_of_my_following}" onclick="addFollowing(${suggestedFollowers.following_idx_of_my_following})" class="btn btn-primary suggestion_list_follow_btn">
+		            <input type="button" value="팔로우" id="follow${suggestedFollowers.following_idx_of_my_following}"
+		            onclick="addFollowing(${suggestedFollowers.following_idx_of_my_following})" class="btn btn-primary suggestion_list_follow_btn">
 		        </div>
 		    </div>
 	    </c:forEach>
@@ -372,7 +368,7 @@
     			}
     		}
     	}
-    	XHR.open('POST', 'following', true);
+    	XHR.open('POST', '/catstagram/account/following', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('to='+member_idx);
     }
@@ -380,7 +376,7 @@
     // 팔로잉 취소(친구삭제)
     function cancelFollowing(member_idx) {
     	const param = 'to='+member_idx;
-    	sendRequest('cancelFollowing', param, cancelFollowingCallBack, 'POST');
+    	sendRequest('/catstagram/account/cancelFollowing', param, cancelFollowingCallBack, 'POST');
     }
     
     function cancelFollowingCallBack() {
@@ -597,7 +593,7 @@
     		}
     	}
     	
-    	XHR.open('POST', 'feedCommentInsert', true);
+    	XHR.open('POST', '/catstagram/account/feedCommentInsert', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('feed_idx='+feed_idx+'&comment_content='+feedComment);
     	
@@ -630,7 +626,7 @@
     		}
     	}
     	
-    	XHR.open('POST', 'feedCommentDel', true);
+    	XHR.open('POST', '/catstagram/account/feedCommentDel', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('comment_idx='+comment_idx);
     }
@@ -658,9 +654,9 @@
     				likeFeedCancel(feed_idx);
     			}
     			newPreviewFeedLike.style.transition = 'transform 0.2s ease-in-out';
-    			newPreviewFeedLike.style.transform = 'scale(1.2)';  // 커졌다가
+    			newPreviewFeedLike.style.transform = 'scale(1.2)';
     			setTimeout(() => {
-    			    newPreviewFeedLike.style.transform = 'scale(1)';  // 다시 원래 크기로
+    			    newPreviewFeedLike.style.transform = 'scale(1)';
     			}, 100);
     			
     			oldPreviewFeedLike.parentNode.replaceChild(newPreviewFeedLike, oldPreviewFeedLike);
@@ -676,16 +672,16 @@
     				likeFeedCancel(feed_idx);
     			}
     			newDetailFeedLike.style.transition = 'transform 0.2s ease-in-out';
-    			newDetailFeedLike.style.transform = 'scale(1.2)';  // 커졌다가
+    			newDetailFeedLike.style.transform = 'scale(1.2)';
     			setTimeout(() => {
-    				newDetailFeedLike.style.transform = 'scale(1)';  // 다시 원래 크기로
+    				newDetailFeedLike.style.transform = 'scale(1)';
     			}, 100);
     			oldDetailFeedLike.parentNode.replaceChild(newDetailFeedLike, oldDetailFeedLike);
     			document.getElementById('detailLikeCountSpan'+feed_idx).innerHTML = '좋아요 '+feedLikeCount+'개';
     		}
     	}
     	
-    	XHR.open('POST', 'likeFeed', true);
+    	XHR.open('POST', '/catstagram/account/likeFeed', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('feed_idx='+feed_idx);
     }
@@ -732,7 +728,7 @@
     		}
     	}
     	
-    	XHR.open('POST', 'likeFeedCancel', true);
+    	XHR.open('POST', '/catstagram/account/likeFeedCancel', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('feed_idx='+feed_idx);
     }
@@ -750,15 +746,15 @@
     			let newPreviewFeedCommentLike = document.createElement('img');
     			if(oldPreviewFeedCommentLike && newPreviewFeedCommentLike) {
 	    			newPreviewFeedCommentLike.src = '/img/heart2.png';
-	    			newPreviewFeedCommentLike.classList = 'feed_comment_icon_heart_img'; // 하트아이콘 css
+	    			newPreviewFeedCommentLike.classList = 'feed_comment_icon_heart_img';
 	    			newPreviewFeedCommentLike.id = 'previewCommentHeartFull'+comment_idx;
 	    			newPreviewFeedCommentLike.onclick = () => {
 	    				feedCommentLikeCancel(comment_idx);
 	    			}
 	    			newPreviewFeedCommentLike.style.transition = 'transform 0.2s ease-in-out';
-	    			newPreviewFeedCommentLike.style.transform = 'scale(1.2)';  // 커졌다가
+	    			newPreviewFeedCommentLike.style.transform = 'scale(1.2)';
 	    			setTimeout(() => {
-	    				newPreviewFeedCommentLike.style.transform = 'scale(1)';  // 다시 원래 크기로
+	    				newPreviewFeedCommentLike.style.transform = 'scale(1)';
 	    			}, 100);
 	    			
 	    			oldPreviewFeedCommentLike.parentNode.replaceChild(newPreviewFeedCommentLike, oldPreviewFeedCommentLike);
@@ -774,9 +770,9 @@
     				feedCommentLikeCancel(comment_idx);
     			}
     			newDetailFeedCommentLike.style.transition = 'transform 0.2s ease-in-out';
-    			newDetailFeedCommentLike.style.transform = 'scale(1.2)';  // 커졌다가
+    			newDetailFeedCommentLike.style.transform = 'scale(1.2)';
     			setTimeout(() => {
-    				newDetailFeedCommentLike.style.transform = 'scale(1)';  // 다시 원래 크기로
+    				newDetailFeedCommentLike.style.transform = 'scale(1)';
     			}, 100);
     			oldDetailFeedCommentLike.parentNode.replaceChild(newDetailFeedCommentLike, oldDetailFeedCommentLike);
     			
@@ -784,7 +780,7 @@
     			
     		}
     	}
-    	XHR.open('POST', 'likeFeedComment', true);
+    	XHR.open('POST', '/catstagram/account/likeFeedComment', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('comment_idx='+comment_idx);
     }
@@ -802,7 +798,7 @@
     			let newPreviewFeedCommentLike = document.createElement('img');
     			if(oldPreviewFeedCommentLike && newPreviewFeedCommentLike) {
 	    			newPreviewFeedCommentLike.src = '/img/heart.png';
-	    			newPreviewFeedCommentLike.classList = 'feed_comment_icon_heart_img'; // 하트아이콘 css
+	    			newPreviewFeedCommentLike.classList = 'feed_comment_icon_heart_img';
 	    			newPreviewFeedCommentLike.id = 'previewCommentHeart'+comment_idx;
 	    			newPreviewFeedCommentLike.onclick = () => {
 	    				feedCommentLike(comment_idx);
@@ -827,7 +823,7 @@
     			}
     		}
     	}
-    	XHR.open('POST', 'likeFeedCommentCancel', true);
+    	XHR.open('POST', '/catstagram/account/likeFeedCommentCancel', true);
     	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     	XHR.send('comment_idx='+comment_idx);
     }

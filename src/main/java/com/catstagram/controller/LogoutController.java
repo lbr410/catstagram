@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LogoutController {
 	
-	@GetMapping("/catstagram/logout")
+	@GetMapping("/catstagram/account/logout")
 	public ModelAndView logout(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		Integer w_sidx = (Integer)session.getAttribute("sidx");

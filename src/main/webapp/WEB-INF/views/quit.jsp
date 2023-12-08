@@ -14,7 +14,7 @@
 <div class="menu_title_div">
     <div class="menu_title">회원 탈퇴</div>
 </div>
-<form class="info_form2" action="quitOk" method="post" onsubmit="return check()">
+<form class="info_form2" action="/catstagram/account/quitOk" method="post" onsubmit="return check()">
     <div class="info_div">
         <div id="quitAgreement">
 			<!-- import -->
@@ -28,7 +28,7 @@
     </div>
     <div class="info_btn2">
         <input type="submit" value="탈퇴" class="btn btn-secondary info_cancel_btn">
-        <input type="button" value="취소" onclick="javascript: location.href='/catstagram/infoUpdate'" class="btn btn-primary info_ok_btn" onclick="javascript: location.href='/catstagram/main'">
+        <input type="button" value="취소" onclick="javascript: location.href='/catstagram/account/infoUpdate'" class="btn btn-primary info_ok_btn">
     </div>
 </form>
 <%@ include file="footer.jsp" %>
