@@ -94,4 +94,9 @@
 		where
 			f.member_to = m.member_idx and f.member_from = #{sidx}
 	</select>
+	
+	<!-- 회원들의 Catstagram 주소로 이용하기 위한 idx와 아이디 조회 -->
+	<select id="urlIdxIdSelect" resultType="com.catstagram.member.model.MemberDTO">
+		select member_idx, member_id from catstagram_member where member_id = #{member_id}
+	</select>
 </mapper>

@@ -23,6 +23,7 @@ public interface MemberService {
 	public String pwdChk(int sidx) throws Exception;
 	public int pwdUpdateOk(MemberDTO dto) throws Exception;
 	public int quit(int sidx) throws Exception;
-	public List<MemberDTO> followerList(int sidx);
-	public List<MemberDTO> followingList(int sidx);
+	public List<MemberDTO> followerList(int sidx) throws Exception;
+	public List<MemberDTO> followingList(int sidx) throws Exception;
+	public MemberDTO urlIdxIdSelect(String member_id) throws Exception;
 }

@@ -19,4 +19,5 @@ public interface MemberMapper {
 	public int quit(int sidx);
 	public List<MemberDTO> followerList(int sidx);
 	public List<MemberDTO> followingList(int sidx);
+	public MemberDTO urlIdxIdSelect(String member_id);
 }

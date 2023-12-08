@@ -39,7 +39,7 @@
 			</c:if>
 			<div class="dropdown-center">
 				<ul class="dropdown-menu dropdown-menu-end">
-					<li><a class="dropdown-item menu_font" href="#">My Catstagram</a></li>
+					<li><a class="dropdown-item menu_font" href="/catstagram/${sessionScope.sid}">My Catstagram</a></li>
 					<li><hr class="dropdown-divider"></li>
 				    <li><a class="dropdown-item menu_font" href="/catstagram/account/infoUpdate">회원 정보 수정</a></li>
 				    <li><hr class="dropdown-divider"></li>

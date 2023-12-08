@@ -74,7 +74,12 @@ public class FollowController {
 			mav.setViewName("msg/msg");
 		} else {
 			int sidx = (Integer)session.getAttribute("sidx");
-			List<MemberDTO> list = memberService.followerList(sidx);
+			List<MemberDTO> list = null;
+			try {
+				list = memberService.followerList(sidx);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			mav.addObject("list", list);
 			mav.setViewName("follower");
 		}
@@ -105,7 +110,12 @@ public class FollowController {
 			mav.setViewName("msg/msg");
 		} else {
 			int sidx = (Integer)session.getAttribute("sidx");
-			List<MemberDTO> list = memberService.followingList(sidx);
+			List<MemberDTO> list = null;
+			try {
+				list = memberService.followingList(sidx);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			mav.addObject("list", list);
 			mav.setViewName("following");
 		}

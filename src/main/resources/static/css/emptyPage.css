@@ -1,0 +1,15 @@
+@charset "UTF-8";
+.empty_section {
+	margin: 100px auto;
+	width: 1000px;
+	text-align: center;
+}
+
+.sorry_msg {
+	font-weight: bold;
+}
+
+.go_back_catstagram {
+	text-decoration: none;
+	color: black;
+}

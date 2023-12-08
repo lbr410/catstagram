@@ -118,15 +118,22 @@ public class MemberServiceImpl implements MemberService {
 	
 	// 팔로워 목록(나를 친구 추가한 사람)
 	@Override
-	public List<MemberDTO> followerList(int sidx) {
+	public List<MemberDTO> followerList(int sidx) throws Exception {
 		List<MemberDTO> dto = mapper.followerList(sidx);
 		return dto;
 	}
 	
 	// 팔로잉 목록(내가 친구 추가한 사람)
 	@Override
-	public List<MemberDTO> followingList(int sidx) {
+	public List<MemberDTO> followingList(int sidx) throws Exception {
 		List<MemberDTO> dto = mapper.followingList(sidx);
+		return dto;
+	}
+	
+	// 회원들의 Catstagram 주소로 이용하기 위한 idx와 아이디 조회
+	@Override
+	public MemberDTO urlIdxIdSelect(String member_id) throws Exception {
+		MemberDTO dto = mapper.urlIdxIdSelect(member_id);
 		return dto;
 	}
 }
