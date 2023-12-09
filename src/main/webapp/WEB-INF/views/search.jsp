@@ -22,21 +22,21 @@
 	    <div class="search_list_div">
 	        <div class="img_and_id_and_name_div">
 	            <c:if test="${empty dto.member_img}">
-	            	<a href="#"><img src="/img/default_photo2.png" class="search_profile_img"></a>&nbsp;
+	            	<a href="/catstagram/${dto.member_id}"><img src="/img/default_photo2.png" class="search_profile_img"></a>&nbsp;
 	            </c:if>
 	            <c:if test="${!empty dto.member_img}">
-	            	<a href="#"><img src="/upload/member/${dto.member_img}" class="search_profile_img"></a>&nbsp;
+	            	<a href="/catstagram/${dto.member_id}"><img src="/upload/member/${dto.member_img}" class="search_profile_img"></a>&nbsp;
 	            </c:if>
 	            <div class="id_and_name_div">
-	                <a href="#" class="search_list_id">${dto.member_id}</a><br>
+	                <a href="/catstagram/${dto.member_id}" class="search_list_id">${dto.member_id}</a><br>
 	                <a class="search_list_name">${dto.member_name}</a>  
 	            </div>
 	        </div>
 	        <div class="search_list_follow_btn_div">
-	        	<c:if test="${dto.is_follow eq 0}">
+	        	<c:if test="${dto.is_follow == 0}">
 	        		<input type="button" value="팔로우" id="follow${dto.member_idx}" onclick="addFollowing(${dto.member_idx})" class="btn btn-primary search_list_follow_btn">
 	        	</c:if>
-	        	<c:if test="${dto.is_follow ne 0}">
+	        	<c:if test="${dto.is_follow != 0}">
 	            	<input type="button" value="팔로잉" id="following${dto.member_idx}" onclick="cancelFollowing(${dto.member_idx})" class="btn btn-secondary follow_list_del_btn">
 	            </c:if>
 	        </div>

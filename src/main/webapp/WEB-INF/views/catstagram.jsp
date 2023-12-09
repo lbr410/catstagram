@@ -15,31 +15,47 @@
 <%@ include file="header.jsp" %>
 <div class="catstagram_div">
     <div class="catstagram_profile_div">
-        <img src="/img/profile2.jpg" class="catstagram_profile_img">
+    	<c:if test="${!empty dto.member_img}">
+        	<img src="/upload/member/${dto.member_img}" class="catstagram_profile_img">
+        </c:if>
+        <c:if test="${empty dto.member_img}">
+        	<img src="/img/default_photo2.png" class="catstagram_profile_img">
+        </c:if>
         <div class="catstagram_profile_info_div">
             <div class="catstagram_profile_id_div">
-                <span class="catstagram_profile_id_span">ramiee__l</span>
+                <span class="catstagram_profile_id_span">${dto.member_id}</span>
                 <span class="catstagram_profile_update_btn_span">
-                    <input type="button" value="프로필 수정" class="btn btn-secondary catstagram_profile_update_btn">
+					<c:if test="${sessionScope.sidx eq dto.member_idx}">
+                    	<input type="button" value="프로필 수정" class="btn btn-secondary catstagram_profile_update_btn" onclick="javascript: location.href='/catstagram/account/profileUpdate'">
+                    </c:if>
+                    <c:if test="${sessionScope.sidx ne dto.member_idx}">
+                    	<input type="button" value="팔로우" class="btn btn-primary catstagram_follow_btn">
+                    </c:if>
                 </span>
                 <span>
-                    <img src="/img/setting.png" class="catstagram_profile_setting_img">
+                	<c:if test="${sessionScope.sidx eq dto.member_idx}">
+                    	<img src="/img/setting.png" class="catstagram_profile_setting_img" onclick="javascript: location.href='/catstagram/account/infoUpdate'">
+                    </c:if>
                 </span>
             </div>
             <div class="catstagram_statistics_div">
-                게시물 <span class="cnt_span">25</span>
-                팔로워 <span class="cnt_span">150</span>
-                팔로잉 <span class="cnt_span">150</span>
+                게시물 <span class="cnt_span">${dto.feed_count_KM}</span>
+                팔로워 
+                <span class="cnt_span2" 
+                onclick="<c:if test='${sessionScope.sidx eq dto.member_idx}'>location.href='/catstagram/account/follower'</c:if><c:if test='${sessionScope.sidx ne dto.member_idx}'>location.href='/catstagram/${dto.member_id}/follower'</c:if>">
+                	${dto.follower_count_KM}
+                </span>
+                팔로잉 
+                <span class="cnt_span2" 
+                onclick="<c:if test='${sessionScope.sidx eq dto.member_idx}'>location.href='/catstagram/account/following'</c:if><c:if test='${sessionScope.sidx ne dto.member_idx}'>location.href='/catstagram/${dto.member_id}/following'</c:if>">
+                	${dto.following_count_KM}
+                </span>
             </div>
             <div class="catstagram_profile_name_div">
-                이보람
+                ${dto.member_name}
             </div>
             <div class="catstagram_profile_intro_div">
-                뭉이&조이 2015년 6월생<br>
-                2015.08~ 2016.06~<br><br>
-
-                💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙<br>
-                ㄴㅇㅁㄹㄴㅇㄹㅇㄴㅁㄻㅇㄴㄹㅇㄴ
+                ${dto.member_intro}
             </div>
         </div>
     </div>

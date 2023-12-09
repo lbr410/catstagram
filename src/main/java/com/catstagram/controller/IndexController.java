@@ -114,10 +114,12 @@ public class IndexController {
 			if(saveid == null) {
 				Cookie ck = new Cookie("saveid", id);
 				ck.setMaxAge(0);
+				ck.setPath("/");
 				resp.addCookie(ck);
 			} else {
 				Cookie ck = new Cookie("saveid", id);
 				ck.setMaxAge(60*60*24*30); // 30일
+				ck.setPath("/");
 				resp.addCookie(ck);
 			}
 			

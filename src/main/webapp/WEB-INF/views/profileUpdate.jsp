@@ -29,7 +29,7 @@
         <textarea class="profile_update_content_textarea" id="profileInto" name="member_intro" maxlength="100" oninput="textCheck()" placeholder="소개 입력...">${member_content}</textarea>
         <div class="textCount">(<span id="textLength">000</span> / 100)</div>
         <div class="profile_update_btn_div">
-            <input type="button" value="취소" class="btn btn-secondary profile_update_cancel_btn" onclick="javascript: location.href='/catstagram'">
+            <input type="button" value="취소" class="btn btn-secondary profile_update_cancel_btn" onclick="javascript: location.href='/catstagram/${sessionScope.sid}'">
             <input type="submit" value="수정" class="btn btn-primary profile_update_btn">
         </div>
     </div>

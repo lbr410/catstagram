@@ -39,6 +39,7 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50px;
+    cursor: pointer;
 }
 
 .id_and_name_div {
@@ -102,4 +103,10 @@ body {
 
 .suggestedFollowList {
 	cursor: pointer;
+}
+
+.first_following {
+	text-decoration: none;
+	color: #555555;
+	font-size: 12px;
 }

@@ -95,8 +95,45 @@
 			f.member_to = m.member_idx and f.member_from = #{sidx}
 	</select>
 	
-	<!-- 회원들의 Catstagram 주소로 이용하기 위한 idx와 아이디 조회 -->
-	<select id="urlIdxIdSelect" resultType="com.catstagram.member.model.MemberDTO">
+	<!-- 회원들의 Catstagram 주소로 이동하기 위한 idx와 아이디, 그 외 정보들 조회 -->
+	<select id="urlIdxIdSelect" resultType="com.catstagram.member.model.MemberDTO" parameterType="String">
+		select 
+			m.member_idx, m.member_id, m.member_name, m.member_intro, m.member_img,
+			(select count(*) from catstagram_feed where member_idx = m.member_idx) feed_count,
+			(select count(*) from catstagram_follow where member_from = m.member_idx) following_count,
+			(select count(*) from catstagram_follow where member_to = m.member_idx) follower_count
+		from 
+			catstagram_member m where m.member_id = #{member_id}
+	</select>
+	
+	<!-- 회원들의 팔로워 & 팔로잉 목록으로 이동하기 위한 idx와 아이디 조회 -->
+	<select id="followListOtherInfo" resultType="com.catstagram.member.model.MemberDTO" parameterType="String">
 		select member_idx, member_id from catstagram_member where member_id = #{member_id}
+	</select>
+	
+	<!-- 다른 회원의 팔로워 목록 -->
+	<select id="otherFollowerList" resultType="com.catstagram.member.model.MemberDTO" parameterType="Map">
+		select
+			m.member_idx, m.member_id, m.member_name, m.member_img,
+			(select follow_idx from catstagram_follow where member_to = member_idx and member_from = #{sidx}) is_follow
+		from
+			catstagram_follow f, catstagram_member m
+		where
+			f.member_from = m.member_idx and f.member_to = #{member_idx}
+		order by
+			case when m.member_idx = #{sidx} then 0 else 1 end, is_follow nulls last
+	</select>
+	
+	<!-- 다른 회원의 팔로잉 목록 -->
+	<select id="otherFollowingList" resultType="com.catstagram.member.model.MemberDTO" parameterType="Map">
+		select
+			m.member_idx, m.member_id, m.member_name, m.member_img,
+			(select follow_idx from catstagram_follow where member_to = member_idx and member_from = #{sidx}) is_follow
+		from
+			catstagram_follow f, catstagram_member m
+		where
+			f.member_to = m.member_idx and f.member_from = #{member_idx}
+		order by
+			case when m.member_idx = #{sidx} then 0 else 1 end, is_follow nulls last
 	</select>
 </mapper>

@@ -130,10 +130,37 @@ public class MemberServiceImpl implements MemberService {
 		return dto;
 	}
 	
-	// 회원들의 Catstagram 주소로 이용하기 위한 idx와 아이디 조회
+	// 회원들의 Catstagram 주소로 이동하기 위한 idx와 아이디, 그 외 정보들 조회
 	@Override
 	public MemberDTO urlIdxIdSelect(String member_id) throws Exception {
 		MemberDTO dto = mapper.urlIdxIdSelect(member_id);
 		return dto;
+	}
+	
+	// 회원들의 팔로워 & 팔로잉 목록으로 이동하기 위한 idx와 아이디 조회
+	@Override
+	public MemberDTO followListOtherInfo(String member_id) throws Exception {
+		MemberDTO dto = mapper.followListOtherInfo(member_id);
+		return dto;
+	}
+	
+	// 다른 회원의 팔로워 목록
+	@Override
+	public List<MemberDTO> otherFollowerList(int member_idx, int sidx) throws Exception {
+		Map map = new HashMap();
+		map.put("member_idx", member_idx);
+		map.put("sidx", sidx);
+		List<MemberDTO> list = mapper.otherFollowerList(map);
+		return list;
+	}
+	
+	// 다른 회원의 팔로잉 목록
+	@Override
+	public List<MemberDTO> otherFollowingList(int member_idx, int sidx) throws Exception {
+		Map map = new HashMap();
+		map.put("member_idx", member_idx);
+		map.put("sidx", sidx);
+		List<MemberDTO> list = mapper.otherFollowingList(map);
+		return list;
 	}
 }

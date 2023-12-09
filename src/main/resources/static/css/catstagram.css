@@ -66,6 +66,17 @@ body {
     color: #555555;
 }
 
+.catstagram_follow_btn {
+	border: none;
+	border-radius: 5px;
+	background: #458eff;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 80px;
+    line-height: 15px;
+}
+
 .catstagram_profile_setting_img {
     width: 25px;
     height: 25px;
@@ -80,6 +91,13 @@ body {
     font-weight: bold;
     margin-left: 10px;
     margin-right: 40px;
+}
+
+.cnt_span2 {
+	font-weight: bold;
+    margin-left: 10px;
+    margin-right: 40px;
+    cursor: pointer;
 }
 
 .catstagram_profile_name_div {

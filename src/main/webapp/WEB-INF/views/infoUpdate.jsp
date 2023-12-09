@@ -25,7 +25,7 @@
         <input type="text" id="userid" name="member_id" placeholder="아이디(영문 또는 숫자 또는 .,_,. 기호)" value="${sessionScope.sid}" class="form-control form-control-sm input_textbox_deco" maxlength="30" oninput="idChk(this)" required> 
     </div>
     <div class="info_btn">
-        <input type="button" value="취소" class="btn btn-secondary info_cancel_btn" onclick="javascript: location.href='/catstagram'">
+        <input type="button" value="취소" class="btn btn-secondary info_cancel_btn" onclick="javascript: location.href='/catstagram/${sessionScope.sid}'">
         <input type="submit" value="수정" class="btn btn-primary info_ok_btn">
     </div>
     <div class="update_quit_div">

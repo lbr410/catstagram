@@ -20,12 +20,12 @@
 		    <div>
 		        <div>
 		            <c:if test="${empty mainFollowingFeed.member_img}">
-						<img src="/img/default_photo2.png" class="feed_profile_img">
+						<img src="/img/default_photo2.png" class="feed_profile_img" onclick="javascript: location.href='/catstagram/${mainFollowingFeed.member_id}'">
 					</c:if>
 					<c:if test="${!empty mainFollowingFeed.member_img}">
-						<img src="/upload/member/${mainFollowingFeed.member_img}" class="feed_profile_img">
+						<img src="/upload/member/${mainFollowingFeed.member_img}" onclick="javascript: location.href='/catstagram/${mainFollowingFeed.member_id}'" class="feed_profile_img">
 					</c:if>
-		            <a href="#" class="feed_profile_id">&nbsp;${mainFollowingFeed.member_id}</a>
+		            <a href="/catstagram/${mainFollowingFeed.member_id}" class="feed_profile_id">&nbsp;${mainFollowingFeed.member_id}</a>
 		            <a class="feed_time">&nbsp;${mainFollowingFeed.feed_date_time}</a>
 		        </div>
 		        <div class="feed_img_div">
@@ -51,7 +51,7 @@
 		            </c:if>
 		        </div>
 		        <div class="feed_content_div">
-		            <a href="#" class="feed_content_id">${mainFollowingFeed.member_id}</a>
+		            <a href="/catstagram/${mainFollowingFeed.member_id}" class="feed_content_id">${mainFollowingFeed.member_id}</a>
 		            <span class="feed_content_content">${mainFollowingFeed.feed_content}</span>
 		        </div>
 		        <div class="feed_detail_btn_div">
@@ -62,7 +62,7 @@
 			    <div class="feed_comment_div" id="feedCommentDiv${mainFollowingFeed.feed_idx}">
 			        <c:if test="${!empty mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_content}">
 			            <span class="feed_comment" id="feedCommentContentSpan${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_idx}">
-			                <a href="#" class="feed_comment_id">${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].member_id}</a>
+			                <a href="/catstagram/${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].member_id}" class="feed_comment_id">${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].member_id}</a>
 			                <div class="feed_comment_comment">
 			                	${mainFollowingFeed.feed_comment_list[fn:length(mainFollowingFeed.feed_comment_list) - 1].comment_content}
 			                </div>
@@ -86,7 +86,6 @@
 			            </span>
 			        </c:if>
 			    </div>
-			    
 		        <div class="feed_comment_insert_div">
 		            <input type="text" name="comment_content" placeholder="댓글 달기..." 
 			            id="feedComment${mainFollowingFeed.feed_idx}" maxlength="1000" 
@@ -109,13 +108,13 @@
 			                <div class="feed_detail_info_span">
 			                    
 			                    <c:if test="${empty mainFollowingFeed.member_img}">
-									<img src="/img/default_photo2.png" class="feed_detail_profile_img">
+									<img src="/img/default_photo2.png" class="feed_detail_profile_img" onclick="javascript: location.href='/catstagram/${mainFollowingFeed.member_id}'">
 								</c:if>
 								<c:if test="${!empty mainFollowingFeed.member_img}">
-									<img src="/upload/member/${mainFollowingFeed.member_img}" class="feed_detail_profile_img">
+									<img src="/upload/member/${mainFollowingFeed.member_img}" class="feed_detail_profile_img" onclick="javascript: location.href='/catstagram/${mainFollowingFeed.member_id}'">
 								</c:if>
 								
-			                    <a href="#" class="feed_profile_id">&nbsp;${mainFollowingFeed.member_id}</a>
+			                    <a href="/catstagram/${mainFollowingFeed.member_id}" class="feed_profile_id">&nbsp;${mainFollowingFeed.member_id}</a>
 			                </div>
 			                
 			                <c:if test="${mainFollowingFeed.member_idx eq sessionScope.sidx}">
@@ -148,14 +147,15 @@
 				                <div class="feed_detail_comment_div" id="feedDetailCommentDiv${feedContentList.comment_idx}">
 				                    <span class="feed_detail_comment"> 
 				                        <c:if test="${empty feedContentList.member_img}">
-											<img src="/img/default_photo2.png" class="feed_detail_profile_comment_img">
+											<img src="/img/default_photo2.png" class="feed_detail_profile_comment_img"
+											onclick="javascript: location.href='/catstagram/${feedContentList.member_id}'">
 										</c:if>
 										<c:if test="${!empty feedContentList.member_img}">
-											<img src="/upload/member/${feedContentList.member_img}" class="feed_detail_profile_comment_img">
+											<img src="/upload/member/${feedContentList.member_img}" class="feed_detail_profile_comment_img"
+											onclick="javascript: location.href='/catstagram/${feedContentList.member_id}'">
 										</c:if>
-				                        
 				                        <span class="feed_detail_comment_comment">
-				                            <a href="#" class="feed_detail_comment_id">${feedContentList.member_id}</a>
+				                            <a href="/catstagram/${feedContentList.member_id}" class="feed_detail_comment_id">${feedContentList.member_id}</a>
 				                            ${feedContentList.comment_content}
 				                        </span>
 				                    </span>
@@ -229,14 +229,14 @@
 	<div class="suggestion_div">
 	    <div>
 	        <c:if test="${empty sessionScope.simg}">
-				<img src="/img/default_photo2.png" class="feed_profile_img">
+				<img src="/img/default_photo2.png" class="feed_profile_img" onclick="javascript: location.href='/catstagram/${sessionScope.sid}'">
 			</c:if>
 			<c:if test="${!empty sessionScope.simg}">
-				<img src="/upload/member/${sessionScope.simg}" class="feed_profile_img">
+				<img src="/upload/member/${sessionScope.simg}" class="feed_profile_img" onclick="javascript: location.href='/catstagram/${sessionScope.sid}'">
 			</c:if>
 	        <div class="id_and_name_div">
-	            <a href="#" class="id_and_name_id">${sessionScope.sid}</a><br>
-	            <a href="#" class="id_and_name_name">${sessionScope.sname}</a>
+	            <a href="/catstagram/${sessionScope.sid}" class="id_and_name_id">${sessionScope.sid}</a><br>
+	            <a class="id_and_name_name">${sessionScope.sname}</a>
 	        </div>
 	    </div>
 	
@@ -248,19 +248,19 @@
 		    <div class="suggestion_list_div">
 		        <div class="img_and_id_and_name_div">
 		        	<c:if test="${empty suggestedFollowers.following_img_of_my_following}">
-						<img src="/img/default_photo2.png" class="feed_profile_img2">
+						<img src="/img/default_photo2.png" class="feed_profile_img2" onclick="javascript: location.href='/catstagram/${suggestedFollowers.following_id_of_my_following}'">
 					</c:if>
 					<c:if test="${!empty suggestedFollowers.following_img_of_my_following}">
-						<img src="/upload/member/${suggestedFollowers.following_img_of_my_following}" class="feed_profile_img2">
+						<img src="/upload/member/${suggestedFollowers.following_img_of_my_following}" class="feed_profile_img2" onclick="javascript: location.href='/catstagram/${suggestedFollowers.following_id_of_my_following}'">
 					</c:if>
 		            <div class="id_and_name_div">
 		            	<div class="id_and_name_div2">
-			                <a href="#" class="suggestion_list_id">${suggestedFollowers.following_id_of_my_following}</a><br>
+			                <a href="/catstagram/${suggestedFollowers.following_id_of_my_following}" class="suggestion_list_id">${suggestedFollowers.following_id_of_my_following}</a><br>
 			                <c:if test="${suggestedFollowers.num_of_followers eq 0}">
-			                	<a class="suggestion_follow_who">${suggestedFollowers.my_following_list_arr[0]}님이 팔로우합니다.</a>
+			                	<span class="suggestion_follow_who"><a class="first_following" href="/catstagram/${suggestedFollowers.my_following_list_arr[0]}">${suggestedFollowers.my_following_list_arr[0]}</a>님이 팔로우합니다.</span>
 			                </c:if>
 			                <c:if test="${suggestedFollowers.num_of_followers ne 0}">
-			                	<span class="suggestion_follow_who">${suggestedFollowers.my_following_list_arr[0]}님 외 
+			                	<span class="suggestion_follow_who"><a class="first_following" href="/catstagram/${suggestedFollowers.my_following_list_arr[0]}">${suggestedFollowers.my_following_list_arr[0]}</a>님 외 
 			                	<span id="suggestedFollowListId${loop.index}"
 			                		class="suggestedFollowList" data-bs-toggle="dropdown" aria-expanded="false">
 			                		${suggestedFollowers.num_of_followers}명</span>이 팔로우합니다.
@@ -268,7 +268,7 @@
 									<div class="dropdown">
 										<ul class="dropdown-menu">
 											<c:forEach var="suggestedFollowList" items="${suggestedFollowers.my_following_list_arr}">
-												<li><a class="dropdown-item menu_font" href="#">${suggestedFollowList}</a></li>
+												<li><a class="dropdown-item menu_font" href="/catstagram/${suggestedFollowList}">${suggestedFollowList}</a></li>
 											</c:forEach>
 										</ul>
 				                	</div>
@@ -468,7 +468,7 @@
     			commentSpan2.setAttribute('id', 'feedCommentContentSpan'+result[result.length-1].comment_idx);
     			
     			const commentIdLink2 = document.createElement('a');
-    			commentIdLink2.href = '#';
+    			commentIdLink2.href = '/catstagram/'+result[result.length-1].member_id;
 				commentIdLink2.classList.add('feed_comment_id');
 				commentIdLink2.textContent = result[result.length-1].member_id;
     			
@@ -520,11 +520,17 @@
         				let imgElement = document.createElement('img');
         				imgElement.src = '/upload/member/'+result[i].member_img;
         				imgElement.classList.add('feed_detail_profile_comment_img');
+        				imgElement.onclick = () => {
+        					location.href = '/catstagram/'+result[i].member_id;
+        				}
         				commentSpan.appendChild(imgElement);
         			} else {
         				let imgElement = document.createElement('img');
         				imgElement.src = '/img/default_photo2.png';
         				imgElement.classList.add('feed_detail_profile_comment_img');
+        				imgElement.onclick = () => {
+        					location.href = '/catstagram/'+result[i].member_id;
+        				}
         				commentSpan.appendChild(imgElement);
         			}
         			
@@ -534,7 +540,7 @@
         			
         			const commentIdLink = document.createElement('a');
     				commentIdLink.textContent = result[i].member_id;
-    				commentIdLink.href = '#';
+    				commentIdLink.href = '/catstagram/'+result[i].member_id;
     				commentIdLink.classList.add('feed_detail_comment_id2');
     				
     				const commentContent = document.createTextNode(result[i].comment_content);

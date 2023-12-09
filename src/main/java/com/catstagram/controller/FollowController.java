@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -150,6 +151,87 @@ public class FollowController {
 			mav.addObject("suggestedFollows", suggestedFollows);
 			mav.setViewName("suggestedFollows");
 		}
+		return mav;
+	}
+	
+	// 다른 사람의 팔로워 목록 페이지
+	@GetMapping("/catstagram/{member_id}/follower")
+	public ModelAndView followerOther(@PathVariable String member_id, HttpSession session) {
+		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		String sid = (String)session.getAttribute("sid");
+		ModelAndView mav = new ModelAndView();
+		
+		MemberDTO dto = null;
+		try {
+			dto = memberService.followListOtherInfo(member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(dto != null && w_sidx != null) {
+			if(dto.getMember_id().equals(sid)) {
+				mav.setViewName("redirect:/catstagram/account/follower");
+			} else {
+				int sidx = (Integer)session.getAttribute("sidx");
+				List<MemberDTO> list = null;
+				try {
+					list = memberService.otherFollowerList(dto.getMember_idx(), sidx);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				mav.addObject("member_id", member_id);
+				mav.addObject("list", list);
+				mav.setViewName("followerOther");				
+			}
+		} else if(dto == null) {
+			mav.setViewName("emptyPage");
+		} else if(w_sidx == null) {
+			mav.addObject("msg", "로그인 후 이용 가능합니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");
+		}
+		
+		return mav;
+	}
+	
+	// 다른 사람의 팔로잉 목록 페이지
+	@GetMapping("/catstagram/{member_id}/following")
+	public ModelAndView followingOther(@PathVariable String member_id, HttpSession session) {
+		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		String sid = (String)session.getAttribute("sid");
+		ModelAndView mav = new ModelAndView();
+		
+		MemberDTO dto = null;
+		try {
+			dto = memberService.followListOtherInfo(member_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(dto != null && w_sidx != null) {
+			if(dto.getMember_id().equals(sid)) {
+				mav.setViewName("redirect:/catstagram/account/following");
+			} else {
+				int sidx = (Integer)session.getAttribute("sidx");
+				List<MemberDTO> list = null;
+				try {
+					list = memberService.otherFollowingList(dto.getMember_idx(), sidx);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				mav.addObject("member_id", member_id);
+				mav.addObject("list", list);
+				mav.setViewName("followingOther");				
+			}
+		} else if(dto == null) {
+			mav.setViewName("emptyPage");
+		} else if(w_sidx == null) {
+			mav.addObject("msg", "로그인 후 이용 가능합니다.");
+			mav.addObject("goUrl", "/catstagram");
+			mav.setViewName("msg/msg");
+		}
+		
 		return mav;
 	}
 }

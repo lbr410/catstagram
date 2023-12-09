@@ -29,13 +29,13 @@
 	    <div class="follow_list_div">
 	        <div class="img_and_id_and_name_div">
 	            <c:if test="${empty dto.member_img}">
-					<a href="#"><img src="/img/default_photo2.png" class="follow_profile_img"></a>&nbsp;
+					<a href="/catstagram/${dto.member_id}"><img src="/img/default_photo2.png" class="follow_profile_img"></a>&nbsp;
             	</c:if>
             	<c:if test="${!empty dto.member_img}">
-            		<a href="#"><img src="/upload/member/${dto.member_img}" class="follow_profile_img"></a>&nbsp;
+            		<a href="/catstagram/${dto.member_id}"><img src="/upload/member/${dto.member_img}" class="follow_profile_img"></a>&nbsp;
             	</c:if>
 	            <div class="id_and_name_div">
-	                <a href="#" class="follow_list_id">${dto.member_id}</a><br>
+	                <a href="/catstagram/${dto.member_id}" class="follow_list_id">${dto.member_id}</a><br>
 	                <a class="follow_list_name">${dto.member_name}</a>
 	            </div>
 	        </div>

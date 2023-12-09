@@ -1,6 +1,7 @@
 package com.catstagram.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.catstagram.member.model.MemberDTO;
 
@@ -26,4 +27,7 @@ public interface MemberService {
 	public List<MemberDTO> followerList(int sidx) throws Exception;
 	public List<MemberDTO> followingList(int sidx) throws Exception;
 	public MemberDTO urlIdxIdSelect(String member_id) throws Exception;
+	public MemberDTO followListOtherInfo(String member_id) throws Exception;
+	public List<MemberDTO> otherFollowerList(int member_idx, int sidx) throws Exception;
+	public List<MemberDTO> otherFollowingList(int member_idx, int sidx) throws Exception;
 }

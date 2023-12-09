@@ -23,4 +23,10 @@ public class MemberDTO {
 	private Date member_joindate;
 	private String member_quit;
 	private int is_follow;
+	private int feed_count;
+	private int following_count;
+	private int follower_count;
+	private String feed_count_KM;
+	private String following_count_KM;
+	private String follower_count_KM;
 }

@@ -5,52 +5,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>catstagram : 팔로우 추천</title>
+<title>catstagram : 팔로워</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="/css/search.css">
+<link rel="stylesheet" type="text/css" href="/css/follow.css">
 <script type="text/javascript" src="/js/xmlHttpRequest.js"></script>
 </head>
 <body>
 <%@ include file="header.jsp" %>
-<div class="search_result_div">
-    <div class="search_msg_div">
-        <h4>💙 Suggestions for you 💙</h4>
-    </div>
-    
-    <c:forEach var="suggestedFollows" items="${suggestedFollows}" varStatus="loop">
-	    <div class="search_list_div">
+<div class="follow_msg_div">
+    <h4>💙 '${member_id}'님의 팔로워 💙</h4>
+</div>
+<div class="follow_nav_div2">
+    <ul class="nav nav-underline">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/catstagram/${member_id}/follower">팔로워</a>
+        </li>
+        <li class="nav-item nav_bottom_border">
+            <a class="nav-link" href="/catstagram/${member_id}/following">팔로잉</a>
+        </li>
+    </ul>
+</div>
+<div class="follow_div">
+	<c:forEach var="dto" items="${list}">    
+	    <div class="follow_list_div">
 	        <div class="img_and_id_and_name_div">
-	            <c:if test="${empty suggestedFollows.following_img_of_my_following}">
-	            	<img src="/img/default_photo2.png" class="search_profile_img" onclick="javacript: location.href='/catstagram/${suggestedFollows.following_id_of_my_following}'">&nbsp;
-	            </c:if>
-	            <c:if test="${!empty suggestedFollows.following_img_of_my_following}">
-	            	<img src="/upload/member/${suggestedFollows.following_img_of_my_following}" class="search_profile_img" onclick="javacript: location.href='/catstagram/${suggestedFollows.following_id_of_my_following}'">&nbsp;
-	            </c:if>
+	            <c:if test="${empty dto.member_img}">
+					<a href="/catstagram/${dto.member_id}"><img src="/img/default_photo2.png" class="follow_profile_img"></a>&nbsp;
+            	</c:if>
+            	<c:if test="${!empty dto.member_img}">
+            		<a href="/catstagram/${dto.member_id}"><img src="/upload/member/${dto.member_img}" class="follow_profile_img"></a>&nbsp;
+            	</c:if>
 	            <div class="id_and_name_div">
-	                <a href="/catstagram/${suggestedFollows.following_id_of_my_following}" class="search_list_id">${suggestedFollows.following_id_of_my_following}</a><br>
-	                <c:if test="${suggestedFollows.num_of_followers eq 0}">
-	                	<span class="search_list_name"><a class="first_following" href="/catstagram/${suggestedFollows.my_following_list_arr[0]}">${suggestedFollows.my_following_list_arr[0]}</a>님이 팔로우합니다.</span>
-	                </c:if>
-	                <c:if test="${suggestedFollows.num_of_followers ne 0}">
-	                	<span class="search_list_name"><a href="/catstagram/${suggestedFollows.my_following_list_arr[0]}" class="first_following">${suggestedFollows.my_following_list_arr[0]}</a>님 외
-	                	<span id="suggestedFollowListId${loop.index}" data-index="${loop.index}"
-		                	class="suggestedFollowList" data-bs-toggle="dropdown" aria-expanded="false"> 
-	                		${suggestedFollows.num_of_followers}명</span>이 팔로우합니다.
-	                		
-	                		<div class="dropdown">
-								<ul class="dropdown-menu" id="follow_list_ul${loop.index}">
-									<c:forEach var="suggestedFollowList" items="${suggestedFollows.my_following_list_arr}">
-										<li><a class="dropdown-item menu_font" href="/catstagram/${suggestedFollowList}">${suggestedFollowList}</a></li>
-									</c:forEach>
-								</ul>
-		                	</div>
-		                </span>
-	                </c:if>
+	                <a href="/catstagram/${dto.member_id}" class="follow_list_id">${dto.member_id}</a><br>
+	                <a class="follow_list_name">${dto.member_name}</a>
 	            </div>
 	        </div>
-	        <div class="search_list_follow_btn_div">
-				<input type="button" value="팔로우" id="follow${suggestedFollows.following_idx_of_my_following}" onclick="addFollowing(${suggestedFollows.following_idx_of_my_following})" class="btn btn-primary search_list_follow_btn">
+	        <div class="follow_list_btn_div">
+	        	<c:if test="${dto.member_idx != sessionScope.sidx}">
+		        	<c:if test="${dto.is_follow != 0}">
+		            	<input type="button" value="팔로잉" id="following${dto.member_idx}" onclick="cancelFollowing(${dto.member_idx})" class="btn btn-secondary follow_list_del_btn">
+		            </c:if>
+		            <c:if test="${dto.is_follow == 0}">
+		            	<input type="button" value="팔로우" id="follow${dto.member_idx}" onclick="addFollowing(${dto.member_idx})" class="btn btn-primary follow_list_follow_btn">
+		            </c:if>
+	            </c:if>
 	        </div>
 	    </div>
 	</c:forEach>
@@ -65,7 +64,7 @@
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
     }
     
-    // 팔로잉(친구추가) - XMLHttpRequest 모듈화 사용 X
+ 	// 팔로잉(친구추가) - XMLHttpRequest 모듈화 사용 X
     // 서버에서 요청받을 것은 없지만 서버가 잘 처리를 하였는지 명확하게 파악하기 위함으로 CallBack을 이용
     function addFollowing(member_idx) {	
     	const XHR = new XMLHttpRequest();
@@ -123,7 +122,7 @@
     					followBtn.type = "button";
     					followBtn.value = "팔로우";
     					followBtn.id = "follow"+result;
-    					followBtn.className = "btn btn-primary search_list_follow_btn";
+    					followBtn.className = "btn btn-primary follow_list_follow_btn";
     					followBtn.onclick = () => {
     						addFollowing(result);
     					}

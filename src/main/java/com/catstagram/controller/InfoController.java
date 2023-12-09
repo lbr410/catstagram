@@ -188,6 +188,7 @@ public class InfoController {
 			// 아이디 저장하기 쿠키 삭제
 			Cookie ck = new Cookie("saveid", sid);
 			ck.setMaxAge(0);
+			ck.setPath("/");
 			resp.addCookie(ck);
 			
 			// 세션 삭제
