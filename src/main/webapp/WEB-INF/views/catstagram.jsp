@@ -30,12 +30,14 @@
                     	<input type="button" value="프로필 수정" class="btn btn-secondary catstagram_profile_update_btn" onclick="javascript: location.href='/catstagram/account/profileUpdate'">
                     </c:if>
                     <c:if test="${sessionScope.sidx ne dto.member_idx}">
-                    	<c:if test="${dto.is_follow eq 0}">
-                    		<input type="button" value="팔로우" class="btn btn-primary catstagram_follow_btn" id="follow${dto.member_idx}" onclick="addFollowing(${dto.member_idx})">
-                    	</c:if>
-                    	<c:if test="${dto.is_follow ne 0}">
-                    		<input type="button" value="팔로잉" class="btn btn-secondary follow_list_del_btn" id="following${dto.member_idx}" onclick="cancelFollowing(${dto.member_idx})">
-                    	</c:if>
+                    	<span>
+	                    	<c:if test="${dto.is_follow eq 0}">
+	                    		<input type="button" value="팔로우" class="btn btn-primary catstagram_follow_btn" id="follow${dto.member_idx}" onclick="addFollowing(${dto.member_idx})">
+	                    	</c:if>
+	                    	<c:if test="${dto.is_follow ne 0}">
+	                    		<input type="button" value="팔로잉" class="btn btn-secondary follow_list_del_btn" id="following${dto.member_idx}" onclick="cancelFollowing(${dto.member_idx})">
+	                    	</c:if>
+                    	</span>
                     	<input type="button" value="메시지 보내기" class="btn btn-secondary send_msg_btn">
                     </c:if>
                 </span>
