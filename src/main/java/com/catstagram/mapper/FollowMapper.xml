@@ -32,9 +32,13 @@
 		        m.member_id as following_id_of_my_following,
 		        m.member_name as following_name_of_my_following,
 		        m.member_img as following_img_of_my_following,
-		        count(*) - 1 as num_of_followers,
-		        listagg(m2.member_id, ',') within group (order by m2.member_id) as my_following_list
-		    from
+		        count(case when m2.member_id in
+                	(select m.member_id from catstagram_member m, catstagram_follow f where m.member_idx = f.member_to and f.member_from = #{sidx}) 
+					 then 1 else null end) - 1 as num_of_followers,
+		        listagg(case when m2.member_id in 
+                    (select m.member_id from catstagram_member m, catstagram_follow f where m.member_idx = f.member_to and f.member_from = #{sidx}) 
+                     then m2.member_id else null end, ',') within group (order by m2.member_id) as my_following_list
+			from
 		        catstagram_member m
 		    join
 		        catstagram_follow f on f.member_to = m.member_idx
@@ -79,10 +83,10 @@
 		        m.member_name as following_name_of_my_following,
 		        m.member_img as following_img_of_my_following,
 		        count(case when m2.member_id in
-                	(select m.member_id from catstagram_member m, catstagram_follow f where m.member_idx = f.member_to and f.member_from = 1) 
+                	(select m.member_id from catstagram_member m, catstagram_follow f where m.member_idx = f.member_to and f.member_from = #{sidx}) 
 					 then 1 else null end) - 1 as num_of_followers,
 		        listagg(case when m2.member_id in 
-                    (select m.member_id from catstagram_member m, catstagram_follow f where m.member_idx = f.member_to and f.member_from = 1) 
+                    (select m.member_id from catstagram_member m, catstagram_follow f where m.member_idx = f.member_to and f.member_from = #{sidx}) 
                      then m2.member_id else null end, ',') within group (order by m2.member_id) as my_following_list
 		    from
 		        catstagram_member m
@@ -123,5 +127,35 @@
 	<!-- 다른 회원의 팔로워 수(내가 그 회원을 팔로잉 후 증감변화를 알기 위함) -->
 	<select id="otherFollowerCount" parameterType="Integer" resultType="Integer">
 		select count(*) from catstagram_follow where member_to = #{member_idx}
+	</select>
+	
+	<!-- 이 회원은 내 팔로우들 중 누가누가 팔로잉했는지 -->
+	<select id="whoFollow" parameterType="Map" resultType="com.catstagram.follow.model.FollowDTO">
+		select 
+		    m.member_idx as following_idx_of_my_following,
+		    m.member_id as following_id_of_my_following,
+		    m.member_name as following_name_of_my_following,
+		    m.member_img as following_img_of_my_following,
+		    count(case when m2.member_id in 
+		        (select m.member_id from catstagram_member m, catstagram_follow f where m.member_idx = f.member_to and f.member_from = #{sidx}) 
+		        then 1 else null end) - 1 as num_of_followers,
+		    listagg(
+		        case when m2.member_id in 
+		            (select m.member_id from catstagram_member m, catstagram_follow f where m.member_idx = f.member_to and f.member_from = #{sidx}) 
+		            then m2.member_id else null end, ','
+		    ) within group (order by m2.member_id) as my_following_list
+		from
+		    catstagram_member m
+		join
+		    catstagram_follow f on f.member_to = m.member_idx
+		join
+		    catstagram_member m2 on m2.member_idx = f.member_from
+		where
+		     m.member_idx = #{member_idx}
+		group by
+		    m.member_idx,
+		    m.member_id,
+		    m.member_name,
+		    m.member_img
 	</select>
 </mapper>

@@ -155,3 +155,21 @@ body {
 .catstagram_feed_img:hover {
     opacity: 0.6; /* 마우스 오버 시 투명도 조절 */
 }
+
+.send_msg_btn {
+	border: none;
+	border-radius: 5px;
+	background: #d9d9d9;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 120px;
+    line-height: 15px;
+    color: #555555;
+}
+
+.who_follow_div {
+	margin-top: 10px;
+	color: #555555;
+	font-size: 12px;
+}

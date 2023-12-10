@@ -125,4 +125,46 @@ public class FeedServiceImpl implements FeedService {
 		int result = mapper.feedLikeCount(feed_idx);
 		return result;
 	}
+	
+	// catstagram 피드 목록
+	@Override
+	public List<MainFollowingFeedDTO> feedList(int member_idx, int sidx) throws Exception {
+		List<MainFollowingFeedDTO> dto = mapper.feedList(member_idx);
+		
+		// 내가 해당 피드에 좋아요를 눌렀는지
+		for(int i=0; i<dto.size(); i++) {
+			FeedLikeDTO fldto = new FeedLikeDTO();
+			fldto.setFeed_idx(dto.get(i).getFeed_idx());
+			fldto.setMember_idx(sidx);
+			dto.get(i).setFeed_like_idx(feedLikeMapper.feedLikeYN(fldto));
+		}
+		
+		// 해당 피드에 대한 댓글 목록
+		for(int i=0; i<dto.size(); i++) {
+			dto.get(i).setFeed_comment_list(commentMapper.feedCommentList(dto.get(i).getFeed_idx()));
+			for(int j=0; j<dto.get(i).getFeed_comment_list().size(); j++) {
+				// 댓글이 작성된지 1시간 미만일 경우
+				if(dto.get(i).getFeed_comment_list().get(j).getComment_date_minute() < 60) {
+					dto.get(i).getFeed_comment_list().get(j).setComment_date_time(dto.get(i).getFeed_comment_list().get(j).getComment_date_minute()+"분");
+				// 댓글이 작성된지 24시간(하루) 미만일 경우
+				} else if(dto.get(i).getFeed_comment_list().get(j).getComment_date_minute() >= 60 && dto.get(i).getFeed_comment_list().get(j).getComment_date_minute() < 1440) {
+					dto.get(i).getFeed_comment_list().get(j).setComment_date_time((int)Math.floor(dto.get(i).getFeed_comment_list().get(j).getComment_date_minute()/60)+"시간");
+				// 댓글이 작성된지 24시간 이상일 경우
+				} else if(dto.get(i).getFeed_comment_list().get(j).getComment_date_minute() >= 1440 && dto.get(i).getFeed_comment_list().get(j).getComment_date_minute() < 10080) {
+					dto.get(i).getFeed_comment_list().get(j).setComment_date_time((int)Math.floor(dto.get(i).getFeed_comment_list().get(j).getComment_date_minute()/1440)+"일");
+				// 댓글이 작성된지 7일(일주일) 이상일 경우
+				} else if(dto.get(i).getFeed_comment_list().get(j).getComment_date_minute() >= 10080) {
+					dto.get(i).getFeed_comment_list().get(j).setComment_date_time((int)Math.floor(dto.get(i).getFeed_comment_list().get(j).getComment_date_minute()/10080)+"주");
+				}
+				
+				// 내가 이 댓글에 좋아요를 눌렀는지에 대한 여부
+				CommentLikeDTO cldto = new CommentLikeDTO();
+				cldto.setComment_idx(dto.get(i).getFeed_comment_list().get(j).getComment_idx());
+				cldto.setMember_idx(sidx);
+				dto.get(i).getFeed_comment_list().get(j).setComment_like_idx(commentLikeMapper.feedLikeCommentYN(cldto));
+			}
+		}
+		
+		return dto;
+	}
 }

@@ -84,4 +84,18 @@
 	<select id="feedLikeCount" parameterType="Integer" resultType="Integer">
 		select feed_like_count from catstagram_feed where feed_idx = #{feed_idx}
 	</select>
+	
+	<!-- catstagram 피드 목록 -->
+	<select id="feedList" parameterType="Integer" resultType="com.catstagram.etc.model.MainFollowingFeedDTO">
+		select
+		    m.member_idx, m.member_id, m.member_img, 
+		    fe.feed_idx, fe.feed_img, fe.feed_content, fe.feed_like_count, fe.feed_date,
+		    trunc((sysdate-fe.feed_date) * 24 * 60) as feed_date_minute
+		from
+		    catstagram_member m, catstagram_feed fe
+		where
+		    fe.member_idx = m.member_idx and m.member_idx = #{member_idx}
+		order by
+			fe.feed_date desc
+	</select>
 </mapper>

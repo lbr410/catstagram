@@ -15,4 +15,5 @@ public interface FeedMapper {
 	public int feedLikeCountPlus(int feed_idx);
 	public int feedLikeCountMinus(int feed_idx);
 	public int feedLikeCount(int feed_idx);
+	public List<MainFollowingFeedDTO> feedList(int member_idx);
 }

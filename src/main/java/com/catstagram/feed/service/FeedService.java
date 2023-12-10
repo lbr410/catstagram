@@ -15,4 +15,5 @@ public interface FeedService {
 	public int feedLikeCountPlus(int feed_idx) throws Exception;
 	public int feedLikeCountMinus(int feed_idx) throws Exception;
 	public int feedLikeCount(int feed_idx) throws Exception;
+	public List<MainFollowingFeedDTO> feedList(int member_idx, int sidx) throws Exception;
 }

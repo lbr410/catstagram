@@ -60,4 +60,14 @@ public class FollowServiceImpl implements FollowService {
 		int result = mapper.otherFollowerCount(member_idx);
 		return result;
 	}
+	
+	// 이 회원은 내 팔로우들 중 누가누가 팔로잉했는지
+	@Override
+	public FollowDTO whoFollow(int member_idx, int sidx) throws Exception {
+		Map map = new HashMap();
+		map.put("member_idx", member_idx);
+		map.put("sidx", sidx);
+		FollowDTO dto = mapper.whoFollow(map);
+		return dto;
+	}
 }
