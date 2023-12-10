@@ -132,8 +132,11 @@ public class MemberServiceImpl implements MemberService {
 	
 	// 회원들의 Catstagram 주소로 이동하기 위한 idx와 아이디, 그 외 정보들 조회
 	@Override
-	public MemberDTO urlIdxIdSelect(String member_id) throws Exception {
-		MemberDTO dto = mapper.urlIdxIdSelect(member_id);
+	public MemberDTO urlIdxIdSelect(String member_id, int sidx) throws Exception {
+		Map map = new HashMap();
+		map.put("member_id", member_id);
+		map.put("sidx", sidx);
+		MemberDTO dto = mapper.urlIdxIdSelect(map);
 		return dto;
 	}
 	

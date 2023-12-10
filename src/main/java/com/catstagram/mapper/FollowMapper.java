@@ -10,4 +10,5 @@ public interface FollowMapper {
 	public int delFollower(Map map);
 	public List<FollowDTO> suggestedFollows(int sidx);
 	public List<FollowDTO> suggestedFollowersInMain(int sidx);
+	public int otherFollowerCount(int member_idx);
 }

@@ -26,7 +26,7 @@ public interface MemberService {
 	public int quit(int sidx) throws Exception;
 	public List<MemberDTO> followerList(int sidx) throws Exception;
 	public List<MemberDTO> followingList(int sidx) throws Exception;
-	public MemberDTO urlIdxIdSelect(String member_id) throws Exception;
+	public MemberDTO urlIdxIdSelect(String member_id, int sidx) throws Exception;
 	public MemberDTO followListOtherInfo(String member_id) throws Exception;
 	public List<MemberDTO> otherFollowerList(int member_idx, int sidx) throws Exception;
 	public List<MemberDTO> otherFollowingList(int member_idx, int sidx) throws Exception;

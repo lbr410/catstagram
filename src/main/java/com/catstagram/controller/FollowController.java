@@ -1,11 +1,13 @@
 package com.catstagram.controller;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -233,5 +235,69 @@ public class FollowController {
 		}
 		
 		return mav;
+	}
+	
+	// 다른 회원의 Catstagram에서 팔로잉하기(팔로워 증감수 반환)
+	@ResponseBody
+	@PostMapping("/catstagram/account/followingCount")
+	public Map<String, Object> followingCount(@RequestParam("to") int to, HttpSession session) {
+		Map<String, Object> resp = new HashMap<String, Object>();
+		FollowDTO dto = new FollowDTO();
+		DecimalFormat df = new DecimalFormat("#,#");
+		int sidx = (Integer)session.getAttribute("sidx");
+		dto.setMember_from(sidx);
+		dto.setMember_to(to);
+		
+		int followerCount = 0;
+		String followerCount_s = null;
+		try {
+			followService.following(dto);
+			followerCount = followService.otherFollowerCount(to);
+			if(followerCount < 1000) {
+				followerCount_s = followerCount+"";
+			} else if(followerCount >= 1000 && followerCount <= 999999) {
+				followerCount_s = df.format(followerCount)+"K";
+			} else if(followerCount > 1000000) {
+				followerCount_s = df.format(followerCount)+"M";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		resp.put("to", to);
+		resp.put("followerCount", followerCount_s);
+		
+		return resp;
+	}
+	
+	// 다른 회원의 Catstagram에서 팔로잉 취소하기(팔로워 증감수 반환)
+	@ResponseBody
+	@PostMapping("/catstagram/account/cancelFollowingCount")
+	public Map<String, Object> cancelFollowingCount(@RequestParam("to") int to, HttpSession session) {
+		Map<String, Object> resp = new HashMap<String, Object>();
+		FollowDTO dto = new FollowDTO();
+		DecimalFormat df = new DecimalFormat("#,#");
+		int sidx = (Integer)session.getAttribute("sidx");
+		dto.setMember_from(sidx);
+		dto.setMember_to(to);
+
+		int followerCount = 0;
+		String followerCount_s = null;
+		try {
+			followService.cancelFollowing(dto);
+			followerCount = followService.otherFollowerCount(to);
+			if(followerCount < 1000) {
+				followerCount_s = followerCount+"";
+			} else if(followerCount >= 1000 && followerCount <= 999999) {
+				followerCount_s = df.format(followerCount)+"K";
+			} else if(followerCount > 1000000) {
+				followerCount_s = df.format(followerCount)+"M";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		resp.put("to", to);
+		resp.put("followerCount", followerCount_s);
+		
+		return resp;
 	}
 }

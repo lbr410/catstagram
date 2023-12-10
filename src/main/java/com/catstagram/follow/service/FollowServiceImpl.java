@@ -53,4 +53,11 @@ public class FollowServiceImpl implements FollowService {
 		List<FollowDTO> list = mapper.suggestedFollowersInMain(sidx);
 		return list;
 	}
+	
+	// 다른 회원의 팔로워 수(내가 그 회원을 팔로잉 후 증감변화를 알기 위함)
+	@Override
+	public int otherFollowerCount(int member_idx) throws Exception {
+		int result = mapper.otherFollowerCount(member_idx);
+		return result;
+	}
 }

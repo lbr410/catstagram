@@ -10,6 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="/css/catstagram.css">
 <link rel="stylesheet" type="text/css" href="/css/main.css">
+<script type="text/javascript" src="/js/xmlHttpRequest.js"></script>
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -29,7 +30,12 @@
                     	<input type="button" value="프로필 수정" class="btn btn-secondary catstagram_profile_update_btn" onclick="javascript: location.href='/catstagram/account/profileUpdate'">
                     </c:if>
                     <c:if test="${sessionScope.sidx ne dto.member_idx}">
-                    	<input type="button" value="팔로우" class="btn btn-primary catstagram_follow_btn">
+                    	<c:if test="${dto.is_follow eq 0}">
+                    		<input type="button" value="팔로우" class="btn btn-primary catstagram_follow_btn" id="follow${dto.member_idx}" onclick="addFollowing(${dto.member_idx})">
+                    	</c:if>
+                    	<c:if test="${dto.is_follow ne 0}">
+                    		<input type="button" value="팔로잉" class="btn btn-secondary follow_list_del_btn" id="following${dto.member_idx}" onclick="cancelFollowing(${dto.member_idx})">
+                    	</c:if>
                     </c:if>
                 </span>
                 <span>
@@ -41,7 +47,7 @@
             <div class="catstagram_statistics_div">
                 게시물 <span class="cnt_span">${dto.feed_count_KM}</span>
                 팔로워 
-                <span class="cnt_span2" 
+                <span class="cnt_span2" id="follow_count_span"
                 onclick="<c:if test='${sessionScope.sidx eq dto.member_idx}'>location.href='/catstagram/account/follower'</c:if><c:if test='${sessionScope.sidx ne dto.member_idx}'>location.href='/catstagram/${dto.member_id}/follower'</c:if>">
                 	${dto.follower_count_KM}
                 </span>
@@ -223,6 +229,79 @@
     function scrollToTop() {
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+    }
+    
+ 	// 팔로잉(친구추가)
+    function addFollowing(member_idx) {	
+    	const XHR = new XMLHttpRequest();
+    	XHR.onreadystatechange = function() {
+    		if(XHR.readyState == 4 && XHR.status == 200) {
+    			const result = JSON.parse(XHR.responseText);
+    			const followBtn = document.getElementById('follow'+result.to);
+    			let followingBtn = document.getElementById('following'+result.to);
+    			const parentDiv = followBtn.parentNode;
+    			
+    			if(parentDiv) {
+    				parentDiv.removeChild(followBtn); // 팔로우 버튼 없앰
+    				document.getElementById('follow_count_span').innerHTML = result.followerCount;
+    				
+    				if(!followingBtn) {
+    					followingBtn = document.createElement("input");
+    					followingBtn.type = "button";
+    					followingBtn.value = "팔로잉";
+    					followingBtn.id = "following"+result.to;
+    					followingBtn.className = "btn btn-secondary follow_list_del_btn";
+    					followingBtn.onclick = () => {
+    						cancelFollowing(result.to);
+    					}
+    					
+    					if(parentDiv) {
+    						parentDiv.appendChild(followingBtn);
+    					}
+    				}
+    			}
+    		}
+    	}
+    	XHR.open('POST', '/catstagram/account/followingCount', true);
+    	XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    	XHR.send('to='+member_idx);
+    }
+    
+    // 팔로잉 취소(친구삭제)
+    function cancelFollowing(member_idx) {
+    	const param = 'to='+member_idx;
+    	sendRequest('/catstagram/account/cancelFollowingCount', param, cancelFollowingCallBack, 'POST');
+    }
+    
+    function cancelFollowingCallBack() {
+    	if(XHR.readyState == 4) {
+    		if(XHR.status == 200) {
+    			const result = JSON.parse(XHR.responseText);
+    			const followingBtn = document.getElementById('following'+result.to);
+    			let followBtn = document.getElementById('follow'+result.to);
+    			const parentDiv = followingBtn.parentNode;
+    			
+    			if(parentDiv) {
+    				parentDiv.removeChild(followingBtn); // 팔로잉(취소) 버튼 없앰
+    				document.getElementById('follow_count_span').innerHTML = result.followerCount;
+    				
+    				if(!followBtn) {
+    					followBtn = document.createElement("input");
+    					followBtn.type = "button";
+    					followBtn.value = "팔로우";
+    					followBtn.id = "follow"+result.to;
+    					followBtn.className = "btn btn-primary catstagram_follow_btn";
+    					followBtn.onclick = () => {
+    						addFollowing(result.to);
+    					}
+    					
+    					if(parentDiv) {
+    						parentDiv.appendChild(followBtn);
+    					}
+    				}
+    			}
+    		}
+    	}
     }
 </script>
 </html>

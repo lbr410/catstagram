@@ -10,4 +10,5 @@ public interface FollowService {
 	public int delFollower(int member_idx, int sidx) throws Exception;
 	public List<FollowDTO> suggestedFollows(int sidx) throws Exception;
 	public List<FollowDTO> suggestedFollowersInMain(int sidx) throws Exception;
+	public int otherFollowerCount(int member_idx) throws Exception;
 }

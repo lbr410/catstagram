@@ -22,12 +22,13 @@ public class CatstagramController {
 	@GetMapping("/catstagram/{member_id}")
 	public ModelAndView catstagram(@PathVariable String member_id, HttpSession session) {
 		Integer w_sidx = (Integer)session.getAttribute("sidx");
+		int sidx = (Integer)session.getAttribute("sidx");
 		ModelAndView mav = new ModelAndView();
 		DecimalFormat df = new DecimalFormat("#,#");
 		
 		MemberDTO dto = null;
 		try {
-			dto = memberService.urlIdxIdSelect(member_id);
+			dto = memberService.urlIdxIdSelect(member_id, sidx);
 			if(dto != null) {
 				if(dto.getMember_intro() != null) {
 					dto.setMember_intro(dto.getMember_intro().replace("\n", "<br>"));

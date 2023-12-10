@@ -19,7 +19,7 @@ public interface MemberMapper {
 	public int quit(int sidx);
 	public List<MemberDTO> followerList(int sidx);
 	public List<MemberDTO> followingList(int sidx);
-	public MemberDTO urlIdxIdSelect(String member_id);
+	public MemberDTO urlIdxIdSelect(Map map);
 	public MemberDTO followListOtherInfo(String member_id);
 	public List<MemberDTO> otherFollowerList(Map map);
 	public List<MemberDTO> otherFollowingList(Map map);

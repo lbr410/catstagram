@@ -15,7 +15,7 @@ body {
     flex: 1;
 }
 
-.catstagram_profile_div{
+.catstagram_profile_div {
     width: 1000px;
     height: 250px;
     text-align: center;
@@ -75,6 +75,18 @@ body {
     font-weight: bold;
     width: 80px;
     line-height: 15px;
+}
+
+.follow_list_del_btn {
+    border: none;
+	border-radius: 5px;
+	background: #d9d9d9;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 80px;
+    line-height: 15px;
+    color: #555555;
 }
 
 .catstagram_profile_setting_img {

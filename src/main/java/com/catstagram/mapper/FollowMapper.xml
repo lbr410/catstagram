@@ -78,8 +78,12 @@
 		        m.member_id as following_id_of_my_following,
 		        m.member_name as following_name_of_my_following,
 		        m.member_img as following_img_of_my_following,
-		        count(*) - 1 as num_of_followers,
-		        listagg(m2.member_id, ',') within group (order by m2.member_id) as my_following_list
+		        count(case when m2.member_id in
+                	(select m.member_id from catstagram_member m, catstagram_follow f where m.member_idx = f.member_to and f.member_from = 1) 
+					 then 1 else null end) - 1 as num_of_followers,
+		        listagg(case when m2.member_id in 
+                    (select m.member_id from catstagram_member m, catstagram_follow f where m.member_idx = f.member_to and f.member_from = 1) 
+                     then m2.member_id else null end, ',') within group (order by m2.member_id) as my_following_list
 		    from
 		        catstagram_member m
 		    join
@@ -114,5 +118,10 @@
 		    order by
 		        dbms_random.value)
 		where rownum <![CDATA[<=]]> 3
+	</select>
+	
+	<!-- 다른 회원의 팔로워 수(내가 그 회원을 팔로잉 후 증감변화를 알기 위함) -->
+	<select id="otherFollowerCount" parameterType="Integer" resultType="Integer">
+		select count(*) from catstagram_follow where member_to = #{member_idx}
 	</select>
 </mapper>
