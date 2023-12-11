@@ -1,4 +1,9 @@
 @charset "UTF-8";
+@font-face {
+    font-family: 'Billabong';
+    src: url('/font/billabong.otf') format('opentype');
+}
+
 .signup_form {
 	margin-top: 150px;
 	margin-bottom: 0;

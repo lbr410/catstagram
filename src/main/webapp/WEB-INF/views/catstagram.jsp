@@ -49,15 +49,16 @@
             </div>
             <div class="catstagram_statistics_div">
                 게시물 <span class="cnt_span">${dto.feed_count_KM}</span>
-                팔로워 
+                <span>팔로워</span> 
                 <span class="cnt_span2" id="follow_count_span"
                 onclick="<c:if test='${sessionScope.sidx eq dto.member_idx}'>location.href='/catstagram/account/follower'</c:if><c:if test='${sessionScope.sidx ne dto.member_idx}'>location.href='/catstagram/${dto.member_id}/follower'</c:if>">
                 	${dto.follower_count_KM}
                 </span>
-                팔로잉 
+                <span>팔로잉
                 <span class="cnt_span2" 
                 onclick="<c:if test='${sessionScope.sidx eq dto.member_idx}'>location.href='/catstagram/account/following'</c:if><c:if test='${sessionScope.sidx ne dto.member_idx}'>location.href='/catstagram/${dto.member_id}/following'</c:if>">
                 	${dto.following_count_KM}
+                </span>
                 </span>
             </div>
             <div class="catstagram_profile_name_div">

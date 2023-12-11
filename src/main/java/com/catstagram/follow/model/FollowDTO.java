@@ -1,5 +1,7 @@
 package com.catstagram.follow.model;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,7 @@ public class FollowDTO {
 	private int follow_idx;
 	private int member_from;
 	private int member_to;
+	private Date follow_date;
 	private int following_idx_of_my_following; // 내가 친구 추가한 사람의 친구의 idx
 	private String following_id_of_my_following; // 내가 친구 추가한 사람의 친구의 id
 	private String following_name_of_my_following; // 내가 친구 추가한 사람의 친구의 name

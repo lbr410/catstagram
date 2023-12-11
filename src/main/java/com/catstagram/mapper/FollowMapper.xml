@@ -8,7 +8,7 @@
 		insert into
 			catstagram_follow
 		values
-			(catstagram_follow_idx.nextval, #{member_from}, #{member_to})
+			(catstagram_follow_idx.nextval, #{member_from}, #{member_to}, sysdate)
 	</insert>
 	
 	<!-- 팔로잉 취소(친구삭제) -->
