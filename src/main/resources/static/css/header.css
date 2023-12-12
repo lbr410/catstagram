@@ -113,3 +113,13 @@ input::placeholder {
 .menu_font {
 	font-size: 14px;
 }
+
+.alarm_size {
+	width: 400px;
+	height: 200px;
+}
+
+.alarm-prop-size {
+	width: 400px;
+	height: 60px;
+}
