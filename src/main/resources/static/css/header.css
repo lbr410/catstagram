@@ -117,9 +117,12 @@ input::placeholder {
 .alarm_size {
 	width: 400px;
 	height: 200px;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .alarm-prop-size {
-	width: 400px;
+	width: 398px;
 	height: 60px;
+	white-space: normal;
 }

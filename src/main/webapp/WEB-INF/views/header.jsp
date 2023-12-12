@@ -32,13 +32,13 @@
 		  			</span>
 	  			</span>
 	  			<ul class="dropdown-menu dropdown-menu-end alarm_size">
-					<li class="alarm-prop-size dropdown-item menu_font">ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</li>
-				    <li class="alarm-prop-size"><a class="dropdown-item menu_font" href="#">알림2</a></li>
-				    <li class="alarm-prop-size"><a class="dropdown-item menu_font" href="#">알림3</a></li>
-				    <li class="alarm-prop-size"><a class="dropdown-item menu_font" href="#">알림4</a></li>
-				    <li class="alarm-prop-size"><a class="dropdown-item menu_font" href="#">알림5</a></li>
-				    <li class="alarm-prop-size"><a class="dropdown-item menu_font" href="#">알림6</a></li>
-				    <li class="alarm-prop-size"><a class="dropdown-item menu_font" href="#">알림7</a></li>
+					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
+					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
+					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
+					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
+					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
+					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
+					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
 				</ul>
   			</div>
 			<div class="btn-group">
