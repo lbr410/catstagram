@@ -32,13 +32,17 @@
 		  			</span>
 	  			</span>
 	  			<ul class="dropdown-menu dropdown-menu-end alarm_size">
-					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
-					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
-					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
-					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
-					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
-					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
-					<li class="alarm-prop-size dropdown-item menu_font">ramiee__l님이 팔로우합니다.</li>
+					<li class="alarm-prop-size dropdown-item menu_font">
+						<img src="/img/profile2.jpg" class="alarm_img">
+						<a>ramiee__l님이 팔로우합니다.가나다라마바사아자차카타파하가나다라마바사</a>
+						<div class="alarm_time">1시간</div>
+					</li>
+					<li class="alarm-prop-size dropdown-item menu_font"><img src="/img/profile2.jpg" class="alarm_img"><a>ramiee__l님이 팔로우합니다.</a></li>
+					<li class="alarm-prop-size dropdown-item menu_font"><img src="/img/profile2.jpg" class="alarm_img"><a>ramiee__l님이 팔로우합니다.</a></li>
+					<li class="alarm-prop-size dropdown-item menu_font"><a>ramiee__l님이 팔로우합니다.</a></li>
+					<li class="alarm-prop-size dropdown-item menu_font"><a>ramiee__l님이 팔로우합니다.</a></li>
+					<li class="alarm-prop-size dropdown-item menu_font"><a>ramiee__l님이 팔로우합니다.</a></li>
+					<li class="alarm-prop-size dropdown-item menu_font"><a>ramiee__l님이 팔로우합니다.</a></li>
 				</ul>
   			</div>
 			<div class="btn-group">
