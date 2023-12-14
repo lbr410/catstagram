@@ -47,7 +47,8 @@ body {width: 100%; height: 100%; margin: 0; padding: 0; overflow-y: scroll; posi
 }
 
 .search_div {
-	margin-right: 200px;
+	/*margin-right: 200px;*/
+	margin-right: 245px;
 	display: flex;
     align-items: center;
     background-color: #FBF9F9;
@@ -104,9 +105,9 @@ input::placeholder {
 }
 
 .header_profile_img {
-	width: 29px;
-	height: 29px;
-	border-radius: 29px;
+	width: 27px;
+	height: 27px;
+	border-radius: 27px;
 	cursor: pointer;
 }
 

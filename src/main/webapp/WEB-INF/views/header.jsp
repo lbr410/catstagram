@@ -22,12 +22,11 @@
 		</form>
 		<div class="menu_div">
 			<img src="/img/home.png" class="menu_img" onclick="javascript: location.href='/catstagram'">
-			<img src="/img/dm.png" class="menu_img">
+			
 			<img src="/img/feed.png" class="menu_img" onclick="javascript: location.href='/catstagram/account/feedWrite'">
 			<div class="btn-group">
 				<span class="position-relative" data-bs-toggle="dropdown" aria-expanded="false" id="alarms">
 					<img src="/img/heart.png" class="menu_img" onclick="redDotRemove(); lastAlarmTime();">
-					
 	  			</span>
 	  			<ul class="dropdown-menu dropdown-menu-end alarm_size">
 	  				<c:forEach var="alarm" items="${alarmList}">
