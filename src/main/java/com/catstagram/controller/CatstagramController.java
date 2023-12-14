@@ -100,12 +100,14 @@ public class CatstagramController {
 				
 				// 해당 회원은 내 팔로우들 중 누가누가 팔로잉했는지
 				whoFollow = followService.whoFollow(dto.getMember_idx(), sidx);
-				if(whoFollow.getNum_of_followers() == -1) {
-					whoFollow.setNum_of_followers(0);
-				}
-				if(whoFollow.getMy_following_list() != null) {
-					followingList = whoFollow.getMy_following_list().split(",");
-					whoFollow.setMy_following_list_arr(followingList);
+				if(whoFollow != null) {
+					if(whoFollow.getNum_of_followers() == -1) {
+						whoFollow.setNum_of_followers(0);
+					}
+					if(whoFollow.getMy_following_list() != null) {
+						followingList = whoFollow.getMy_following_list().split(",");
+						whoFollow.setMy_following_list_arr(followingList);
+					}
 				}
 			}
 		} catch (Exception e) {

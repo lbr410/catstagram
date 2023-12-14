@@ -1,6 +1,10 @@
 package com.catstagram.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +50,7 @@ public class IndexController {
 			System.out.println("sid : "+session.getAttribute("sid"));
 			System.out.println("sname : "+session.getAttribute("sname"));
 			System.out.println("simg : "+session.getAttribute("simg"));
+			System.out.println("lastTime : "+session.getAttribute("lastTime"));
 		} else {
 			int sidx = (Integer)session.getAttribute("sidx");
 			
@@ -165,10 +170,25 @@ public class IndexController {
 			session.setAttribute("sname", dto.getMember_name());
 			session.setAttribute("simg", dto.getMember_img());
 			
-			System.out.println(dto.getMember_idx());
-			System.out.println(dto.getMember_id());
-			System.out.println(dto.getMember_name());
-			System.out.println(dto.getMember_img());
+			System.out.println("sidx : "+dto.getMember_idx());
+			System.out.println("sid : "+dto.getMember_id());
+			System.out.println("sname : "+dto.getMember_name());
+			System.out.println("simg : "+dto.getMember_img());
+			
+			// 내가 본 알림들 중 마지막 알림을 session에 저장
+			int sidx = (Integer)session.getAttribute("sidx");
+			Date lastTime = null;
+			try {
+				lastTime = memberService.lastAlarmTime(sidx);
+				
+				if(lastTime != null) {
+					Timestamp timestampDate = new Timestamp(lastTime.getTime());
+					session.setAttribute("lastTime", timestampDate);
+					System.out.println("lastTime : "+timestampDate);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 			mav.setViewName("redirect:/catstagram");
 		} else if(result == memberService.LOGIN_FAIL || result == memberService.ERROR) {

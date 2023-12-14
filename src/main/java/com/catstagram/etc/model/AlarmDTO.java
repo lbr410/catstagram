@@ -1,6 +1,6 @@
 package com.catstagram.etc.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +25,5 @@ public class AlarmDTO {
 	private int comment_like_idx;
 	private Date alarm_date;
 	private int alarm_date_minute;
-	private String alarm_date_string;
+	private String alarm_date_string; // 분, 일, 주로 나타낸 것
 }

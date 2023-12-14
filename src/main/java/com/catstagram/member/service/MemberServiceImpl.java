@@ -174,4 +174,21 @@ public class MemberServiceImpl implements MemberService {
 		List<AlarmDTO> list = mapper.alarmList(sidx);
 		return list;
 	}
+	
+	// 내가 본 알림들 중 마지막 알림의 시간
+	@Override
+	public Date lastAlarmTime(int sidx) throws Exception {
+		Date lastTime = mapper.lastAlarmTime(sidx);
+		return lastTime;
+	}
+	
+	// DB에 마지막 알림의 시간을 저장
+	@Override
+	public int lastAlarmSave(java.sql.Timestamp lastTime, int sidx) throws Exception {
+		Map map = new HashMap();
+		map.put("lastTime", lastTime);
+		map.put("sidx", sidx);
+		int result = mapper.lastAlarmSave(map);
+		return result;
+	}
 }

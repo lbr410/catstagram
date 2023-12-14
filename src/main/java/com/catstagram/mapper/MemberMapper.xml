@@ -13,7 +13,7 @@
 		insert into
 			catstagram_member
 		values
-			(catstagram_member_idx.nextval, #{member_id}, #{member_name}, #{member_pwd}, '', '', '', sysdate, 'n')
+			(catstagram_member_idx.nextval, #{member_id}, #{member_name}, #{member_pwd}, '', '', '', sysdate, 'n', null)
 	</insert>
 	
 	<!-- 로그인 -->
@@ -186,38 +186,11 @@
 	
 	<!-- 내가 본 알림들 중 마지막 알림의 시간 -->
 	<select id="lastAlarmTime" parameterType="Integer" resultType="java.util.Date">
-		select * from (
-			select f.follow_date as alarm_date
-			from catstagram_member m, catstagram_follow f
-			where f.member_to = #{sidx} 
-			and m.member_idx = f.member_from
-			
-			union all
-			select fl.feed_like_date as alarm_date
-			from catstagram_member m, catstagram_feed fe, catstagram_feed_like fl
-			where fe.member_idx = #{sidx}
-			and m.member_idx = fl.member_idx
-			and fe.feed_idx = fl.feed_idx
-			and fl.member_idx <![CDATA[<>]]> #{sidx}
-			
-			union all 
-			select c.comment_date as alarm_date
-			from catstagram_member m, catstagram_feed fe, catstagram_comment c
-			where fe.member_idx = #{sidx}
-			and m.member_idx = c.member_idx
-			and fe.feed_idx = c.feed_idx
-			and c.member_idx <![CDATA[<>]]> #{sidx}
-			
-			union all
-			select cl.comment_like_date as alarm_date
-			from catstagram_member m, catstagram_feed fe, catstagram_comment c, catstagram_comment_like cl
-			where m.member_idx = cl.member_idx
-			and c.feed_idx = fe.feed_idx
-			and cl.member_idx <![CDATA[<>]]> #{sidx}
-			and c.member_idx = #{sidx}
-			and cl.member_idx = m.member_idx
-			and c.comment_idx = cl.comment_idx
-			order by alarm_date desc
-		) where rownum = 1
+		select member_last_alarm_time from catstagram_member where member_idx = #{sidx}
 	</select>
+	
+	<!-- DB에 마지막 알림의 시간을 저장 -->
+	<update id="lastAlarmSave" parameterType="map">
+		update catstagram_member set member_last_alarm_time = #{lastTime} where member_idx = #{sidx}
+	</update>
 </mapper>

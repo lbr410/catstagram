@@ -21,6 +21,7 @@ public class LogoutController {
 			session.removeAttribute("sid");
 			session.removeAttribute("sname");
 			session.removeAttribute("simg");
+			session.removeAttribute("lastTime");
 			mav.setViewName("redirect:/catstagram");
 		} else {
 			mav.addObject("msg", "잘못된 접근입니다.");

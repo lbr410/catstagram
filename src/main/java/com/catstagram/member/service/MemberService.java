@@ -1,7 +1,7 @@
 package com.catstagram.member.service;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import com.catstagram.etc.model.AlarmDTO;
 import com.catstagram.member.model.MemberDTO;
@@ -32,4 +32,6 @@ public interface MemberService {
 	public List<MemberDTO> otherFollowerList(int member_idx, int sidx) throws Exception;
 	public List<MemberDTO> otherFollowingList(int member_idx, int sidx) throws Exception;
 	public List<AlarmDTO> alarmList(int sidx) throws Exception;
+	public Date lastAlarmTime(int sidx) throws Exception;
+	public int lastAlarmSave(java.sql.Timestamp lastTime, int sidx) throws Exception;
 }

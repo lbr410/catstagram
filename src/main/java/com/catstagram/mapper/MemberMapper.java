@@ -25,4 +25,6 @@ public interface MemberMapper {
 	public List<MemberDTO> otherFollowerList(Map map);
 	public List<MemberDTO> otherFollowingList(Map map);
 	public List<AlarmDTO> alarmList(int sidx);
+	public Date lastAlarmTime(int sidx);
+	public int lastAlarmSave(Map map);
 }
