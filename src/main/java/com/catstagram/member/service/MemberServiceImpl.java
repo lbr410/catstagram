@@ -5,6 +5,7 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.catstagram.etc.model.AlarmDTO;
 import com.catstagram.mapper.MemberMapper;
 import com.catstagram.member.model.MemberDTO;
 
@@ -164,6 +165,13 @@ public class MemberServiceImpl implements MemberService {
 		map.put("member_idx", member_idx);
 		map.put("sidx", sidx);
 		List<MemberDTO> list = mapper.otherFollowingList(map);
+		return list;
+	}
+	
+	// Header의 알림 목록
+	@Override
+	public List<AlarmDTO> alarmList(int sidx) throws Exception {
+		List<AlarmDTO> list = mapper.alarmList(sidx);
 		return list;
 	}
 }

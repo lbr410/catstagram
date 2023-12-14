@@ -2,6 +2,7 @@ package com.catstagram.mapper;
 
 import java.util.*;
 
+import com.catstagram.etc.model.AlarmDTO;
 import com.catstagram.member.model.MemberDTO;
 
 public interface MemberMapper {
@@ -23,4 +24,5 @@ public interface MemberMapper {
 	public MemberDTO followListOtherInfo(String member_id);
 	public List<MemberDTO> otherFollowerList(Map map);
 	public List<MemberDTO> otherFollowingList(Map map);
+	public List<AlarmDTO> alarmList(int sidx);
 }

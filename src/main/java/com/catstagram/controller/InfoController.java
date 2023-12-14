@@ -1,5 +1,7 @@
 package com.catstagram.controller;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catstagram.encryption.Encryption;
+import com.catstagram.etc.model.AlarmDTO;
 import com.catstagram.member.model.MemberDTO;
 import com.catstagram.member.service.MemberService;
 
@@ -26,12 +29,37 @@ public class InfoController {
 	public ModelAndView infoUpdateForm(HttpSession session) {
 		Integer w_sidx = (Integer)session.getAttribute("sidx");
 		ModelAndView mav = new ModelAndView();
+		int sidx = (Integer)session.getAttribute("sidx");
 		
 		if(w_sidx == null) {
 			mav.addObject("msg", "잘못된 접근입니다.");
 			mav.addObject("goUrl", "/catstagram");
 			mav.setViewName("msg/msg");
 		} else {
+			// Header의 알림 목록
+			List<AlarmDTO> alarmList = null;
+			try {
+				alarmList = memberService.alarmList(sidx);
+				for(int i=0; i<alarmList.size(); i++) {
+					// 알림이 생긴지 1시간 미만일 경우
+					if(alarmList.get(i).getAlarm_date_minute() < 60) {
+						alarmList.get(i).setAlarm_date_string(alarmList.get(i).getAlarm_date_minute()+"분");
+					// 알림이 생긴지 24시간(하루) 미만일 경우
+					} else if(alarmList.get(i).getAlarm_date_minute() >= 60 && alarmList.get(i).getAlarm_date_minute() < 1440) {
+						alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/60)+"시간");
+					// 알림이 생긴지 24시간 이상일 경우
+					} else if(alarmList.get(i).getAlarm_date_minute() >= 1440 && alarmList.get(i).getAlarm_date_minute() < 10080) {
+						alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/1440)+"일");
+					// 알림이 생긴지 7일(일주일) 이상일 경우
+					} else if(alarmList.get(i).getAlarm_date_minute() >= 10080) {
+						alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/10080)+"주");
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			mav.addObject("alarmList", alarmList);
 			mav.setViewName("infoUpdate");
 		}
 		return mav;
@@ -71,6 +99,30 @@ public class InfoController {
 		ModelAndView mav = new ModelAndView();
 		
 		if(!page.equals("") && page.equals("p") && page != null && sidx != null) {
+			// Header의 알림 목록
+			List<AlarmDTO> alarmList = null;
+			try {
+				alarmList = memberService.alarmList(sidx);
+				for(int i=0; i<alarmList.size(); i++) {
+					// 알림이 생긴지 1시간 미만일 경우
+					if(alarmList.get(i).getAlarm_date_minute() < 60) {
+						alarmList.get(i).setAlarm_date_string(alarmList.get(i).getAlarm_date_minute()+"분");
+					// 알림이 생긴지 24시간(하루) 미만일 경우
+					} else if(alarmList.get(i).getAlarm_date_minute() >= 60 && alarmList.get(i).getAlarm_date_minute() < 1440) {
+						alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/60)+"시간");
+					// 알림이 생긴지 24시간 이상일 경우
+					} else if(alarmList.get(i).getAlarm_date_minute() >= 1440 && alarmList.get(i).getAlarm_date_minute() < 10080) {
+						alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/1440)+"일");
+					// 알림이 생긴지 7일(일주일) 이상일 경우
+					} else if(alarmList.get(i).getAlarm_date_minute() >= 10080) {
+						alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/10080)+"주");
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			mav.addObject("alarmList", alarmList);
 			mav.addObject("page", page);
 			mav.setViewName("pwdChk");
 		} else if(page.equals("") || page == null || !page.equals("p") || sidx == null) {
@@ -90,6 +142,30 @@ public class InfoController {
 		ModelAndView mav = new ModelAndView();
 		
 		if(!page.equals("") && page.equals("q") && page != null && sidx != null) {
+			// Header의 알림 목록
+			List<AlarmDTO> alarmList = null;
+			try {
+				alarmList = memberService.alarmList(sidx);
+				for(int i=0; i<alarmList.size(); i++) {
+					// 알림이 생긴지 1시간 미만일 경우
+					if(alarmList.get(i).getAlarm_date_minute() < 60) {
+						alarmList.get(i).setAlarm_date_string(alarmList.get(i).getAlarm_date_minute()+"분");
+					// 알림이 생긴지 24시간(하루) 미만일 경우
+					} else if(alarmList.get(i).getAlarm_date_minute() >= 60 && alarmList.get(i).getAlarm_date_minute() < 1440) {
+						alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/60)+"시간");
+					// 알림이 생긴지 24시간 이상일 경우
+					} else if(alarmList.get(i).getAlarm_date_minute() >= 1440 && alarmList.get(i).getAlarm_date_minute() < 10080) {
+						alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/1440)+"일");
+					// 알림이 생긴지 7일(일주일) 이상일 경우
+					} else if(alarmList.get(i).getAlarm_date_minute() >= 10080) {
+						alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/10080)+"주");
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			mav.addObject("alarmList", alarmList);
 			mav.addObject("page", page);
 			mav.setViewName("pwdChk");
 		} else if(page.equals("") || page == null || !page.equals("q") || sidx == null) {
@@ -116,6 +192,31 @@ public class InfoController {
 		
 		if(dbPwd.equals(Encryption.sha256(member_pwd))) {
 			if(!page.equals("") && page != null && sidx != null) {
+				// Header의 알림 목록
+				List<AlarmDTO> alarmList = null;
+				try {
+					alarmList = memberService.alarmList(sidx);
+					for(int i=0; i<alarmList.size(); i++) {
+						// 알림이 생긴지 1시간 미만일 경우
+						if(alarmList.get(i).getAlarm_date_minute() < 60) {
+							alarmList.get(i).setAlarm_date_string(alarmList.get(i).getAlarm_date_minute()+"분");
+						// 알림이 생긴지 24시간(하루) 미만일 경우
+						} else if(alarmList.get(i).getAlarm_date_minute() >= 60 && alarmList.get(i).getAlarm_date_minute() < 1440) {
+							alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/60)+"시간");
+						// 알림이 생긴지 24시간 이상일 경우
+						} else if(alarmList.get(i).getAlarm_date_minute() >= 1440 && alarmList.get(i).getAlarm_date_minute() < 10080) {
+							alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/1440)+"일");
+						// 알림이 생긴지 7일(일주일) 이상일 경우
+						} else if(alarmList.get(i).getAlarm_date_minute() >= 10080) {
+							alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/10080)+"주");
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				mav.addObject("alarmList", alarmList);
+				
 				if(page.equals("p")) {
 					mav.setViewName("pwdUpdate");
 				} else if(page.equals("q")) {

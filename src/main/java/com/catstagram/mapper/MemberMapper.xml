@@ -139,4 +139,85 @@
 		order by
 			case when m.member_idx = #{sidx} then 0 else 1 end, is_follow nulls last
 	</select>
+	
+	<!-- Header의 알림 목록 -->
+	<select id="alarmList" parameterType="Integer" resultType="com.catstagram.etc.model.AlarmDTO">
+		select * from ( 
+			select 'follow' as activity_type, m.member_id, f.follow_idx, null as feed_idx, null as feed_img, null as feed_like_idx, null as comment_idx, 
+			null as comment_content, null as comment_like_idx, f.follow_date as alarm_date, trunc((sysdate-f.follow_date) * 24 * 60) as alarm_date_minute
+			from catstagram_member m, catstagram_follow f
+			where f.member_to = #{sidx} 
+			and m.member_idx = f.member_from
+			
+			union all
+			
+			select 'feedLike' as activity_type, m.member_id, null as follow_idx, fe.feed_idx, fe.feed_img, fl.feed_like_idx, null as comment_idx,
+			null as comment_content, null as comment_like_idx, fl.feed_like_date as alarm_date, trunc((sysdate-fl.feed_like_date) * 24 * 60) as alarm_date_minute
+			from catstagram_member m, catstagram_feed fe, catstagram_feed_like fl
+			where fe.member_idx = #{sidx}
+			and m.member_idx = fl.member_idx
+			and fe.feed_idx = fl.feed_idx
+			and fl.member_idx <![CDATA[<>]]> #{sidx} 
+			
+			union all 
+			
+			select 'comment' as activity_type, m.member_id, null as follow_idx, fe.feed_idx, fe.feed_img, null as feed_like_idx, c.comment_idx, 
+			c.comment_content, null as comment_like_idx, c.comment_date as alarm_date, trunc((sysdate-c.comment_date) * 24 * 60) as alarm_date_minute
+			from catstagram_member m, catstagram_feed fe, catstagram_comment c
+			where fe.member_idx = #{sidx}
+			and m.member_idx = c.member_idx
+			and fe.feed_idx = c.feed_idx
+			and c.member_idx <![CDATA[<>]]> #{sidx}
+			
+			union all
+			
+			select 'commentLike' as activity_type, m.member_id, null as follow_idx, fe.feed_idx, fe.feed_img, null as feed_like_idx, c.comment_idx, 
+			c.comment_content, cl.comment_like_idx, cl.comment_like_date as alarm_date, trunc((sysdate-cl.comment_like_date) * 24 * 60) as alarm_date_minute
+			from catstagram_member m, catstagram_feed fe, catstagram_comment c, catstagram_comment_like cl
+			where m.member_idx = cl.member_idx
+			and c.feed_idx = fe.feed_idx
+			and cl.member_idx <![CDATA[<>]]> #{sidx}
+			and c.member_idx = #{sidx}
+			and cl.member_idx = m.member_idx
+			and c.comment_idx = cl.comment_idx
+			order by alarm_date desc
+		) where rownum <![CDATA[<=]]> 40
+	</select>
+	
+	<!-- 내가 본 알림들 중 마지막 알림의 시간 -->
+	<select id="lastAlarmTime" parameterType="Integer" resultType="java.util.Date">
+		select * from (
+			select f.follow_date as alarm_date
+			from catstagram_member m, catstagram_follow f
+			where f.member_to = #{sidx} 
+			and m.member_idx = f.member_from
+			
+			union all
+			select fl.feed_like_date as alarm_date
+			from catstagram_member m, catstagram_feed fe, catstagram_feed_like fl
+			where fe.member_idx = #{sidx}
+			and m.member_idx = fl.member_idx
+			and fe.feed_idx = fl.feed_idx
+			and fl.member_idx <![CDATA[<>]]> #{sidx}
+			
+			union all 
+			select c.comment_date as alarm_date
+			from catstagram_member m, catstagram_feed fe, catstagram_comment c
+			where fe.member_idx = #{sidx}
+			and m.member_idx = c.member_idx
+			and fe.feed_idx = c.feed_idx
+			and c.member_idx <![CDATA[<>]]> #{sidx}
+			
+			union all
+			select cl.comment_like_date as alarm_date
+			from catstagram_member m, catstagram_feed fe, catstagram_comment c, catstagram_comment_like cl
+			where m.member_idx = cl.member_idx
+			and c.feed_idx = fe.feed_idx
+			and cl.member_idx <![CDATA[<>]]> #{sidx}
+			and c.member_idx = #{sidx}
+			and cl.member_idx = m.member_idx
+			and c.comment_idx = cl.comment_idx
+			order by alarm_date desc
+		) where rownum = 1
+	</select>
 </mapper>

@@ -142,3 +142,19 @@ input::placeholder {
 	margin-left: 10px;
 	color: #7e7e7e;
 }
+
+.alarm_msg_span {
+	width: 300px;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.alarm_msg_span2 {
+	width: 350px;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}

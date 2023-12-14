@@ -12,10 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.catstagram.encryption.Encryption;
+import com.catstagram.etc.model.AlarmDTO;
 import com.catstagram.etc.model.MainFollowingFeedDTO;
 import com.catstagram.feed.service.FeedService;
 import com.catstagram.follow.model.FollowDTO;
@@ -42,6 +42,10 @@ public class IndexController {
 		ModelAndView mav = new ModelAndView();
 		if(w_sidx == null) {
 			mav.setViewName("index");
+			System.out.println("sidx : "+session.getAttribute("sidx"));
+			System.out.println("sid : "+session.getAttribute("sid"));
+			System.out.println("sname : "+session.getAttribute("sname"));
+			System.out.println("simg : "+session.getAttribute("simg"));
 		} else {
 			int sidx = (Integer)session.getAttribute("sidx");
 			
@@ -86,10 +90,36 @@ public class IndexController {
 				e.printStackTrace();
 			}
 			
+			// Header의 알림 목록
+			List<AlarmDTO> alarmList = null;
+			try {
+				alarmList = memberService.alarmList(sidx);
+				for(int i=0; i<alarmList.size(); i++) {
+					// 알림이 생긴지 1시간 미만일 경우
+					if(alarmList.get(i).getAlarm_date_minute() < 60) {
+						alarmList.get(i).setAlarm_date_string(alarmList.get(i).getAlarm_date_minute()+"분");
+					// 알림이 생긴지 24시간(하루) 미만일 경우
+					} else if(alarmList.get(i).getAlarm_date_minute() >= 60 && alarmList.get(i).getAlarm_date_minute() < 1440) {
+						alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/60)+"시간");
+					// 알림이 생긴지 24시간 이상일 경우
+					} else if(alarmList.get(i).getAlarm_date_minute() >= 1440 && alarmList.get(i).getAlarm_date_minute() < 10080) {
+						alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/1440)+"일");
+					// 알림이 생긴지 7일(일주일) 이상일 경우
+					} else if(alarmList.get(i).getAlarm_date_minute() >= 10080) {
+						alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/10080)+"주");
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			mav.addObject("alarmList", alarmList);
 			mav.addObject("mainFollowingFeed", mainFollowingFeed);
 			mav.addObject("suggestedFollowersInMain", suggestedFollowersInMain);
 			mav.setViewName("main");
 		}
+		
+		
 		return mav;
 	}
 	

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.catstagram.etc.model.AlarmDTO;
 import com.catstagram.etc.model.MainFollowingFeedDTO;
 import com.catstagram.feed.service.FeedService;
 import com.catstagram.follow.model.FollowDTO;
@@ -111,10 +112,34 @@ public class CatstagramController {
 			e.printStackTrace();
 		}
 		
+		// Header의 알림 목록
+		List<AlarmDTO> alarmList = null;
+		try {
+			alarmList = memberService.alarmList(sidx);
+			for(int i=0; i<alarmList.size(); i++) {
+				// 알림이 생긴지 1시간 미만일 경우
+				if(alarmList.get(i).getAlarm_date_minute() < 60) {
+					alarmList.get(i).setAlarm_date_string(alarmList.get(i).getAlarm_date_minute()+"분");
+				// 알림이 생긴지 24시간(하루) 미만일 경우
+				} else if(alarmList.get(i).getAlarm_date_minute() >= 60 && alarmList.get(i).getAlarm_date_minute() < 1440) {
+					alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/60)+"시간");
+				// 알림이 생긴지 24시간 이상일 경우
+				} else if(alarmList.get(i).getAlarm_date_minute() >= 1440 && alarmList.get(i).getAlarm_date_minute() < 10080) {
+					alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/1440)+"일");
+				// 알림이 생긴지 7일(일주일) 이상일 경우
+				} else if(alarmList.get(i).getAlarm_date_minute() >= 10080) {
+					alarmList.get(i).setAlarm_date_string((int)Math.floor(alarmList.get(i).getAlarm_date_minute()/10080)+"주");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		if(dto != null && w_sidx != null) {
 			mav.addObject("dto", dto);
 			mav.addObject("whoFollow", whoFollow);
 			mav.addObject("feedList", feedList);
+			mav.addObject("alarmList", alarmList);
 			mav.setViewName("catstagram");
 		} else if(dto == null) {
 			mav.setViewName("emptyPage");

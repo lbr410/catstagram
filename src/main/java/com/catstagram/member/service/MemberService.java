@@ -3,6 +3,7 @@ package com.catstagram.member.service;
 import java.util.List;
 import java.util.Map;
 
+import com.catstagram.etc.model.AlarmDTO;
 import com.catstagram.member.model.MemberDTO;
 
 public interface MemberService {
@@ -30,4 +31,5 @@ public interface MemberService {
 	public MemberDTO followListOtherInfo(String member_id) throws Exception;
 	public List<MemberDTO> otherFollowerList(int member_idx, int sidx) throws Exception;
 	public List<MemberDTO> otherFollowingList(int member_idx, int sidx) throws Exception;
+	public List<AlarmDTO> alarmList(int sidx) throws Exception;
 }

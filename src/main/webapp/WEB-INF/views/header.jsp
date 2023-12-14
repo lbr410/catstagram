@@ -26,23 +26,39 @@
 			<img src="/img/feed.png" class="menu_img" onclick="javascript: location.href='/catstagram/account/feedWrite'">
 			<div class="btn-group">
 				<span class="position-relative" data-bs-toggle="dropdown" aria-expanded="false">
-					<img src="/img/heart.png" class="menu_img">
-					<span class="position-absolute top-0 start-50 translate-middle p-1 bg-danger border border-light rounded-circle">
-		    			<span class="visually-hidden">New alerts</span>
-		  			</span>
+					<img src="/img/heart.png" class="menu_img" onclick="redDotRemove()">
+					<span class="position-absolute top-0 start-50 translate-middle p-1 bg-danger border border-light rounded-circle" id="alarmRedDot"></span>
 	  			</span>
 	  			<ul class="dropdown-menu dropdown-menu-end alarm_size">
-					<li class="alarm-prop-size dropdown-item menu_font">
-						<img src="/img/profile2.jpg" class="alarm_img">
-						<a>ramiee__l님이 팔로우합니다.가나다라마바사아자차카타파하가나다라마바사</a>
-						<div class="alarm_time">1시간</div>
-					</li>
-					<li class="alarm-prop-size dropdown-item menu_font"><img src="/img/profile2.jpg" class="alarm_img"><a>ramiee__l님이 팔로우합니다.</a></li>
-					<li class="alarm-prop-size dropdown-item menu_font"><img src="/img/profile2.jpg" class="alarm_img"><a>ramiee__l님이 팔로우합니다.</a></li>
-					<li class="alarm-prop-size dropdown-item menu_font"><a>ramiee__l님이 팔로우합니다.</a></li>
-					<li class="alarm-prop-size dropdown-item menu_font"><a>ramiee__l님이 팔로우합니다.</a></li>
-					<li class="alarm-prop-size dropdown-item menu_font"><a>ramiee__l님이 팔로우합니다.</a></li>
-					<li class="alarm-prop-size dropdown-item menu_font"><a>ramiee__l님이 팔로우합니다.</a></li>
+	  				<c:forEach var="alarmList" items="${alarmList}">
+	  					<c:if test="${alarmList.activity_type eq 'follow'}">
+	  						<li class="alarm-prop-size dropdown-item menu_font">
+								<div class="alarm_msg_span2">${alarmList.member_id}님이 팔로우하기 시작했습니다.</div>
+								<div class="alarm_time">${alarmList.alarm_date_string}</div>
+							</li>
+	  					</c:if>
+	  					<c:if test="${alarmList.activity_type eq 'feedLike'}">
+	  						<li class="alarm-prop-size dropdown-item menu_font">
+								<img src="/upload/feed/${alarmList.feed_img}" class="alarm_img">
+								<div class="alarm_msg_span">${alarmList.member_id}님이 회원님의 게시물을 좋아합니다.</div>
+								<div class="alarm_time">${alarmList.alarm_date_string}</div>
+							</li>
+	  					</c:if>
+	  					<c:if test="${alarmList.activity_type eq 'comment'}">
+	  						<li class="alarm-prop-size dropdown-item menu_font">
+								<img src="/upload/feed/${alarmList.feed_img}" class="alarm_img">
+								<div class="alarm_msg_span">${alarmList.member_id}님이 회원님의 게시글에 댓글을 남겼습니다. "${alarmList.comment_content}"</div>
+								<div class="alarm_time">${alarmList.alarm_date_string}</div>
+							</li>
+	  					</c:if>
+	  					<c:if test="${alarmList.activity_type eq 'commentLike'}">
+	  						<li class="alarm-prop-size dropdown-item menu_font">
+								<img src="/upload/feed/${alarmList.feed_img}" class="alarm_img">
+								<div class="alarm_msg_span">${alarmList.member_id}님이 회원님의 댓글을 좋아합니다. "${alarmList.comment_content}"</div>
+								<div class="alarm_time">${alarmList.alarm_date_string}</div>
+							</li>
+	  					</c:if>
+	  				</c:forEach>
 				</ul>
   			</div>
 			<div class="btn-group">
@@ -63,4 +79,10 @@
 		</div>
 	</div>
 </body>
+<script>
+	// 알림창 클릭시 빨간 점 표시 없애기
+	function redDotRemove() {
+		document.getElementById('alarmRedDot').remove();
+	}
+</script>
 </html>
