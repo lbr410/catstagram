@@ -11,6 +11,7 @@ body {
 	margin-top: 120px;
 	text-align: center;
     color: #555555;
+    cursor: default;
 }
 
 .follow_nav_div {
