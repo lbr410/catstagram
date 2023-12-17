@@ -9,7 +9,6 @@ body {
 
 .all_div {
     margin: 70px auto;
-    /*margin: 0 auto;*/
     width: 1100px;
     display: flex;
     margin-bottom: 60px;
@@ -56,20 +55,6 @@ body {
 .feed_img_div {
     margin-top: 13px;
     border: 1px solid #d9d9d9;
-    /*display: inline-block;*/
-    /*width: 600px;
-    height: 350px;*/
-    /*text-align: center;*/
-    /*width: 600px;*/
-    /*height: 350px;*/
-    
-    /*max-height: 500px;
-    position: relative;
-    max-width: 100%;
-    overflow: hidden;*/
-    
-    
-    
     width: 600px;
     line-height: 0;
     max-height: 600px;
@@ -77,26 +62,8 @@ body {
 }
 
 .feed_feed_img {
-    /*width: 598px;
-    height: 348px;*/
-    
-    
-    
-    /*width: 100%;
-    height: auto;
-    max-width: 100%;
-    display: block;*/
-    
-    
-    /*width: auto;
-    height: 100%;
-    max-width: 100%;
-    display: block;
-    margin: 0 auto;*/
-    
-    
     width: 100%;
-    height: auto; /* 높이를 자동으로 조정하여 이미지 비율 유지 */
+    height: auto;
     display: block;
     margin: auto;
 }
@@ -191,18 +158,6 @@ body {
 }
 
 .feed_comment_icon {
-    /*display: block;
-    margin-top: 5px;
-    width: 45px;
-    text-align: right;
-    padding-right: 3px;*/
-    
-    
-    /*display: flex;
-    margin-top: 5px;
-    width: 45px;
-    text-align: right;*/
-    
     display: flex;
     align-items: center;
     justify-content: flex-end; /* 오른쪽 정렬을 위해 추가 */
@@ -215,7 +170,6 @@ body {
     width: 16px;
     height: 16px;
     cursor: pointer;
-    /*margin-left: 2px;*/
     margin-left: 7px;
 }
 
@@ -267,10 +221,6 @@ body {
 
 .id_and_name_div2 {
 	width: 312px;
-    /*white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    position: relative;*/
 }
 
 .suggestion_follow_who:hover {
@@ -315,8 +265,6 @@ body {
 
 .suggestion_list_div {
     margin-top: 15px;
-    /*display: flex;
-    align-items: center;*/
     display: flex;
     justify-content: space-between; /* 수평으로 정렬 */
     align-items: center; /* 세로 중앙 정렬 (선택적으로 사용) */
@@ -325,8 +273,6 @@ body {
 }
 
 .img_and_id_and_name_div {
-    /*width: 390px;
-    float: left;*/
     display: flex;
     align-items: center;
 }
@@ -397,24 +343,13 @@ body {
 }
 
 .feed_detail_img_div {
-    /*width: 500px;
-    line-height: 895px;
-    max-height: 895px;*/
-    
     width: 500px;
     line-height: 0;
     max-height: 895px;
     overflow: hidden;
-    /*border: 1px solid #d9d9d9;*/
 }
 
 .feed_detail_img {
-    /*width: 100%;
-    display: block;
-    margin: auto;
-    border: 1px solid #d9d9d9;*/
-    
-    
     width: 100%;
     height: auto;
     display: block;
@@ -511,17 +446,6 @@ body {
 }
 
 .feed_detail_comment_icon {
-    /*display: flex;
-	align-items: center;
-    width: 40px;
-    margin-top: 5px;*/
-    
-    /*display: flex;
-    align-items: center;
-    margin-top: 5px;
-    width: 40px;
-    text-align: right;*/
-    
     display: flex;
     align-items: center;
     justify-content: flex-end; /* 오른쪽 정렬을 위해 추가 */
