@@ -74,7 +74,6 @@
 			<version>2.3.1</version>
 			<scope>test</scope>
 		</dependency>
-		
 		<dependency>
 		    <groupId>com.oracle.database.jdbc</groupId>
 		    <artifactId>ojdbc6</artifactId>
