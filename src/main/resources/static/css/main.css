@@ -160,7 +160,7 @@ body {
 .feed_comment_icon {
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* 오른쪽 정렬을 위해 추가 */
+    justify-content: flex-end;
     margin-top: 5px;
     width: 40px;
 }
