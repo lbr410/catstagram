@@ -56,7 +56,7 @@ body {
     display: flex;
     align-items: center;
     height: 50px;
-    width: 100%; /* 전체 너비를 활용 */
+    width: 100%;
     max-width: 680px;
     margin-left: 210px;
 }
