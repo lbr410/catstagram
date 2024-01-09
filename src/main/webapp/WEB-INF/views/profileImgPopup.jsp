@@ -49,17 +49,17 @@
     	const profileImgUpload = document.getElementById('profileImgUpload');
     	if(profileImgUpload.files.length > 0) {
 	        const fileSizeInBytes = profileImgUpload.files[0].size;
-    		const maxSizeInBytes = 1024 * 1024; // 1MB
+    		const maxSizeInBytes = 1024 * 1024 * 5; // 5MB
     		
     		if(fileSizeInBytes <= maxSizeInBytes) {
     	        const reader = new FileReader();
 		        reader.onload = function(event) {
 		            const img = document.getElementById('profileImgPreview');
-		            img.setAttribute("src", event.target.result);
+		            img.setAttribute('src', event.target.result);
 		        }
 		        reader.readAsDataURL(event.target.files[0]);
     		} else {
-    			window.alert('이미지의 사이즈가 1MB를 초과할 수 없습니다.');
+    			window.alert('이미지의 사이즈가 5MB를 초과할 수 없습니다.');
     			profileImgUpload.value = '';
     		}
     	}

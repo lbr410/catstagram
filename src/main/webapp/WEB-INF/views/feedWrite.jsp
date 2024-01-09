@@ -51,13 +51,13 @@
     	const feedImgUpload = document.getElementById('feedImgUpload');
     	if(feedImgUpload.files.length > 0) {
     		const fileSizeInBytes = feedImgUpload.files[0].size;
-    		const maxSizeInBytes = 1024 * 1024 * 5; // 5MB
+    		const maxSizeInBytes = 1024 * 1024 * 10; // 5MB
     		
     		if(fileSizeInBytes <= maxSizeInBytes) {
 	        	const reader = new FileReader();
 	        	reader.onload = function(event) {
 	            	const img = document.getElementById('feedImgPreview');
-	            	img.setAttribute("src", event.target.result);
+	            	img.setAttribute('src', event.target.result);
 	        	}
 	        	reader.readAsDataURL(event.target.files[0]);
     		} else {
