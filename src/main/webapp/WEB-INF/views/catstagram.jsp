@@ -38,7 +38,6 @@
 	                    		<input type="button" value="팔로잉" class="btn btn-secondary follow_list_del_btn" id="following${dto.member_idx}" onclick="cancelFollowing(${dto.member_idx})">
 	                    	</c:if>
                     	</span>
-                    	<input type="button" value="메시지 보내기" class="btn btn-secondary send_msg_btn">
                     </c:if>
                 </span>
                 <span>
