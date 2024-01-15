@@ -122,7 +122,7 @@
     					followBtn = document.createElement("input");
     					followBtn.type = "button";
     					followBtn.value = "팔로우";
-    					followBtn.id = "follow"+result;
+    					followBtn.id = 'follow'+result;
     					followBtn.className = "btn btn-primary search_list_follow_btn";
     					followBtn.onclick = () => {
     						addFollowing(result);
