@@ -119,7 +119,7 @@
     				parentDiv.removeChild(followingBtn); // 팔로잉(취소) 버튼 없앰
     				
     				if(!followBtn) {
-    					followBtn = document.createElement("input");
+    					followBtn = document.createElement('input');
     					followBtn.type = 'button';
     					followBtn.value = '팔로우';
     					followBtn.id = 'follow'+result;
