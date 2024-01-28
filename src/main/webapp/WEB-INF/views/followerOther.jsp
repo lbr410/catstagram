@@ -81,7 +81,7 @@
     				if(!followingBtn) {
     					followingBtn = document.createElement('input');
     					followingBtn.type = 'button';
-    					followingBtn.value = "팔로잉";
+    					followingBtn.value = '팔로잉';
     					followingBtn.id = "following"+result;
     					followingBtn.className = "btn btn-secondary follow_list_del_btn";
     					followingBtn.onclick = () => {
