@@ -38,6 +38,12 @@ Catstagram은 고양이 반려인들을 위한 소셜 네트워크 서비스로,
 <br><br><br>
 
 
+## ⚙️ Usecase
+<img src="https://github.com/lbr410/catstagram/assets/21166946/e2369fe2-9277-421a-8d77-788156cdd759">
+<br><br><br>
+
+
+
 ## 💻 화면 구성
 <table>
   <tr>
