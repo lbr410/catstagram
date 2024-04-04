@@ -33,8 +33,7 @@ Catstagram은 고양이 반려인들을 위한 소셜 네트워크 서비스로,
 <img src="https://img.shields.io/badge/Spring Tool Suite-6DB33F?style=for-the-badge&logo=Spring&logoColor=white">
 
 #### FrameWork
-<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=SpringBoot&logoColor=white">
-<img src="https://img.shields.io/badge/MyBatis-DD282E?style=for-the-badge&logo=MyBatis&logoColor=white">
+<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=SpringBoot&logoColor=white"><img src="https://img.shields.io/badge/MyBatis-DD282E?style=for-the-badge&logo=MyBatis&logoColor=white">
 <br><br><br>
 
 
